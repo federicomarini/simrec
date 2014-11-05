@@ -1,0 +1,10 @@
+diff a/R/simrec.R b/R/simrec.R	(rejected hunks)
+@@ -7,7 +7,7 @@
+ #' effect covariate (frailty term) can be incorporated. Data for individual \eqn{i} are generated
+ #' according to the intensity process \deqn{Y_i(t) \lambda_0(t) Z_i exp(\beta^t X_i),}
+ #' where \eqn{X_i} defines the covariate vector and \eqn{\beta} the regression coefficient vector.
+-#' \eqn{\lambda_0(t)} denotes the baseline hazard, being a function of the total/calendar
++#' \eqn{\lambda_0(t)} denotes the baselingit le hazard, being a function of the total/calendar
+ #' time \eqn{t}, and \eqn{Y_i(t)} the predictable process
+ #' that equals one as long as individual \eqn{i} is under observation and at risk for experiencing events.
+ #' \eqn{Z_i} denotes the frailty variable with \eqn{(Z_i)_i} iid with \eqn{E(Z_i)=1} and
