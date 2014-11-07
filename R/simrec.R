@@ -135,6 +135,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   # generating the follow-up
   # follow-up uniformly distributed in [fu.min, fu.max] if not censored
   # or uniformly distributed in [0, fu.max] if censored
+  if(cens.prob<0 || cens.prob>1){stop("cens.prob must be a probability between 0 and 1")}
   if(fu.min>fu.max || fu.min<0){stop("fu.min must be a non-negative value smaller or equal fu.max")}
   fu <- rbinom(N, 1, cens.prob)           # 1 = censored
   nr.cens <- sum(fu)
@@ -157,6 +158,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
     dist.x[i] <- match.arg(dist.x[i], choices=c("binomial", "normal"))
     if (dist.x[i]=="binomial") {
       if(length(par.x[[i]])!=1){stop("par.x has wrong dimension")}
+      if(par.x[[i]]<0 || par.x[[i]]>1){stop("par.x must be a probability between 0 and 1 for the binomial distributed covariate")}
       x[,i] <- c(rbinom(N,1,par.x[[i]]))
     } else {                                         # normally distributed covariate
       if(length(par.x[[i]])!=2){stop("par.x has wrong dimension")}
@@ -196,6 +198,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
 
   if(length(pfree)!=1){stop("pfree has wrong dimension")}
   if(length(dfree)!=1){stop("dfree has wrong dimension")}
+  if(pfree<0 || pfree>1){stop("pfree must be a probability between 0 and 1")}
 
   # initial step: simulation of N first event times
   U <- runif(N)
