@@ -4,19 +4,19 @@
 \alias{simrec}
 \title{simrec}
 \usage{
-simrec(N, fu.min = 0, fu.max = 1, cens.prob = 0, dist.x = "binomial",
-  par.x = 0, beta = 0, dist.z = "gamma", par.z = 0,
-  dist.rec = "weibull", par.rec = c(1, 1), pfree = 0, dfree = 0)
+simrec(N, fu.min, fu.max, cens.prob = 0, dist.x = "binomial", par.x = 0,
+  beta = 0, dist.z = "gamma", par.z = 0, dist.rec, par.rec, pfree = 0,
+  dfree = 0)
 }
 \arguments{
 \item{N}{Number of individuals}
 
-\item{fu.min}{Minimum length of follow-up. Default is \code{fu.min=0}.}
+\item{fu.min}{Minimum length of follow-up.}
 
 \item{fu.max}{Maximum length of follow-up. Individuals length of follow-up is
 generated from a uniform distribution on
  \code{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common
- follow-up. Default is \code{fu.max=1} time unit.}
+ follow-up.}
 
 \item{cens.prob}{Gives the probability of being censored due to loss to follow-up before
 \code{fu.max}. For a random set of individuals defined by a B(N,cens.prob)-distribution,
@@ -50,7 +50,7 @@ the variance of the frailty variable \eqn{Z}.
 Default is \code{par.z=0}, i.e. no frailty effect.}
 
 \item{dist.rec}{Form of the baseline hazard function. Possible values are \code{"weibull"} or
-\code{"lognormal"}, with default \code{dist.rec="weibull"}.}
+\code{"lognormal"}.}
 
 \item{par.rec}{Parameters for the distribution of the event data.
 If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda\nu t^{\nu - 1},}
@@ -61,8 +61,7 @@ If \code{dist.rec="lognormal"}, the hazard function is
 \deqn{\lambda_0(t)=((1/\sigma t)\phi((ln(t)-\mu)/\sigma))/(\Phi((-ln(t)-\mu)/\sigma)),}
 where \eqn{\phi} is the probability density function and \eqn{\Phi} is the cumulative
 distribution function of the standard normal distribution,
-\eqn{\sigma} is a shape parameter and \eqn{\mu} is set to zero. Then \code{par.rec=}\eqn{\sigma}.
-Default is \code{par.rec=c(1,1)}, corresponding to \code{dist.rec="weibull"}.}
+\eqn{\sigma} is a shape parameter and \eqn{\mu} is set to zero. Then \code{par.rec=}\eqn{\sigma}.}
 
 \item{pfree}{Probability that after experiencing an event the individual is not at risk
 for experiencing further events for a length of \code{dfree} time units.

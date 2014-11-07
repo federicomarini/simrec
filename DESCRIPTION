@@ -7,6 +7,6 @@ Maintainer: Katharina Ingel <ingel@uni-mainz.de>
 Description: Simulation of recurrent event data for non-constant baseline
     hazard in the total time model with risk-free intervalls
 Depends:
-    R (>= 3.1.1)
+    R (>= 2.10)
 License: GPL-2
 LazyData: true
