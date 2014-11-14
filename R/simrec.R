@@ -5,7 +5,7 @@
 #' intensity model described in Andersen and Gill [1] with the baseline hazard being a
 #' function of the total/calendar time. To induce between-subject-heterogeneity a random
 #' effect covariate (frailty term) can be incorporated. Data for individual \eqn{i} are generated
-#' according to the intensity process \deqn{Y_i(t) \lambda_0(t) Z_i exp(\beta^t X_i),}
+#' according to the intensity process \deqn{Y_i(t) = \lambda_0(t)* Z_i *exp(\beta^t X_i),}
 #' where \eqn{X_i} defines the covariate vector and \eqn{\beta} the regression coefficient vector.
 #' \eqn{\lambda_0(t)} denotes the baseline hazard, being a function of the total/calendar
 #' time \eqn{t}, and \eqn{Y_i(t)} the predictable process
@@ -48,15 +48,15 @@
 #' @param dist.rec   Form of the baseline hazard function. Possible values are \code{"weibull"} or
 #'   \code{"lognormal"}.
 #' @param par.rec  Parameters for the distribution of the event data.
-#'   If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda\nu t^{\nu - 1},}
+#'   If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
 #'   where \eqn{\lambda} is the scale and \eqn{\nu} is the shape parameter. Then
 #'   \code{par.rec=c(}\eqn{\lambda, \nu}\code{)}. A special case
 #'   of this is the exponential distribution for \eqn{\nu=1}.
 #'   If \code{dist.rec="lognormal"}, the hazard function is
-#'   \deqn{\lambda_0(t)=((1/\sigma t)\phi((ln(t)-\mu)/\sigma))/(\Phi((-ln(t)-\mu)/\sigma)),}
+#'   \deqn{\lambda_0(t)=[(1/\sigma t)\phi((ln(t)-\mu)/\sigma)]/[\Phi((-ln(t)-\mu)/\sigma)],}
 #'   where \eqn{\phi} is the probability density function and \eqn{\Phi} is the cumulative
-#'   distribution function of the standard normal distribution,
-#'   \eqn{\sigma} is a shape parameter and \eqn{\mu} is set to zero. Then \code{par.rec=}\eqn{\sigma}.
+#'   distribution function of the standard normal distribution, \eqn{\mu} is a location parameter and
+#'   \eqn{\sigma} is a shape parameter. Then \code{par.rec=c(}\eqn{\mu,\sigma}\code{)}.
 #' @param pfree Probability that after experiencing an event the individual is not at risk
 #'   for experiencing further events for a length of \code{dfree} time units.
 #'   Default is \code{pfree=0}.
@@ -94,37 +94,43 @@
 #' @export
 #' @examples
 #' ### Example:
-#' ### A sample of 10 individuals with a binomially distributed covariate with
-#' ### a regression coefficient of beta=0.3, and a standard normally distributed
-#' ### covariate with a regression coefficient beta=0.2,
-#' ### a gamma distributed frailty variable with variance 0.25
-#' ### and a Weibull-shaped baseline hazard with shape parameter lambda=1
-#' ### and scale parameter nu=2.
-#' ### Subjects are to be followed for two years with 20% of the subjects
-#' ### being censored according to a uniformly distributed censoring time within [0,2] (in years).
-#' ### After each event a subject is not at risk for experiencing further events
-#' ### for a period of 30 days with a probability of 50%.
+#' ### A sample of 10 individuals
+#'
 #' N <- 10
 #'
-#' fu.min    <- 2
-#' fu.max    <- 2
-#' cens.prob <- 0.2
-
+#' ### with a binomially distributed covariate with a regression coefficient of beta=0.3,
+#' ### and a standard normally distributed covariate with a regression coefficient of beta=0.2,
+#'
 #' dist.x <- c("binomial", "normal")
 #' par.x  <- list(0.5, c(0,1))
 #' beta   <- c(0.3, 0.2)
 #'
+#' ### a gamma distributed frailty variable with variance 0.25
+#'
 #' dist.z <- "gamma"
 #' par.z  <- 0.25
 #'
+#' ### and a Weibull-shaped baseline hazard with shape parameter lambda=1
+#' ### and scale parameter nu=2.
+#'
 #' dist.rec <- "weibull"
 #' par.rec  <- c(1,2)
+#'
+#' ### Subjects are to be followed for two years with 20% of the subjects
+#' ### being censored according to a uniformly distributed censoring time within [0,2] (in years).
+#'
+#' fu.min    <- 2
+#' fu.max    <- 2
+#' cens.prob <- 0.2
+#'
+#' ### After each event a subject is not at risk for experiencing further events
+#' ### for a period of 30 days with a probability of 50%.
 #'
 #' dfree <- 30/365
 #' pfree <- 0.5
 #'
 #' simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta, dist.z, par.z, dist.rec, par.rec, pfree, dfree)
-#' # print(simdata)
+#' # print(simdata)  # only run for small N!
 ########################################################################
 
 simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, beta=0, dist.z="gamma", par.z=0, dist.rec, par.rec, pfree=0, dfree=0) {
@@ -188,8 +194,9 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   # derivation of the distributional parameters for the recurrent event data
   dist.rec <- match.arg(dist.rec, choices=c("weibull", "lognormal"))
   if (dist.rec=="lognormal") {
-    if(length(par.rec)!=1){stop("par.rec has wrong dimension")}
-    sigma <- par.rec
+    if(length(par.rec)!=2){stop("par.rec has wrong dimension")}
+    mu    <- par.rec[1]
+    sigma <- par.rec[2]
   } else {                                               # weibull
     if(length(par.rec)!=2){stop("par.rec has wrong dimension")}
     lambda <- par.rec[1]
@@ -204,7 +211,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   U <- runif(N)
   Y <- (-1)*log(U)*exp((-1)*x%*%beta)*1/z
   if (dist.rec=="lognormal") {
-    t <- exp(qnorm(1-exp((-1)*Y))*sigma)
+    t <- exp(qnorm(1-exp((-1)*Y))*sigma + mu)
   } else {                             # weibull
     t <- ((lambda)^(-1)*Y)^(1/nu)
   }
@@ -219,7 +226,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
     Y  <- (-1)*log(U)*exp((-1)*x%*%beta)*1/z
     t1 <- t+pd*dfree
     if (dist.rec=="lognormal") {
-      t <- (t1 + exp(qnorm(1-exp(log(1-pnorm((log(t1)/sigma)))-Y))*sigma)-(t1))
+      t <- (t1 + exp(qnorm(1-exp(log(1-pnorm((log(t1)-mu/sigma)))-Y))*sigma+mu)-(t1))
     } else {                                             # weibull
       t <- (t1 + ((Y+lambda*(t1)^(nu))/lambda)^(1/nu)-(t1))
     }
