@@ -5,7 +5,7 @@
 #' intensity model described in Andersen and Gill [1] with the baseline hazard being a
 #' function of the total/calendar time. To induce between-subject-heterogeneity a random
 #' effect covariate (frailty term) can be incorporated. Data for individual \eqn{i} are generated
-#' according to the intensity process \deqn{Y_i(t) = \lambda_0(t)* Z_i *exp(\beta^t X_i),}
+#' according to the intensity process \deqn{Y_i(t) * \lambda_0(t)* Z_i *exp(\beta^t X_i),}
 #' where \eqn{X_i} defines the covariate vector and \eqn{\beta} the regression coefficient vector.
 #' \eqn{\lambda_0(t)} denotes the baseline hazard, being a function of the total/calendar
 #' time \eqn{t}, and \eqn{Y_i(t)} the predictable process
@@ -46,17 +46,24 @@
 #'   the variance of the frailty variable \eqn{Z}.
 #'   Default is \code{par.z=0}, i.e. no frailty effect.
 #' @param dist.rec   Form of the baseline hazard function. Possible values are \code{"weibull"} or
-#'   \code{"lognormal"}.
+#'   \code{"gompertz"} or \code{"lognormal"}.
 #' @param par.rec  Parameters for the distribution of the event data.
 #'   If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
-#'   where \eqn{\lambda} is the scale and \eqn{\nu} is the shape parameter. Then
+#'   where \eqn{\lambda>0} is the scale and \eqn{\nu>0} is the shape parameter. Then
 #'   \code{par.rec=c(}\eqn{\lambda, \nu}\code{)}. A special case
 #'   of this is the exponential distribution for \eqn{\nu=1}.
+#'   If \code{dist.rec="gompertz"}, the hazard function is \deqn{\lambda_0(t)=\lambda*exp(\alpha t),}
+#'   where \eqn{\lambda>0} is the scale and \eqn{\alpha\in(-\infty,+\infty)} is the shape parameter.
+#'   Then \code{par.rec=c(}\eqn{\lambda, \alpha}\code{)}.
 #'   If \code{dist.rec="lognormal"}, the hazard function is
-#'   \deqn{\lambda_0(t)=[(1/\sigma t)\phi((ln(t)-\mu)/\sigma)]/[\Phi((-ln(t)-\mu)/\sigma)],}
+#'   \deqn{\lambda_0(t)=[(1/(\sigma t))*\phi((ln(t)-\mu)/\sigma)]/[\Phi((-ln(t)-\mu)/\sigma)],}
 #'   where \eqn{\phi} is the probability density function and \eqn{\Phi} is the cumulative
-#'   distribution function of the standard normal distribution, \eqn{\mu} is a location parameter and
-#'   \eqn{\sigma} is a shape parameter. Then \code{par.rec=c(}\eqn{\mu,\sigma}\code{)}.
+#'   distribution function of the standard normal distribution, \eqn{\mu\in(-\infty,+\infty)} is a
+#'   location parameter and \eqn{\sigma>0} is a shape parameter. Then \code{par.rec=c(}\eqn{\mu,\sigma}\code{)}.
+#'   Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
+#'   specify the usual lognormal model (with covariates specified as effects on the parameters of the
+#'   lognormal distribution resulting in non-proportional hazards), but only defines the baseline
+#'   hazard and incorporates covariate effects using the proportional hazard assumtion.
 #' @param pfree Probability that after experiencing an event the individual is not at risk
 #'   for experiencing further events for a length of \code{dfree} time units.
 #'   Default is \code{pfree=0}.
@@ -192,15 +199,22 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
 
 
   # derivation of the distributional parameters for the recurrent event data
-  dist.rec <- match.arg(dist.rec, choices=c("weibull", "lognormal"))
-  if (dist.rec=="lognormal") {
+  dist.rec <- match.arg(dist.rec, choices=c("weibull", "lognormal", "gompertz"))
+  if (dist.rec=="lognormal") {                                       # lognormal
     if(length(par.rec)!=2){stop("par.rec has wrong dimension")}
     mu    <- par.rec[1]
     sigma <- par.rec[2]
-  } else {                                               # weibull
+    if(any(beta!=0)){
+      warning("lognormal together with covariates specified: this does not define the usual lognormal model! see help for details")
+    }
+  } else if(dist.rec=="weibull"){                                    # weibull
     if(length(par.rec)!=2){stop("par.rec has wrong dimension")}
     lambda <- par.rec[1]
     nu     <- par.rec[2]
+  } else {
+    if(length(par.rec)!=2){stop("par.rec has wrong dimension")}      # gompertz
+    lambdag <- par.rec[1]
+    alpha   <- par.rec[2]
   }
 
   if(length(pfree)!=1){stop("pfree has wrong dimension")}
@@ -210,10 +224,12 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   # initial step: simulation of N first event times
   U <- runif(N)
   Y <- (-1)*log(U)*exp((-1)*x%*%beta)*1/z
-  if (dist.rec=="lognormal") {
+  if (dist.rec=="lognormal") {                   # lognormal
     t <- exp(qnorm(1-exp((-1)*Y))*sigma + mu)
-  } else {                             # weibull
+  } else if (dist.rec=="weibull"){               # weibull
     t <- ((lambda)^(-1)*Y)^(1/nu)
+  } else {                                       # gompertz
+    t <- (1/alpha)*log((alpha/lambdag)*Y+1)
   }
   T  <- matrix(t,N,1)
   dirty <- rep(TRUE,N)
@@ -227,8 +243,10 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
     t1 <- t+pd*dfree
     if (dist.rec=="lognormal") {
       t <- (t1 + exp(qnorm(1-exp(log(1-pnorm((log(t1)-mu/sigma)))-Y))*sigma+mu)-(t1))
-    } else {                                             # weibull
+    } else if (dist.rec=="weibull"){
       t <- (t1 + ((Y+lambda*(t1)^(nu))/lambda)^(1/nu)-(t1))
+    } else{                                                 # gompertz
+      t <- (t1 + ((1/alpha)*log((alpha/lambdag)*Y+exp(alpha*t1))) - (t1))
     }
     T1 <- cbind(T1,ifelse(dirty,t1,NA))
     dirty <- ifelse(dirty,(t(t) < fu) & (t(t1) < fu),dirty)
