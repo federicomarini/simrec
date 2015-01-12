@@ -19,7 +19,7 @@ generated from a uniform distribution on
  follow-up.}
 
 \item{cens.prob}{Gives the probability of being censored due to loss to follow-up before
-\code{fu.max}. For a random set of individuals defined by a B(N,cens.prob)-distribution,
+\code{fu.max}. For a random set of individuals defined by a B(N,\code{cens.prob})-distribution,
 the time to censoring is generated from a uniform
 distribution on \code{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring
 due to loss to follow-up.}
@@ -42,12 +42,12 @@ covariate, \code{beta} must be a vector of coefficients with one entry for each 
 
 \item{dist.z}{Distribution of the frailty variable \eqn{Z} with \eqn{E(Z)=1} and
 \eqn{Var(Z)=\theta}. Possible values are \code{"gamma"} for a Gamma distributed frailty
- and \code{"lognormal"} for a log-normal distributed frailty.
+ and \code{"lognormal"} for a lognormal distributed frailty.
  Default is \code{dist.z="gamma"}.}
 
 \item{par.z}{Parameter \eqn{\theta} for the frailty distribution: this parameter gives
 the variance of the frailty variable \eqn{Z}.
-Default is \code{par.z=0}, i.e. no frailty effect.}
+Default is \code{par.z=0}, which causes Z=1, i.e. no frailty effect.}
 
 \item{dist.rec}{Form of the baseline hazard function. Possible values are \code{"weibull"} or
 \code{"gompertz"} or \code{"lognormal"}.}
@@ -119,8 +119,9 @@ to the multiplicative intensity model.
 
 N <- 10
 
-### with a binomially distributed covariate with a regression coefficient of beta=0.3,
-### and a standard normally distributed covariate with a regression coefficient of beta=0.2,
+### with a binomially distributed covariate with a regression coefficient
+### of beta=0.3, and a standard normally distributed covariate with a
+### regression coefficient of beta=0.2,
 
 dist.x <- c("binomial", "normal")
 par.x  <- list(0.5, c(0,1))
@@ -138,7 +139,8 @@ dist.rec <- "weibull"
 par.rec  <- c(1,2)
 
 ### Subjects are to be followed for two years with 20\% of the subjects
-### being censored according to a uniformly distributed censoring time within [0,2] (in years).
+### being censored according to a uniformly distributed censoring time
+### within [0,2] (in years).
 
 fu.min    <- 2
 fu.max    <- 2
