@@ -1,0 +1,231 @@
+
+\documentclass[nojss]{jss}  % [article] for Article in JSS
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<setup, include=FALSE, cache=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.path='./figures',
+fig.align='center', fig.show='asis', #fig.show='hold',dev="png",
+eval=TRUE,
+fig.width=4.5,
+fig.height=4.5,
+message=FALSE,
+size='small',
+comment='##',
+prompt=TRUE,
+echo=TRUE, # set to true for the vignette!
+results='hold',
+tidy=FALSE)
+options(replace.assign=TRUE, width=90, prompt="R> ")
+options(rgl.useNULL=TRUE)
+knit_hooks$set(rgl=hook_rgl)
+@
+
+%% almost as usual
+\author{Katharina Ingel\\ IMBEI Mainz \And
+        Stella Preussler\\ IMBEI Mainz \And
+        Antje Jahn-Eimermacher\\ IMBEI Mainz}
+\title{\pkg{simrec}: An \proglang{R}-Package for Simulation of Recurrent Event Data}
+
+%% for pretty printing and a nice hypersummary also set:
+\Plainauthor{Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher} %% comma-separated
+\Plaintitle{simrec: An R-Package for Simulation of Recurrent Event Data} %% without formatting
+\Shorttitle{\pkg{simrec}: Simulation of Recurrent Event Data} %% a short title (if necessary)
+
+%% an abstract and keywords
+\Abstract{
+  \pkg{simrec} allows simulation of recurrent event data following the multiplicative intensity model described in Andersen and Gill [1] with the baseline hazard being a function of the total/calendar time. To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated.
+}
+\Keywords{recurrent event data, simulation, total-time model}
+%\Plainkeywords{keywords, comma-separated, not capitalized, Java} %% without formatting
+%% at least one keyword must be supplied
+
+%% publication information
+%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
+%% \Volume{50}
+%% \Issue{9}
+%% \Month{June}
+%% \Year{2012}
+%% \Submitdate{2012-06-04}
+%% \Acceptdate{2012-06-04}
+
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+  Katharina Ingel\\
+  Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI)\\
+  University Medical Center of the Johannes Gutenberg-University Mainz\\
+  55101 Mainz, Germany\\
+  E-mail: \email{ingel@uni-mainz.de}\\
+  URL: \url{http://www.unimedizin-mainz.de/imbei}
+}
+%% It is also possible to add a telephone and fax number
+%% before the e-mail in the following format:
+%% Telephone: +49/6131/17-2433
+%% Fax: +43/6131/17-471634
+
+%% for those who use Sweave please include the following line (with % symbols):
+%% need no \usepackage{Sweave.sty}
+
+\usepackage{amsmath, amssymb}
+
+%% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%% include your article here, just as usual
+%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
+
+
+%\section{Introduction}\label{sec:intro}
+
+
+\subsection*{Description}
+This function allows simulation of recurrent event data following the multiplicative
+intensity model described in Andersen and Gill [1] with the baseline hazard being a
+function of the total/calendar time. To induce between-subject-heterogeneity a random
+effect covariate (frailty term) can be incorporated. Data for individual $i$ are generated
+according to the intensity process \[Y_i(t)\cdot \lambda_0(t)\cdot Z_i \cdot \exp(\beta^t X_i),\]
+where $X_i$ defines the covariate vector and $\beta$ the regression coefficient vector.
+$\lambda_0(t)$ denotes the baseline hazard, being a function of the total/calendar
+time $t$, and $Y_i(t)$ the predictable process
+that equals one as long as individual $i$ is under observation and at risk for experiencing events.
+$Z_i$ denotes the frailty variable with $(Z_i)_i$ iid with $E(Z_i)=1$ and
+$Var(Z_i)=\theta$. The parameter $\theta$ describes the degree of
+between-subject-heterogeneity. Data output is in the counting process format.
+
+\code{
+simrec(N, fu.min, fu.max, cens.prob = 0, dist.x = "binomial", par.x = 0,
+  beta = 0, dist.z = "gamma", par.z = 0, dist.rec, par.rec, pfree = 0,
+  dfree = 0)
+}
+
+\subsection*{Parameters}
+
+\begin{itemize}
+  \item \code{N} Number of individuals
+
+  \item \code{fu.min} Minimum length of follow-up.
+
+  \item \code{fu.max} Maximum length of follow-up. Individuals length of follow-up is generated from a uniform distribution on \code{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common follow-up.
+
+  \item \code{cens.prob} Gives the probability of being censored due to loss to follow-up before \code{fu.max}. For a random set of individuals defined by a B(N,\code{cens.prob})-distribution, the time to censoring is generated from a uniform distribution on \code{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring due to loss to follow-up.
+
+  \item \code{dist.x} Distribution of the covariate(s) $X$. If there is more than one covariate,
+\code{dist.x} must be a vector of distributions with one entry for each covariate. Possible
+values are \code{"binomial"} and \code{"normal"}, default is \code{dist.x="binomial"}.
+
+  \item \code{par.x} Parameters of the covariate distribution(s). For \code{"binomial", par.x} is the probability for $x=1$. For \code{"normal"}, \code{par.x=c(}$\mu, \sigma$\code{)} where $\mu$ is the mean and $\sigma$ is the standard deviation of a normal distribution. If one of the covariates is defined to be normally distributed, \code{par.x} must be a list, e.g. \code{ dist.x <- c("binomial", "normal")} and \code{par.x  <- list(0.5, c(1,2))}. Default is \code{par.x=0}, i.e. $x=0$ for all individuals.
+
+  \item \code{beta} Regression coefficient(s) for the covariate(s) $x$. If there is more than one covariate, \code{beta} must be a vector of coefficients with one entry for each covariate. \code{simrec} generates as many covariates as there are entries in \code{beta}. Default is \code{beta=0}, corresponding to no effect of the covariate $x$.
+
+  \item \code{dist.z} Distribution of the frailty variable $Z$ with $E(Z)=1$ and $Var(Z)=\theta$. Possible values are \code{"gamma"} for a Gamma distributed frailty and \code{"lognormal"} for a lognormal distributed frailty. Default is \code{dist.z="gamma"}.
+
+  \item \code{par.z} Parameter $\theta$ for the frailty distribution: this parameter gives the variance of the frailty variable $Z$. Default is \code{par.z=0}, which causes $Z\equiv 1$, i.e. no frailty effect.
+
+  \item \code{dist.rec} Form of the baseline hazard function. Possible values are \code{"weibull"} or \code{"gompertz"} or \code{"lognormal"}.
+
+  \item \code{par.rec} Parameters for the distribution of the event data.\\
+  If \code{dist.rec="weibull"} the  hazard function is
+  \[\lambda_0(t)=\lambda\cdot\nu\cdot t^{\nu - 1},\]
+  where $\lambda>0$ is the scale and $\nu>0$ is the shape parameter. Then \code{par.rec=c(}$\lambda, \nu$\code{)}. A special case of this is the exponential distribution for $\nu=1$.\\
+If \code{dist.rec="gompertz"}, the hazard function is
+\[\lambda_0(t)=\lambda\cdot \exp(\alpha t),\]
+where $\lambda>0$ is the scale and $\alpha\in(-\infty,+\infty)$ is the shape parameter. Then \code{par.rec=c(}$\lambda, \alpha$\code{)}.\\
+If \code{dist.rec="lognormal"}, the hazard function is
+\[\lambda_0(t)=\frac{1}{\sigma t}\cdot\frac{\phi(\frac{ln(t)-\mu}{\sigma})}{\Phi(\frac{-ln(t)-\mu}{\sigma})},\]
+where $\phi$ is the probability density function and $\Phi$ is the cumulative distribution function of the standard normal distribution, $\mu\in(-\infty,+\infty)$ is a location parameter and $\sigma>0$ is a shape parameter. Then \code{par.rec=c(}$\mu,\sigma$\code{)}. Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
+specify the usual lognormal model (with covariates specified as effects on the parameters of the
+lognormal distribution resulting in non-proportional hazards), but only defines the baseline
+hazard and incorporates covariate effects using the proportional hazard assumtion.
+
+  \item \code{pfree} Probability that after experiencing an event the individual is not at risk for experiencing further events for a length of \code{dfree} time units. Default is \code{pfree=0}.
+
+  \item \code{dfree} Length of the risk-free interval. Must be in the same time unit as \code{fu.max}. Default is \code{dfree=0}, i.e. the individual is continously at risk for experiencing events until end of follow-up.
+
+\end{itemize}
+
+\subsection*{Output}
+
+The output is a \code{data.frame} consisting of the columns:
+\begin{itemize}
+   \item \code{id} An integer number for identification of each individual
+   \item \code{x} or \code{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the randomly generated value of the covariate(s) $X$ for each individual.
+   \item \code{z} Contains the randomly generated value of the frailty variable $Z$ for each individual.
+   \item \code{start} The start of interval \code{[start, stop]}, when the individual starts to be at risk for a next event.
+   \item \code{stop} The time of an event or censoring, i.e. the end of interval \code{[start, stop]}.
+   \item \code{status} An indicator of whether an event occured at time \code{stop} (\code{status=1}) or the individual is censored at time \code{stop} (\code{status=0}).
+   \item \code{fu} Length of follow-up period \code{[0,fu]} for each individual.
+\end{itemize}
+For each individual there are as many lines as it experiences events, plus one line if being censored. The data format corresponds to the counting process format.
+
+
+\subsection*{Details}
+Data are simulated by extending the methods proposed by Bender et al [2] to the multiplicative intensity model.
+
+\subsection*{Example}
+<<>>=
+library(simrec)
+### Example:
+### A sample of 10 individuals
+
+N <- 10
+
+### with a binomially distributed covariate with a regression coefficient
+### of beta=0.3, and a standard normally distributed covariate with a
+### regression coefficient of beta=0.2,
+
+dist.x <- c("binomial", "normal")
+par.x  <- list(0.5, c(0,1))
+beta   <- c(0.3, 0.2)
+
+### a gamma distributed frailty variable with variance 0.25
+
+dist.z <- "gamma"
+par.z  <- 0.25
+
+### and a Weibull-shaped baseline hazard with shape parameter lambda=1
+### and scale parameter nu=2.
+
+dist.rec <- "weibull"
+par.rec  <- c(1,2)
+
+### Subjects are to be followed for two years with 20\% of the subjects
+### being censored according to a uniformly distributed censoring time
+### within [0,2] (in years).
+
+fu.min    <- 2
+fu.max    <- 2
+cens.prob <- 0.2
+
+### After each event a subject is not at risk for experiencing further events
+### for a period of 30 days with a probability of 50\%.
+
+dfree <- 30/365
+pfree <- 0.5
+
+simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta,
+                    dist.z, par.z, dist.rec, par.rec, pfree, dfree)
+print(simdata[1:10,])
+
+
+@
+
+\subsection*{References}
+\enumerate{
+\item Andersen P, Gill R (1982): Cox's regression model for counting processes:
+   a large sample study. The Annals of Statistics 10:1100-1120
+\item Bender R, Augustin T, Blettner M (2005): Generating survival times to simulate Cox
+  proportional hazards models. Statistics in Medicine 24:1713-1723
+}
+%\section{Acknowledgements}
+
+
+%\newpage
+%\bibliography{simrec}
+% \printbibliography
+\end{document}
