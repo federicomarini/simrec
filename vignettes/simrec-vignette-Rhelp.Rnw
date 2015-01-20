@@ -1,4 +1,10 @@
+% \VignetteIndexEntry{simrec: An R-Package for Simulation of Recurrent Event Data}
+% \VignetteKeywords{simrec simulation recurrent events}
+% \VignettePackage{simrec}
+% \VignetteEngine{knitr::knitr}
 
+
+% \documentclass[11pt,oneside]{article}
 \documentclass[nojss]{jss}  % [article] for Article in JSS
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -98,11 +104,13 @@ $Z_i$ denotes the frailty variable with $(Z_i)_i$ iid with $E(Z_i)=1$ and
 $Var(Z_i)=\theta$. The parameter $\theta$ describes the degree of
 between-subject-heterogeneity. Data output is in the counting process format.
 
-\code{
+<<codeExample,echo=TRUE,eval=FALSE>>=
 simrec(N, fu.min, fu.max, cens.prob = 0, dist.x = "binomial", par.x = 0,
   beta = 0, dist.z = "gamma", par.z = 0, dist.rec, par.rec, pfree = 0,
   dfree = 0)
-}
+
+@
+
 
 \subsection*{Parameters}
 
