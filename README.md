@@ -12,7 +12,17 @@ To install the development version for the package **simrec**, please start a cu
 ```r 
 # currently this can be done via github
 install.packages("devtools") # if needed
-devtools::install_github("katharinaingel/simrec")
+devtools::install_github("katharinaingel/simrec") # or if needed:
+devtools::install_github("katharinaingel/simrec", build_vignettes=TRUE)
+```
+
+### Vignette
+To inspect the vignette and the code used in it, type:
+
+```r
+vignette("simrec_vignette_Rhelp")
+## and/or
+browseVignettes("simrec")
 ```
 
 ### Contact

@@ -26,8 +26,6 @@ echo=TRUE, # set to true for the vignette!
 results='hold',
 tidy=FALSE)
 options(replace.assign=TRUE, width=90, prompt="R> ")
-options(rgl.useNULL=TRUE)
-knit_hooks$set(rgl=hook_rgl)
 @
 
 %% almost as usual
