@@ -20,7 +20,7 @@ devtools::install_github("katharinaingel/simrec", build_vignettes=TRUE)
 To inspect the vignette and the code used in it, type:
 
 ```r
-vignette("simrec_vignette_Rhelp")
+vignette("simrec-vignette-Rhelp")
 ## and/or
 browseVignettes("simrec")
 ```
