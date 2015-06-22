@@ -5,6 +5,8 @@ simrec
 **simrec** allows simulation of recurrent event data following the multiplicative intensity model described in
 Andersen and Gill (1982) with the baseline hazard being a function of the total/calendar time. To induce 
 between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated.
+Furthermore, via **simreccomp** simulation of data following a multistate model with recurrent event data 
+of one type and a competing event is possible.
 
 ### Installation
 To install the development version for the package **simrec**, please start a current version of R and type (using `devtools`):

@@ -34,27 +34,27 @@
 #'   If one of the covariates is defined to be normally distributed, \code{par.x} must be a list,
 #'   e.g. \code{ dist.x <- c("binomial", "normal")} and \code{par.x  <- list(0.5, c(1,2))}.
 #'   Default is \code{par.x=0}, i.e. \eqn{x=0} for all individuals.
-#' @param beta  Regression coefficient(s) for the covariate(s) \eqn{x}. If there is more than one
-#'   covariate, \code{beta} must be a vector of coefficients with one entry for each covariate.
-#'   \code{simrec} generates as many covariates as there are entries in \code{beta}. Default is
-#'   \code{beta=0}, corresponding to no effect of the covariate \eqn{x}.
+#' @param beta.x  Regression coefficient(s) for the covariate(s) \eqn{x}. If there is more than one
+#'   covariate, \code{beta.x} must be a vector of coefficients with one entry for each covariate.
+#'   \code{simrec} generates as many covariates as there are entries in \code{beta.x}. Default is
+#'   \code{beta.x=0}, corresponding to no effect of the covariate \eqn{x}.
 #' @param dist.z     Distribution of the frailty variable \eqn{Z} with \eqn{E(Z)=1} and
 #'   \eqn{Var(Z)=\theta}. Possible values are \code{"gamma"} for a Gamma distributed frailty
 #'    and \code{"lognormal"} for a lognormal distributed frailty.
 #'    Default is \code{dist.z="gamma"}.
 #' @param par.z      Parameter \eqn{\theta} for the frailty distribution: this parameter gives
 #'   the variance of the frailty variable \eqn{Z}.
-#'   Default is \code{par.z=0}, which causes Z=1, i.e. no frailty effect.
+#'   Default is \code{par.z=0}, which causes \eqn{Z=1}, i.e. no frailty effect.
 #' @param dist.rec   Form of the baseline hazard function. Possible values are \code{"weibull"} or
-#'   \code{"gompertz"} or \code{"lognormal"}.
+#'   \code{"gompertz"} or \code{"lognormal"} or \code{"step"}.
 #' @param par.rec  Parameters for the distribution of the event data.
 #'   If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
 #'   where \eqn{\lambda>0} is the scale and \eqn{\nu>0} is the shape parameter. Then
 #'   \code{par.rec=c(}\eqn{\lambda, \nu}\code{)}. A special case
-#'   of this is the exponential distribution for \eqn{\nu=1}.
+#'   of this is the exponential distribution for \eqn{\nu=1}.\\
 #'   If \code{dist.rec="gompertz"}, the hazard function is \deqn{\lambda_0(t)=\lambda*exp(\alpha t),}
 #'   where \eqn{\lambda>0} is the scale and \eqn{\alpha\in(-\infty,+\infty)} is the shape parameter.
-#'   Then \code{par.rec=c(}\eqn{\lambda, \alpha}\code{)}.
+#'   Then \code{par.rec=c(}\eqn{\lambda, \alpha}\code{)}.\\
 #'   If \code{dist.rec="lognormal"}, the hazard function is
 #'   \deqn{\lambda_0(t)=[(1/(\sigma t))*\phi((ln(t)-\mu)/\sigma)]/[\Phi((-ln(t)-\mu)/\sigma)],}
 #'   where \eqn{\phi} is the probability density function and \eqn{\Phi} is the cumulative
@@ -63,7 +63,9 @@
 #'   Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
 #'   specify the usual lognormal model (with covariates specified as effects on the parameters of the
 #'   lognormal distribution resulting in non-proportional hazards), but only defines the baseline
-#'   hazard and incorporates covariate effects using the proportional hazard assumtion.
+#'   hazard and incorporates covariate effects using the proportional hazard assumtion.\\
+#'   If \code{dist.rec="step"} the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
+#'   Then \code{par.rec=c(}\eqn{a,b,t_1}\code{)}.
 #' @param pfree Probability that after experiencing an event the individual is not at risk
 #'   for experiencing further events for a length of \code{dfree} time units.
 #'   Default is \code{pfree=0}.
@@ -94,10 +96,13 @@
 #'    a large sample study. The Annals of Statistics 10:1100-1120
 #' \item Bender R, Augustin T, Blettner M (2005): Generating survival times to simulate Cox
 #'   proportional hazards models. Statistics in Medicine 24:1713-1723
+#' \item Jahn-Eimermacher A, Ingel K, Ozga AK, Preussler S, Binder H (2015): Simulating recurrent event data
+#'   with hazard functions defined on a total time scale. BMC Medical Research Methodology 15:16 
 #' }
 #' @author Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher.
 #' Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI),
 #' University Medical Center of the Johannes Gutenberg-University Mainz, Germany
+#' @seealso simreccomp
 #' @export
 #' @examples
 #' ### Example:
@@ -111,7 +116,7 @@
 #'
 #' dist.x <- c("binomial", "normal")
 #' par.x  <- list(0.5, c(0,1))
-#' beta   <- c(0.3, 0.2)
+#' beta.x   <- c(0.3, 0.2)
 #'
 #' ### a gamma distributed frailty variable with variance 0.25
 #'
@@ -138,11 +143,11 @@
 #' dfree <- 30/365
 #' pfree <- 0.5
 #'
-#' simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta, dist.z, par.z, dist.rec, par.rec, pfree, dfree)
+#' simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z, par.z, dist.rec, par.rec, pfree, dfree)
 #' # print(simdata)  # only run for small N!
 ########################################################################
 
-simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, beta=0, dist.z="gamma", par.z=0, dist.rec, par.rec, pfree=0, dfree=0) {
+simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, beta.x=0, dist.z="gamma", par.z=0, dist.rec, par.rec, pfree=0, dfree=0) {
 
 
   ID <- c(1:N)
@@ -163,11 +168,11 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   }
 
 
-  if(length(beta)!=length(dist.x)){stop("dimensions of beta and dist.x differ")}
-  if(length(beta)!=length(par.x)){stop("dimensions of beta and par.x differ")}
+  if(length(beta.x)!=length(dist.x)){stop("dimensions of beta.x and dist.x differ")}
+  if(length(beta.x)!=length(par.x)){stop("dimensions of beta.x and par.x differ")}
 
   # generating the covariate-matrix x
-  nr.cov <- length(beta)       # number of covariates
+  nr.cov <- length(beta.x)       # number of covariates
   x<-matrix(0,N,nr.cov)        # matrix with N lines and one column for each covariate
   for(i in 1:nr.cov){
     dist.x[i] <- match.arg(dist.x[i], choices=c("binomial", "normal"))
@@ -201,22 +206,28 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
 
 
   # derivation of the distributional parameters for the recurrent event data
-  dist.rec <- match.arg(dist.rec, choices=c("weibull", "lognormal", "gompertz"))
+  dist.rec <- match.arg(dist.rec, choices=c("weibull", "lognormal", "gompertz", "step"))
   if (dist.rec=="lognormal") {                                       # lognormal
     if(length(par.rec)!=2){stop("par.rec has wrong dimension")}
     mu    <- par.rec[1]
     sigma <- par.rec[2]
-    if(any(beta!=0)){
+    if(any(beta.x!=0)){
       warning("lognormal together with covariates specified: this does not define the usual lognormal model! see help for details")
     }
   } else if(dist.rec=="weibull"){                                    # weibull
     if(length(par.rec)!=2){stop("par.rec has wrong dimension")}
     lambda <- par.rec[1]
     nu     <- par.rec[2]
-  } else {
+  } else if(dist.rec=="gompertz"){
     if(length(par.rec)!=2){stop("par.rec has wrong dimension")}      # gompertz
     lambdag <- par.rec[1]
-    alpha   <- par.rec[2]
+    alpha   <- par.rec[2]             
+  } else if(dist.rec=="step"){                                       # step
+    if(length(par.rec)!=3){stop("par.rec has wrong dimensions")}
+    fc   <- par.rec[1]
+    sc   <- par.rec[2]
+    jump       <- par.rec[3]
+    jumpinv    <- jump*fc
   }
 
   if(length(pfree)!=1){stop("pfree has wrong dimension")}
@@ -225,13 +236,19 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
 
   # initial step: simulation of N first event times
   U <- runif(N)
-  Y <- (-1)*log(U)*exp((-1)*x%*%beta)*1/z
+  Y <- (-1)*log(U)*exp((-1)*x%*%beta.x)*1/z
   if (dist.rec=="lognormal") {                   # lognormal
     t <- exp(qnorm(1-exp((-1)*Y))*sigma + mu)
   } else if (dist.rec=="weibull"){               # weibull
     t <- ((lambda)^(-1)*Y)^(1/nu)
-  } else {                                       # gompertz
+  } else if(dist.rec=="gompertz"){               # gompertz
     t <- (1/alpha)*log((alpha/lambdag)*Y+1)
+  } else if(dist.rec=="step"){                   # step
+    t <- rep(NA,N)
+    indexTr1    <- which(Y <= jumpinv)
+    if(length(indexTr1 >0)){ t[indexTr1] <- Y[indexTr1]/fc }
+    indexTr2    <- which(Y>jumpinv)
+    if(length(indexTr2 >0)){ t[indexTr2] <- (Y[indexTr2]-(fc-sc)*jump)/sc }
   }
   T  <- matrix(t,N,1)
   dirty <- rep(TRUE,N)
@@ -241,14 +258,21 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   while (any(dirty)) {
     pd <- rbinom(N,1,pfree)
     U  <- runif(N)
-    Y  <- (-1)*log(U)*exp((-1)*x%*%beta)*1/z
+    Y  <- (-1)*log(U)*exp((-1)*x%*%beta.x)*1/z
     t1 <- t+pd*dfree
-    if (dist.rec=="lognormal") {
+    if (dist.rec=="lognormal") {                                                     # lognormal
       t <- (t1 + exp(qnorm(1-exp(log(1-pnorm((log(t1)-mu/sigma)))-Y))*sigma+mu)-(t1))
-    } else if (dist.rec=="weibull"){
+    } else if (dist.rec=="weibull"){                                                 # weibull
       t <- (t1 + ((Y+lambda*(t1)^(nu))/lambda)^(1/nu)-(t1))
-    } else{                                                 # gompertz
+    } else if(dist.rec=="gompertz"){                                                 # gompertz
       t <- (t1 + ((1/alpha)*log((alpha/lambdag)*Y+exp(alpha*t1))) - (t1))
+    } else if(dist.rec=="step"){                                                      # step
+      indexTr3 <- which((t1 <=jump) & (Y <= (jump-t1)*fc))
+      if(length(indexTr3 >0)){ t[indexTr3] <- t1[indexTr3] + Y[indexTr3]/fc }
+      indexTr4 <- which((t1 <= jump) & (Y > (jump-t1)*fc))
+      if(length(indexTr4 >0)){ t[indexTr4] <- t1[indexTr4] + (Y[indexTr4]+(fc-sc)*(t1[indexTr4]-jump))/sc }
+      indexTr5 <- which(t1 > jump)
+      if(length(indexTr5 >0)){ t[indexTr5] <- t1[indexTr5] + Y[indexTr5]/sc }              
     }
     T1 <- cbind(T1,ifelse(dirty,t1,NA))
     dirty <- ifelse(dirty,(t(t) < fu) & (t(t1) < fu),dirty)
