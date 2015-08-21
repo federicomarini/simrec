@@ -41,7 +41,7 @@ options(replace.assign=TRUE, width=90, prompt="R> ")
 
 %% an abstract and keywords
 \Abstract{
-  \code{simrec} allows simulation of recurrent event data following the multiplicative intensity model described in Andersen and Gill [1] with the baseline hazard being a function of the total/calendar time. To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated. Furthermore, via \code{simreccomp} simulation of data following a multistate model with recurrent event data of one type and a competing event is possible.
+  \code{simrec} allows simulation of recurrent event data following the multiplicative intensity model described in Andersen and Gill [1] with the baseline hazard being a function of the total/calendar time. To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated. Furthermore, via \code{simreccomp} simulation of data following a multistate model with recurrent event data of one type and a competing event is possible. \code{simrecint} gives the possibility to additionally simulate a recruitment time for each individual and cut the data to an interim data set.
 }
 \Keywords{recurrent event data, competing event, frailty, simulation, total-time model}
 %\Plainkeywords{keywords, comma-separated, not capitalized, Java} %% without formatting
@@ -67,6 +67,7 @@ options(replace.assign=TRUE, width=90, prompt="R> ")
 %% need no \usepackage{Sweave.sty}
 
 \usepackage{amsmath, amssymb}
+\usepackage{tikz}
 
 %% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -79,12 +80,13 @@ options(replace.assign=TRUE, width=90, prompt="R> ")
 
 \section{Introduction}\label{sec:intro} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The \pkg{simrec} package includes the functions \code{simrec} and \code{simreccomp} and allows simulation of recurrent event data. To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated. Via \code{simreccomp} time-to-event data that follow a multistate model with recurrent event data of one type and a competing event can be simulated. Data output is in the counting-process format.
+The \pkg{simrec} package includes the functions \code{simrec}, \code{simreccomp} and \code{simrecint} and allows simulation of recurrent event data. To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated. Via \code{simreccomp} time-to-event data that follow a multistate model with recurrent event data of one type and a competing event can be simulated. Data output is in the counting-process format. \code{simrecint} gives the possibility to additionally simulate a recruitment time for each individual and cut the data to an interim data set.
 
 
 \section{simrec} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection*{Description}
+
 The function \code{simrec} allows simulation of recurrent event data following the multiplicative
 intensity model described in Andersen and Gill [1] with the baseline hazard being a
 function of the total/calendar time. To induce between-subject-heterogeneity a random
@@ -169,9 +171,11 @@ For each individual there are as many lines as it experiences events, plus one l
 
 
 \subsection*{Details}
+
 Data are simulated by extending the methods proposed by Bender et al [2] to the multiplicative intensity model.
 
 \subsection*{Example}
+
 <<Examplesimrec>>=
 library(simrec)
 ### Example:
@@ -223,6 +227,7 @@ print(simdata[1:10,])
 \section{simreccomp} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection*{Description}
+
 The function \code{simreccomp} allows simulation of time-to-event-data that follow a multistate-model
 with recurrent events of one type and a competing event. The baseline hazard for the
 cause-specific hazards are here functions of the total/calendar time.
@@ -324,6 +329,7 @@ The output is a \code{data.frame} consisting of the columns:
 For each individual there are as many lines as it experiences events, plus one line if being censored. The data format corresponds to the counting process format.
 
 \subsection*{Example}
+
 <<Examplesimreccomp>>=
 library(simrec)
  ### Example:
@@ -395,6 +401,106 @@ library(simrec)
 
  print(simdata1[1:10,])
  #print(simdata2[1:10,])
+@
+
+
+\section{simrecint} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Description}
+
+With this function previously simulated data (for example simulated by the use of \code{simrec} or \code{simreccomp})
+can be cut to an interim data set.
+The simulated data must be in patient time (i.e. time since the patient entered the study, for an example see below),
+and must be in the counting process format. Furthermore the dataset must have the variables \code{id}, \code{start}, \code{stop} and \code{status},
+like data simulated by the use of \code{simrec} or \code{simreccomp}.
+Then for every individual additionally a recruitment time is generated in study time (i.e. time since start of the study, for an example see below),
+which is uniformly distributed on $[0, t_R]$.
+The timing of the interim analysis $t_I$ is set in study time and
+data are being cut to all data, that are available at the interim analysis.
+If you only wish to simulate a recruitment time, $t_I$ can be set to $t_R + fu.max$ or something else beyond the end of the study.
+
+
+Simulated data in patient time:
+
+\begin{center}
+\begin{tikzpicture}
+\draw[->] (0,0) -- (0,4.5) node [anchor=east,text width=4.1em] {individual};
+\draw[->] (0,0) -- (7,0) node [below=2pt] {patient time};
+\draw[thick] (0,1) -- (4,1) node[circle,fill=black,inner sep=1.5pt]{}  node at (1,1) [fill=black, inner sep=1.5pt]{}  node at (1.8,1) [fill=black, inner sep=1.5pt]{}  node at (3.2,1) [fill=black, inner sep=1.5pt]{}  node at (0,1)[left=2pt]{1} ;
+\draw[thick] (0,2) -- (4,2) node[circle,fill=black,inner sep=1.5pt]{} node at (1,2) [fill=black, inner sep=1.5pt]{} node at (2,2) [fill=black, inner sep=1.5pt]{} node at (3.3,2) [fill=black, inner sep=1.5pt]{} node at (0,2)[left=2pt]{2} ;
+\draw[thick] (0,3) -- (4,3) node[circle,fill=black,inner sep=1.5pt]{} node at (2,3) [fill=black, inner sep=1.5pt]{} node at (0,3)[left=2pt]{3} ;
+\draw[thick] (0,4) -- (4,4) node[circle,fill=black,inner sep=1.5pt]{} node at (0.9,4) [fill=black, inner sep=1.5pt]{} node at (1.4,4) [fill=black, inner sep=1.5pt]{} node at (0,4)[left=2pt]{4} ;
+\end{tikzpicture}
+\end{center}
+
+Simulated data in study time with time of interim analysis ($t_I$), end of recruitment period ($t_R$) and end of study
+
+\begin{center}
+\begin{tikzpicture}
+\draw[->] (0,0) -- (0,4.5) node [anchor=east,text width=4.1em] {individual};
+\draw[->] (0,0) -- (7,0) node [below=2pt] {study time};
+\draw[thick] (0,0.8) -- (4,0.8) node[circle,fill=black,inner sep=1.5pt]{}  node at (1,0.8) [fill=black, inner sep=1.5pt]{}  node at (1.6,0.8) [fill=black, inner sep=1.5pt]{}  node at (3.2,0.8) [fill=black, inner sep=1.5pt]{}  node at (0,0.8)[left=2pt]{1} ;
+\draw[thick] (0.5,1.6) -- (4.5,1.6) node[circle,fill=black,inner sep=1.5pt]{} node at (1.5,1.6) [fill=black, inner sep=1.5pt]{} node at (2.5,1.6) [fill=black, inner sep=1.5pt]{} node at (3.8,1.6) [fill=black, inner sep=1.5pt]{} node at (0,1.6)[left=2pt]{2} ;
+\draw[thick] (1,2.4) -- (5,2.4) node[circle,fill=black,inner sep=1.5pt]{} node at (3.2,2.4) [fill=black, inner sep=1.5pt]{} node at (0,2.4)[left=2pt]{3} ;
+\draw[thick] (1.5,3.2) -- (5.5,3.2) node[circle,fill=black,inner sep=1.5pt]{} node at (2.4,3.2) [fill=black, inner sep=1.5pt]{} node at (2.9,3.2) [fill=black, inner sep=1.5pt]{} node at (0,3.2)[left=2pt]{4} ;
+\draw[thick] (2,4) -- (6,4) node[circle,fill=black,inner sep=1.5pt]{} node at (2.7,4) [fill=black, inner sep=1.5pt]{} node at (4,4.5)[above]{event} node at (5.4,4) [fill=black, inner sep=1.5pt]{} node at (0,4)[left=2pt]{5} ;
+\draw[->] (3.6,4.5) -- (2.9,4.2);
+\draw[->] (4.4,4.5) -- (5.2,4.2);
+\draw[thick, color=green] (2,-0.1) -- (2, 4.3) node at (2,-0.6)[below]{end of recruitment ($t_R$)};
+\draw[thick, color=blue] (1.7,-0.1) -- (1.7, 4.3) node at (1.7,-0.1)[below]{interim analysis ($t_I$)};
+\draw[thick, color=red] (6,-0.1) -- (6, 4.3) node at (6, -0.6)[below]{end of study};
+\end{tikzpicture}
+\end{center}
+
+<<codeExampleint,echo=TRUE,eval=FALSE>>=
+simrecint(data, N, tR, tI)
+@
+
+\subsection*{Parameters}
+
+\begin{itemize}
+\item \code{data} Previously generated data (in patient time), that shall be cut to interim data
+\item \code{N} Number of individuals, for which \code{data} was generated
+\item \code{tR} Length of the recruitment period (in study time)
+\item \code{tI} Timing of the interim analysis (in study time)
+\end{itemize}
+
+\subsection*{Output}
+
+The output is a data.frame consisting of the columns, that were put into, and additionally the following columns:
+\begin{itemize}
+   \item \code{rectime} The recruitment time for each individual (in study time).
+   \item \code{interimtime} The time of the interim analysis \code{tI} (in study time).
+   \item \code{stop_study} The stopping time for each event in study time.
+\end{itemize}
+ Individuals that are not already recruited at the interim analysis are left out here.
+
+
+\subsection*{Example}
+
+<<Examplesimrecint>>=
+### Example - see example for simrec
+library(simrec)
+N         <- 10
+dist.x    <- c("binomial", "normal")
+par.x     <- list(0.5, c(0,1))
+beta.x    <- c(0.3, 0.2)
+dist.z    <- "gamma"
+par.z     <- 0.25
+dist.rec  <- "weibull"
+par.rec   <- c(1,2)
+fu.min    <- 2
+fu.max    <- 2
+cens.prob <- 0.2
+
+simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z,
+                  par.z, dist.rec, par.rec)
+
+### Now simulate for each patient a recruitment time in [0,tR=2]
+### and cut data to the time of the interim analysis at tI=1:
+
+simdataint <- simrecint(simdata, N=N, tR=2, tI=1)
+# print(simdataint)  # only run for small N!
 @
 
 

@@ -97,7 +97,7 @@
 #' \item Bender R, Augustin T, Blettner M (2005): Generating survival times to simulate Cox
 #'   proportional hazards models. Statistics in Medicine 24:1713-1723
 #' \item Jahn-Eimermacher A, Ingel K, Ozga AK, Preussler S, Binder H (2015): Simulating recurrent event data
-#'   with hazard functions defined on a total time scale. BMC Medical Research Methodology 15:16 
+#'   with hazard functions defined on a total time scale. BMC Medical Research Methodology 15:16
 #' }
 #' @author Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher.
 #' Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI),
@@ -143,7 +143,8 @@
 #' dfree <- 30/365
 #' pfree <- 0.5
 #'
-#' simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z, par.z, dist.rec, par.rec, pfree, dfree)
+#' simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z, par.z,
+#'                   dist.rec, par.rec, pfree, dfree)
 #' # print(simdata)  # only run for small N!
 ########################################################################
 
@@ -221,7 +222,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   } else if(dist.rec=="gompertz"){
     if(length(par.rec)!=2){stop("par.rec has wrong dimension")}      # gompertz
     lambdag <- par.rec[1]
-    alpha   <- par.rec[2]             
+    alpha   <- par.rec[2]
   } else if(dist.rec=="step"){                                       # step
     if(length(par.rec)!=3){stop("par.rec has wrong dimensions")}
     fc   <- par.rec[1]
@@ -272,7 +273,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
       indexTr4 <- which((t1 <= jump) & (Y > (jump-t1)*fc))
       if(length(indexTr4 >0)){ t[indexTr4] <- t1[indexTr4] + (Y[indexTr4]+(fc-sc)*(t1[indexTr4]-jump))/sc }
       indexTr5 <- which(t1 > jump)
-      if(length(indexTr5 >0)){ t[indexTr5] <- t1[indexTr5] + Y[indexTr5]/sc }              
+      if(length(indexTr5 >0)){ t[indexTr5] <- t1[indexTr5] + Y[indexTr5]/sc }
     }
     T1 <- cbind(T1,ifelse(dirty,t1,NA))
     dirty <- ifelse(dirty,(t(t) < fu) & (t(t1) < fu),dirty)

@@ -1,21 +1,21 @@
 #' simreccomp
 #'
 #' This function allows simulation of time-to-event-data that follow a multistate-model
-#' with recurrent events of one type and a competing event. The baseline hazard for the 
-#' cause-specific hazards are here functions of the total/calendar time. 
+#' with recurrent events of one type and a competing event. The baseline hazard for the
+#' cause-specific hazards are here functions of the total/calendar time.
 #' To induce between-subject-heterogeneity a random
-#' effect covariate (frailty term) can be incorporated for the recurrent and the competing event. 							
+#' effect covariate (frailty term) can be incorporated for the recurrent and the competing event.
 #' Data for the recurrent events of the individual \eqn{i} are generated
 #' according to the cause-specific hazards \deqn{\lambda_{0r}(t)* Z_{ri} *exp(\beta_r^t X_i),}
 #' where \eqn{X_i} defines the covariate vector and \eqn{\beta_r} the regression coefficient vector.
 #' \eqn{\lambda_{0r}(t)} denotes the baseline hazard, being a function of the total/calendar
 #' time \eqn{t} and
-#' \eqn{Z_{ri}} denotes the frailty variables with \eqn{(Z_{ri})_i} iid with \eqn{E(Z_{ri})=1} and									
+#' \eqn{Z_{ri}} denotes the frailty variables with \eqn{(Z_{ri})_i} iid with \eqn{E(Z_{ri})=1} and
 #' \eqn{Var(Z_{ri})=\theta_r}. The parameter \eqn{\theta_r} describes the degree of
 #' between-subject-heterogeneity for the recurrent event.
-#' Analougously the competing event is generated according to the cause-specific hazard conditionally 
-#' on the frailty variable and covariates: \deqn{\lambda_{0c}(t)* Z_{ci} *exp(\beta_c^t X_i)} 		
-#' Data output is in the counting process format. 
+#' Analougously the competing event is generated according to the cause-specific hazard conditionally
+#' on the frailty variable and covariates: \deqn{\lambda_{0c}(t)* Z_{ci} *exp(\beta_c^t X_i)}
+#' Data output is in the counting process format.
 #'
 #' @param N          Number of individuals
 #' @param fu.min     Minimum length of follow-up.
@@ -37,35 +37,35 @@
 #'   If one of the covariates is defined to be normally distributed, \code{par.x} must be a list,
 #'   e.g. \code{ dist.x <- c("binomial", "normal")} and \code{par.x  <- list(0.5, c(1,2))}.
 #'   Default is \code{par.x=0}, i.e. \eqn{x=0} for all individuals.
-#' @param beta.xr  Regression coefficient(s) for the covariate(s) \eqn{x} corresponding to the 
-#'    recurrent events. If there is more than one covariate, 
+#' @param beta.xr  Regression coefficient(s) for the covariate(s) \eqn{x} corresponding to the
+#'    recurrent events. If there is more than one covariate,
 #'   \code{beta.xr} must be a vector of coefficients with one entry for each covariate.
 #'   \code{simreccomp} generates as many covariates as there are entries in \code{beta.xr}. Default is
-#'   \code{beta.xr=0}, corresponding to no effect of the covariate \eqn{x} on the recurrent events.  											
+#'   \code{beta.xr=0}, corresponding to no effect of the covariate \eqn{x} on the recurrent events.
 #' @param beta.xc Regression coefficient(s) for the covariate(s) \eqn{x} corresponding to the
-#'   competing event. If there is more than one	covariate, \code{beta.xc} 		
+#'   competing event. If there is more than one	covariate, \code{beta.xc}
 #'   must be a vector of coefficients with one entry for each covariate. Default is
 #'   \code{beta.xc=0}, corresponding to no effect of the covariate \eqn{x} on the competing event.
-#' @param dist.zr     Distribution of the frailty variable \eqn{Z_r} for the recurent events with \eqn{E(Z_r)=1} and						
+#' @param dist.zr     Distribution of the frailty variable \eqn{Z_r} for the recurent events with \eqn{E(Z_r)=1} and
 #'   \eqn{Var(Z_r)=\theta_r}. Possible values are \code{"gamma"} for a Gamma distributed frailty
 #'    and \code{"lognormal"} for a lognormal distributed frailty.
 #'    Default is \code{dist.zr="gamma"}.
 #' @param par.zr      Parameter \eqn{\theta_r} for the frailty distribution: this parameter gives
 #'   the variance of the frailty variable \eqn{Z_r}.
-#'   Default is \code{par.zr=0}, which causes \eqn{Z_r=1}, i.e. no frailty effect for the recurrent events.																							
-#' @param dist.zc     Distribution of the frailty variable \eqn{Z_c} for the competing event with \eqn{E(Z_c)=1} and						
+#'   Default is \code{par.zr=0}, which causes \eqn{Z_r=1}, i.e. no frailty effect for the recurrent events.
+#' @param dist.zc     Distribution of the frailty variable \eqn{Z_c} for the competing event with \eqn{E(Z_c)=1} and
 #'   \eqn{Var(Z_c)=\theta_c}. Possible values are \code{"gamma"} for a Gamma distributed frailty
 #'    and \code{"lognormal"} for a lognormal distributed frailty.
 #'    Default is \code{dist.zc=NULL}.
 #' @param par.zc      Parameter \eqn{\theta_c} for the frailty distribution: this parameter gives
 #'   the variance of the frailty variable \eqn{Z_c}.
 #'	 Default is \code{par.zc=NULL}.
-#' @param a 	Alternatively, the frailty distribution for the competing event can be computed through the distribution 
-#'   of the frailty variable \eqn{Z_r} by \eqn{Z_c=Z_r**a}.   																					
-#'	 Default is \code{a=NULL}.																												
-#' @param dist.rec   Form of the baseline hazard function for the recurrent events. Possible values are \code{"weibull"} or				
+#' @param a 	Alternatively, the frailty distribution for the competing event can be computed through the distribution
+#'   of the frailty variable \eqn{Z_r} by \eqn{Z_c=Z_r**a}.
+#'	 Default is \code{a=NULL}.
+#' @param dist.rec   Form of the baseline hazard function for the recurrent events. Possible values are \code{"weibull"} or
 #'   \code{"gompertz"} or \code{"lognormal"} or \code{"step"}.
-#' @param par.rec  Parameters for the distribution of the recurrent event data.																
+#' @param par.rec  Parameters for the distribution of the recurrent event data.
 #'   If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
 #'   where \eqn{\lambda>0} is the scale and \eqn{\nu>0} is the shape parameter. Then
 #'   \code{par.rec=c(}\eqn{\lambda, \nu}\code{)}. A special case
@@ -84,8 +84,8 @@
 #'   hazard and incorporates covariate effects using the proportional hazard assumtion.
 #'   If \code{dist.rec="step"} the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
 #'   Then \code{par.rec=c(}\eqn{a,b,t_1}\code{)}.
-#' @param dist.comp	Form of the baseline hazard function for the competing event. Possible values are \code{"weibull"} or				
-#'   \code{"gompertz"} or \code{"lognormal"} or \code{"step"}       .																							
+#' @param dist.comp	Form of the baseline hazard function for the competing event. Possible values are \code{"weibull"} or
+#'   \code{"gompertz"} or \code{"lognormal"} or \code{"step"}       .
 #' @param par.comp  Parameters for the distribution of the competing event data. For more details see \code{par.rec}.
 #' @param pfree Probability that after experiencing an event the individual is not at risk
 #'   for experiencing further events for a length of \code{dfree} time units.
@@ -104,7 +104,7 @@
 #'    \item{stop}{The time of an event or censoring, i.e. the end of interval
 #'    \code{[start, stop]}.}
 #'    \item{status}{An indicator of whether an event occured at time \code{stop} (\code{status=1}),
-#'        the individual is censored at time \code{stop} (\code{status=0}) or the competing event occured at time 
+#'        the individual is censored at time \code{stop} (\code{status=0}) or the competing event occured at time
 #'        \code{stop} (\code{status=2}).}
 #'    \item{fu}{Length of follow-up period \code{[0,fu]} for each individual.}
 #'    For each individual there are as many lines as it experiences events,
@@ -121,10 +121,10 @@
 #'
 #' N <- 10
 #'
-#'### with a binomially distributed covariate and a standard normally distributed covariate 
-#'### with regression coefficients of beta.xr=0.3 and beta.xr=0.2, respectively, 
+#'### with a binomially distributed covariate and a standard normally distributed covariate
+#'### with regression coefficients of beta.xr=0.3 and beta.xr=0.2, respectively,
 #'### for the recurrent events,
-#'### as well as regression coefficients of beta.xc=0.5 and beta.xc=0.25, respectively, 
+#'### as well as regression coefficients of beta.xc=0.5 and beta.xc=0.25, respectively,
 #'### for the competing event.
 #'
 #' dist.x  <- c("binomial", "normal")
@@ -132,8 +132,8 @@
 #' beta.xr <- c(0.3, 0.2)
 #' beta.xc <- c(0.5,0.25)
 #'
-#'### a gamma distributed frailty variable for the recurrent event with variance 0.25 						
-#'### and for the competing event with variance 0.3,																
+#'### a gamma distributed frailty variable for the recurrent event with variance 0.25
+#'### and for the competing event with variance 0.3,
 #'
 #' dist.zr <- "gamma"
 #' par.zr  <- 0.25
@@ -141,17 +141,17 @@
 #' dist.zc <- "gamma"
 #' par.zc  <- 0.3
 #'
-#'### alternatively the frailty variable for the competing event can be computed via a:										
+#'### alternatively the frailty variable for the competing event can be computed via a:
 #' a <- 0.5
 #'
-#'### Furthermore a Weibull-shaped baseline hazard for the recurrent event with shape parameter lambda=1
-#'### and scale parameter nu=2,
+#'### Furthermore a Weibull-shaped baseline hazard for the recurrent event with shape parameter
+#'### lambda=1 and scale parameter nu=2,
 #'
 #' dist.rec <- "weibull"
 #' par.rec  <- c(1,2)
 #'
-#'### and a Weibull-shaped baseline hazard for the competing event with shape parameter lambda=1	
-#'### and scale parameter nu=2 
+#'### and a Weibull-shaped baseline hazard for the competing event with shape parameter lambda=1
+#'### and scale parameter nu=2
 #'
 #' dist.comp	<- "weibull"
 #' par.comp 	<-c(1,2)
@@ -170,8 +170,17 @@
 #' dfree <- 30/365
 #' pfree <- 0.5
 #'
-#'simdata1 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob, dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc, dist.zr=dist.zr, par.zr=par.zr, a=a,                           dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp, pfree= pfree, dfree=dfree)
-#'simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob, dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc, dist.zr=dist.zr, par.zr=par.zr,dist.zc=dist.zc, par.zc=par.zc, dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp, pfree= pfree, dfree=dfree)
+#'simdata1 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
+#'                       dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
+#'                       dist.zr=dist.zr, par.zr=par.zr, a=a,
+#'                       dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
+#'                       pfree= pfree, dfree=dfree)
+#'
+#'simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
+#'                       dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
+#'                       dist.zr=dist.zr, par.zr=par.zr,dist.zc=dist.zc, par.zc=par.zc,
+#'                       dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
+#'                       pfree= pfree, dfree=dfree)
 #'
 #'simdata1
 #'simdata2
@@ -180,7 +189,7 @@
 simreccomp <- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, beta.xr=0, beta.xc=0, dist.zr="gamma", par.zr=0, a=NULL, dist.zc=NULL, par.zc=NULL, dist.rec, par.rec, dist.comp, par.comp, pfree=0, dfree=0) {
 
 ID <- c(1:N)
- 
+
 # generating the follow-up  *****************************************************************
 # follow-up uniformly distributed in [fu.min, fu.max] if not censored
 # or uniformly distributed in [0, fu.max] if censored
@@ -235,10 +244,10 @@ if(par.zr!=0){                                       # if par.zr=0 then frailty=
     sigma.zr <- sqrt(log(par.zr+1))
     zr       <- exp(rnorm(N, mean = mu.zr, sd=sigma.zr))
   }
-}  	
+}
 
 if(length(a)==0){
-	if(length(dist.zc)==0 | length(par.zc)==0){stop("enter either a or dist.zc and par.zc")}			
+	if(length(dist.zc)==0 | length(par.zc)==0){stop("enter either a or dist.zc and par.zc")}
 	zc <- rep(1,N)
 	dist.zc <- match.arg(dist.zc, choices=c("gamma", "lognormal"))
 	if(length(par.zc)!=1){stop("par.zc has wrong dimension")}
@@ -253,7 +262,7 @@ if(length(a)==0){
 			zc       <- exp(rnorm(N, mean = mu.zc, sd=sigma.zc))
 			}
 	  }
-	} else { 
+	} else {
 	zc<-zr**a
 }
 # generating the recurrent event times *************************************************************
@@ -270,8 +279,8 @@ if (dist.rec=="lognormal") {                                       # lognormal
 		if(length(par.rec)!=2){stop("par.rec has wrong dimension")}
 		lambda <- par.rec[1]
 		nu     <- par.rec[2]
-	} else if(dist.rec=="gompertz"){                                   # gompertz 
-    if(length(par.rec)!=2){stop("par.rec has wrong dimension")}      
+	} else if(dist.rec=="gompertz"){                                   # gompertz
+    if(length(par.rec)!=2){stop("par.rec has wrong dimension")}
     lambdag <- par.rec[1]
     alpha   <- par.rec[2]
 	} else if(dist.rec=="step"){                                       # step
@@ -302,7 +311,7 @@ if(dist.rec=="lognormal") {                     # lognormal
 	  indexTr2    <- which(Y>jumpinv)
 	  if(length(indexTr2 >0)){ t[indexTr2] <- (Y[indexTr2]-(fc-sc)*jump)/sc }
 	}
-  
+
 T  <- matrix(t,N,1)
 dirty <- rep(TRUE,N)
 T1 <- NULL
@@ -312,7 +321,7 @@ while (any(dirty)) {
 	pd <- rbinom(N,1,pfree)
     U  <- runif(N)
     Y  <- (-1)*log(U)*exp((-1)*x%*%beta.xr)*1/zr
-    t1 <- t+pd*dfree  
+    t1 <- t+pd*dfree
     if (dist.rec=="lognormal") {                                                      # lognormal
       t <- (t1 + exp(qnorm(1-exp(log(1-pnorm((log(t1)-mu/sigma)))-Y))*sigma+mu)-(t1))
     } else if (dist.rec=="weibull"){                                                  # weibull
@@ -325,7 +334,7 @@ while (any(dirty)) {
       indexTr4 <- which((t1 <= jump) & (Y > (jump-t1)*fc))
       if(length(indexTr4 >0)){ t[indexTr4] <- t1[indexTr4] + (Y[indexTr4]+(fc-sc)*(t1[indexTr4]-jump))/sc }
       indexTr5 <- which(t1 > jump)
-      if(length(indexTr5 >0)){ t[indexTr5] <- t1[indexTr5] + Y[indexTr5]/sc }              
+      if(length(indexTr5 >0)){ t[indexTr5] <- t1[indexTr5] + Y[indexTr5]/sc }
     }
     T1 <- cbind(T1,ifelse(dirty,t1,NA))
     dirty <- ifelse(dirty,(t(t) < fu) & (t(t1) < fu),dirty)
@@ -335,8 +344,8 @@ while (any(dirty)) {
 
 # comp. events simulation ***********************************************************
 #derivation of the distributional parameters for the comp. events
-dist.comp <- match.arg(dist.comp, choices=c("weibull", "lognormal","gompertz", "step")) 
-  
+dist.comp <- match.arg(dist.comp, choices=c("weibull", "lognormal","gompertz", "step"))
+
 if (dist.comp=="lognormal") {                                         # lognormal
   if(length(par.comp)!=2){stop("par.comp has wrong dimension")}
   mu2    <- par.comp[1]
@@ -345,8 +354,8 @@ if (dist.comp=="lognormal") {                                         # lognorma
 	  if(length(par.comp)!=2){stop("par.comp has wrong dimension")}
     lambda2 <- par.comp[1]
     nu2     <- par.comp[2]
-	} else if(dist.comp=="gompertz"){                                   # gompertz 
-	  if(length(par.comp)!=2){stop("par.comp has wrong dimension")}      
+	} else if(dist.comp=="gompertz"){                                   # gompertz
+	  if(length(par.comp)!=2){stop("par.comp has wrong dimension")}
 	  lambdag2 <- par.comp[1]
 	  alpha2   <- par.comp[2]
 	} else if(dist.comp=="step"){                                       # step
@@ -356,14 +365,14 @@ if (dist.comp=="lognormal") {                                         # lognorma
 	  jump2       <- par.comp[3]
 	  jumpinv2    <- jump2*fc2
 	}
-  
+
 # simulation of N comp. events
-U2 <- runif(N)  
-Y2 <- (-1)*log(U2)*exp((-1)*x%*%beta.xc)*1/zc	
+U2 <- runif(N)
+Y2 <- (-1)*log(U2)*exp((-1)*x%*%beta.xc)*1/zc
 if (dist.comp=="lognormal") {		                     # lognormal
-    t2 <- exp(qnorm(1-exp((-1)*Y2))*sigma2 + mu2)			
-	} else if(dist.comp=="weibull"){                   # weibull 		
-    t2 <- ((lambda2)^(-1)*Y2)^(1/nu2)					
+    t2 <- exp(qnorm(1-exp((-1)*Y2))*sigma2 + mu2)
+	} else if(dist.comp=="weibull"){                   # weibull
+    t2 <- ((lambda2)^(-1)*Y2)^(1/nu2)
 	}	else if(dist.comp=="gompertz"){                  # gompertz
 	  t2 <- (1/alpha2)*log((alpha2/lambdag2)*Y2+1)
 	} else if(dist.comp=="step"){                      # step
@@ -372,13 +381,13 @@ if (dist.comp=="lognormal") {		                     # lognormal
 	  if(length(indexTr12 >0)){ t2[indexTr12] <- Y2[indexTr12]/fc2 }
 	  indexTr22    <- which(Y2>jumpinv2)
 	  if(length(indexTr22 >0)){ t2[indexTr22] <- (Y2[indexTr22]-(fc2-sc2)*jump2)/sc2 }
-	}	
-T2<-matrix(t2,N,1) 
+	}
+T2<-matrix(t2,N,1)
 comp.event<-as.vector(t(T2))
 comp.event<-comp.event[!is.na(comp.event)]
 
 # **************************************************************************************
-    
+
 # start times
 start.t     <- cbind(0,T1)
 start.t     <- as.vector(t(start.t))
@@ -418,29 +427,29 @@ for (i in 1:length(l)) {
 	if (l[i]) {tab.stop.t[i] <- tab.Fu[i]; e[i]<-0}
 }
 
-s<-tab.start.t>tab.comp.event				# create vector which remembers the times which are after the comp.event and therefore do not exist.										
-# r<-rep(0,length(s))												 
-# for (i in 1:length(s)){											
-# 	if (s[i]) {r[i-1]<-1}											
-# }	
-  
-m<-tab.stop.t>tab.comp.event			# modify status vector, whenever the stop.time is greater than the comp. event it leads to status 2								 
+s<-tab.start.t>tab.comp.event				# create vector which remembers the times which are after the comp.event and therefore do not exist.
+# r<-rep(0,length(s))
+# for (i in 1:length(s)){
+# 	if (s[i]) {r[i-1]<-1}
+# }
+
+m<-tab.stop.t>tab.comp.event			# modify status vector, whenever the stop.time is greater than the comp. event it leads to status 2
 for (i in 1:length(m)) {
-	if (m[i]) {tab.stop.t[i]<-tab.comp.event[i]; e[i]<-2}				
+	if (m[i]) {tab.stop.t[i]<-tab.comp.event[i]; e[i]<-2}
 }
-  
+
 tab <- cbind(tab.ID,tab.X,tab.zr,tab.zc,tab.start.t,tab.stop.t,t(e),tab.Fu, tab.comp.event)
- 
+
 for (i in 1:length(w)) {
-	if(w[i]) {tab[i,] <- rep(NA, nr.cov+8)}		# delete times, which are after the FU and therefore don't exist 
+	if(w[i]) {tab[i,] <- rep(NA, nr.cov+8)}		# delete times, which are after the FU and therefore don't exist
 }
 for (i in 1:length(w)) {
-	if(s[i]) {tab[i,]<-rep(NA, nr.cov+8)}		# delete times, which are after the comp. event and therefore don't exist	
+	if(s[i]) {tab[i,]<-rep(NA, nr.cov+8)}		# delete times, which are after the comp. event and therefore don't exist
 }
 
 tab<- data.frame(id=tab[,1], x=tab[,2:(nr.cov+1)], zr=tab[,(nr.cov+2)], zc=tab[,(nr.cov+3)], start=tab[,(nr.cov+4)], stop=tab[,(nr.cov+5)], status=tab[,(nr.cov+6)], fu=tab[,(nr.cov+7)])
 tab<-na.omit(tab)
- 
+
 return(tab)
 
 } #*****************************************************************************************************************************************************

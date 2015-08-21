@@ -154,7 +154,8 @@ cens.prob <- 0.2
 dfree <- 30/365
 pfree <- 0.5
 
-simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z, par.z, dist.rec, par.rec, pfree, dfree)
+simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z, par.z,
+                  dist.rec, par.rec, pfree, dfree)
 # print(simdata)  # only run for small N!
 }
 \author{

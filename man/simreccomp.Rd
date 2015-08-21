@@ -171,8 +171,8 @@ par.zc  <- 0.3
 ### alternatively the frailty variable for the competing event can be computed via a:
 a <- 0.5
 
-### Furthermore a Weibull-shaped baseline hazard for the recurrent event with shape parameter lambda=1
-### and scale parameter nu=2,
+### Furthermore a Weibull-shaped baseline hazard for the recurrent event with shape parameter
+### lambda=1 and scale parameter nu=2,
 
 dist.rec <- "weibull"
 par.rec  <- c(1,2)
@@ -197,8 +197,17 @@ cens.prob <- 0.2
 dfree <- 30/365
 pfree <- 0.5
 
-simdata1 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob, dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc, dist.zr=dist.zr, par.zr=par.zr, a=a,                           dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp, pfree= pfree, dfree=dfree)
-simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob, dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc, dist.zr=dist.zr, par.zr=par.zr,dist.zc=dist.zc, par.zc=par.zc, dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp, pfree= pfree, dfree=dfree)
+simdata1 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
+                      dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
+                      dist.zr=dist.zr, par.zr=par.zr, a=a,
+                      dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
+                      pfree= pfree, dfree=dfree)
+
+simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
+                      dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
+                      dist.zr=dist.zr, par.zr=par.zr,dist.zc=dist.zc, par.zc=par.zc,
+                      dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
+                      pfree= pfree, dfree=dfree)
 
 simdata1
 simdata2
