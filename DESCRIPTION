@@ -6,7 +6,7 @@ Author: Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher
 Maintainer: Katharina Ingel <ingel@uni-mainz.de>
 Description: Simulation of recurrent event data for non-constant baseline
     hazard in the total time model with risk-free intervalls and possibly a competing event.
-    Possibility to cut the data to an interim data set.
+    Possibility to cut the data to an interim data set. Data can be plotted.
 Depends:
     R (>= 2.10)
 VignetteBuilder: knitr
