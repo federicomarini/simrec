@@ -28,4 +28,4 @@ browseVignettes("simrec")
 ```
 
 ### Contact
-For additional details regarding the functions of **simrec**, please consult the documentation or write an email to ingel@uni-mainz.de. 
+For additional details regarding the functions of **simrec**, please consult the documentation.
