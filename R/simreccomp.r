@@ -121,69 +121,69 @@
 #'
 #' N <- 10
 #'
-#'### with a binomially distributed covariate and a standard normally distributed covariate
-#'### with regression coefficients of beta.xr=0.3 and beta.xr=0.2, respectively,
-#'### for the recurrent events,
-#'### as well as regression coefficients of beta.xc=0.5 and beta.xc=0.25, respectively,
-#'### for the competing event.
-#'
-#' dist.x  <- c("binomial", "normal")
-#' par.x   <- list(0.5, c(0,1))
-#' beta.xr <- c(0.3, 0.2)
-#' beta.xc <- c(0.5,0.25)
-#'
-#'### a gamma distributed frailty variable for the recurrent event with variance 0.25
-#'### and for the competing event with variance 0.3,
-#'
-#' dist.zr <- "gamma"
-#' par.zr  <- 0.25
-#'
-#' dist.zc <- "gamma"
-#' par.zc  <- 0.3
-#'
-#'### alternatively the frailty variable for the competing event can be computed via a:
-#' a <- 0.5
-#'
-#'### Furthermore a Weibull-shaped baseline hazard for the recurrent event with shape parameter
-#'### lambda=1 and scale parameter nu=2,
-#'
-#' dist.rec <- "weibull"
-#' par.rec  <- c(1,2)
-#'
-#'### and a Weibull-shaped baseline hazard for the competing event with shape parameter lambda=1
-#'### and scale parameter nu=2
-#'
-#' dist.comp	<- "weibull"
-#' par.comp 	<-c(1,2)
-#'
-#'### Subjects are to be followed for two years with 20% of the subjects
-#'### being censored according to a uniformly distributed censoring time
-#'### within [0,2] (in years).
-#'
-#' fu.min    <- 2
-#' fu.max    <- 2
-#' cens.prob <- 0.2
-#'
-#'### After each event a subject is not at risk for experiencing further events
-#'### for a period of 30 days with a probability of 50%.
-#'
-#' dfree <- 30/365
-#' pfree <- 0.5
-#'
-#'simdata1 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
-#'                       dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
-#'                       dist.zr=dist.zr, par.zr=par.zr, a=a,
-#'                       dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
-#'                       pfree= pfree, dfree=dfree)
-#'
-#'simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
-#'                       dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
-#'                       dist.zr=dist.zr, par.zr=par.zr,dist.zc=dist.zc, par.zc=par.zc,
-#'                       dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
-#'                       pfree= pfree, dfree=dfree)
-#'
-#'simdata1
-#'simdata2
+#' ### with a binomially distributed covariate and a standard normally distributed covariate
+#' ### with regression coefficients of beta.xr=0.3 and beta.xr=0.2, respectively,
+#' ### for the recurrent events,
+#' ### as well as regression coefficients of beta.xc=0.5 and beta.xc=0.25, respectively,
+#' ### for the competing event.
+#' 
+#'  dist.x  <- c("binomial", "normal")
+#'  par.x   <- list(0.5, c(0,1))
+#'  beta.xr <- c(0.3, 0.2)
+#'  beta.xc <- c(0.5,0.25)
+#' 
+#' ### a gamma distributed frailty variable for the recurrent event with variance 0.25
+#' ### and for the competing event with variance 0.3,
+#' 
+#'  dist.zr <- "gamma"
+#'  par.zr  <- 0.25
+#' 
+#'  dist.zc <- "gamma"
+#'  par.zc  <- 0.3
+#' 
+#' ### alternatively the frailty variable for the competing event can be computed via a:
+#'  a <- 0.5
+#' 
+#' ### Furthermore a Weibull-shaped baseline hazard for the recurrent event with shape parameter
+#' ### lambda=1 and scale parameter nu=2,
+#' 
+#'  dist.rec <- "weibull"
+#'  par.rec  <- c(1,2)
+#' 
+#' ### and a Weibull-shaped baseline hazard for the competing event with shape parameter lambda=1
+#' ### and scale parameter nu=2
+#' 
+#'  dist.comp	<- "weibull"
+#'  par.comp 	<-c(1,2)
+#' 
+#' ### Subjects are to be followed for two years with 20% of the subjects
+#' ### being censored according to a uniformly distributed censoring time
+#' ### within [0,2] (in years).
+#' 
+#'  fu.min    <- 2
+#'  fu.max    <- 2
+#'  cens.prob <- 0.2
+#' 
+#' ### After each event a subject is not at risk for experiencing further events
+#' ### for a period of 30 days with a probability of 50%.
+#' 
+#'  dfree <- 30/365
+#'  pfree <- 0.5
+#' 
+#' simdata1 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
+#'                        dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
+#'                        dist.zr=dist.zr, par.zr=par.zr, a=a,
+#'                        dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
+#'                        pfree= pfree, dfree=dfree)
+#' 
+#' simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
+#'                        dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
+#'                        dist.zr=dist.zr, par.zr=par.zr,dist.zc=dist.zc, par.zc=par.zc,
+#'                        dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
+#'                        pfree= pfree, dfree=dfree)
+#' 
+#' simdata1
+#' simdata2
 simreccomp <- function(N, 
                        fu.min, 
                        fu.max, 
@@ -203,9 +203,7 @@ simreccomp <- function(N,
                        par.comp, 
                        pfree=0, 
                        dfree=0) {
-  
   ID <- c(1:N)
-  
   # generating the follow-up  *****************************************************************
   # follow-up uniformly distributed in [fu.min, fu.max] if not censored
   # or uniformly distributed in [0, fu.max] if censored
@@ -225,7 +223,6 @@ simreccomp <- function(N,
   if(length(beta.xr)!=length(dist.x)){stop("dimensions of beta.xr and dist.x differ")}
   if(length(beta.xr)!=length(par.x)){stop("dimensions of beta.xr and par.x differ")}
   if(length(beta.xr)!=length(beta.xc)){stop("dimensions of beta.xr and beta.xc differ")}
-  
   
   # generating the covariate-matrix x   *****************************************************
   nr.cov <- length(beta.xr)       # number of covariates
@@ -467,5 +464,4 @@ simreccomp <- function(N,
   tab<-na.omit(tab)
   
   return(tab)
-  
 }
