@@ -6,12 +6,15 @@ Authors@R: c(person("Katharina", "Ingel", role = c("aut", "cre"), email = "ingel
     person("Antje", "Jahn-Eimermacher", role="aut"),
     person("Stella", "Preussler", role="aut"),
     person("Federico", "Marini", role="ctb", email="marinif@uni-mainz.de", comment = c(ORCID = '0000-0003-3252-7758')))
-Maintainer: Katharina Ingel <ingel@uni-mainz.de>
+Maintainer: Antje Jahn-Eimermacher <jahna@uni-mainz.de>
 Description: Simulation of recurrent event data for non-constant baseline
     hazard in the total time model with risk-free intervalls and possibly a competing event.
     Possibility to cut the data to an interim data set. Data can be plotted.
 Depends:
     R (>= 2.10)
+Imports:
+    graphics,
+    stats
 VignetteBuilder: knitr
 Suggests:
     knitr
