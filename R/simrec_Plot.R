@@ -44,18 +44,22 @@
 
 ########################################################################################
 
-simrecPlot <- function(data, id="id", start="start", Stop="stop", status="status"){
-
+simrecPlot <- function(data, 
+                       id="id", 
+                       start="start", 
+                       Stop="stop", 
+                       status="status"){
+  
   if(!(id %in% colnames(data))){stop("Please give the name of the id-column")}
   if(!(start %in% colnames(data))){stop("Please give the name of the start-column")}
   if(!(Stop %in% colnames(data))){stop("Please give the name of the stop-column")}
   if(!(status %in% colnames(data))){stop("Please give the name of the status-column")}
-
+  
   colnames(data)[colnames(data)==id]     <- "id"
   colnames(data)[colnames(data)==start]  <- "start"
   colnames(data)[colnames(data)==Stop]   <- "stop"
   colnames(data)[colnames(data)==status] <- "status"
-
+  
   data    <- data[order(data$id),]       # data ordered by id
   t       <- table(data$id)              # the table entries will also be ordered by id
   idvec   <- names(t)                    # all occuring IDs just one time
@@ -65,17 +69,16 @@ simrecPlot <- function(data, id="id", start="start", Stop="stop", status="status
   for(i in idvec){
     data$idnum[data$id==i] <- idtable$idnum[idtable$idvec==i]   # new column with a numerical id for each patient
   }
-
-
+  
   events <- data$stop[data$status==1]       # all event times in one vector
   cens   <- data$stop[data$status==0]       # all censoring times in one vector
-
+  
   idevents <- data$idnum[data$status==1]    # all numerical patient-IDs corresponding to the event times in one vector
   idcens   <- data$idnum[data$status==0]    # all numerical patient-IDs corresponding to the censoring times in one vector
-
+  
   nevents <- length(events)                 # how many event times    ...  if no events: events = numeric(0) and length(events)=0
   ncens   <- length(cens)                   # how many censoring times
-
+  
   par(las=1, cex.axis=0.5)
   plot( c(events, cens), c(idevents, idcens),                              # plot time points vs. corresponding patient-id
         pch=c(rep(20, nevents), rep(1,ncens)),                             # symbol for event: filled circle / symbol for censoring: circle
@@ -90,7 +93,6 @@ simrecPlot <- function(data, id="id", start="start", Stop="stop", status="status
   # axis(1, labels=TRUE, at=0:max(data$fu), tick=TRUE)
   axis(2, labels=idvec, at=idnum, tick=TRUE)
 }
-##################################################################################################################################################
 
 
 #' simreccompPlot
@@ -144,23 +146,22 @@ simrecPlot <- function(data, id="id", start="start", Stop="stop", status="status
 #' # pdf("Plot.pdf")
 #' # simreccompPlot(simdata)
 #' # dev.off()
-
-
-########################################################################
-
-simreccompPlot <- function(data, id="id", start="start", Stop="stop", status="status"){
-
-
+simreccompPlot <- function(data, 
+                           id="id", 
+                           start="start", 
+                           Stop="stop", 
+                           status="status"){
+  
   if(!(id %in% colnames(data))){stop("Please give the name of the id-column")}
   if(!(start %in% colnames(data))){stop("Please give the name of the start-column")}
   if(!(Stop %in% colnames(data))){stop("Please give the name of the stop-column")}
   if(!(status %in% colnames(data))){stop("Please give the name of the status-column")}
-
+  
   colnames(data)[colnames(data)==id]     <- "id"
   colnames(data)[colnames(data)==start]  <- "start"
   colnames(data)[colnames(data)==Stop]   <- "stop"
   colnames(data)[colnames(data)==status] <- "status"
-
+  
   data    <- data[order(data$id),]       # data ordered by id
   t       <- table(data$id)              # the table entries will also be ordered by id
   idvec   <- names(t)                    # all occuring IDs just one time
@@ -170,19 +171,19 @@ simreccompPlot <- function(data, id="id", start="start", Stop="stop", status="st
   for(i in idvec){
     data$idnum[data$id==i] <- idtable$idnum[idtable$idvec==i]   # new column with a numerical id for each patient
   }
-
+  
   events <- data$stop[data$status==1]    # all event times in one vector
   cens   <- data$stop[data$status==0]    # all censoring times in one vector
   compev <- data$stop[data$status==2]    # all competing event times in one vector
-
+  
   idevents <- data$idnum[data$status==1]    # all numerical patient-IDs corresponding to the event times in one vector
   idcens   <- data$idnum[data$status==0]    # all numerical patient-IDs corresponding to the censoring times in one vector
   idcompev <- data$idnum[data$status==2]    # all numerical patient-IDs corresponding to the competing event times in one vector
-
+  
   nevents <- length(events)              # how many event times                if no events: events = numeric(0) and length(events)=0
   ncens   <- length(cens)                # how many censoring times
   ncompev <- length(compev)              # how many competing events
-
+  
   par(las=1, cex.axis=0.5)
   plot( c(events, cens, compev), c(idevents, idcens, idcompev),         # plot time points vs. corresponding patient-id
         pch=c(rep(20, nevents), rep(1,ncens), rep(4, ncompev)),         # symbol for event: filled circle / symbol for censoring: circle / symbol for comp. event: x
