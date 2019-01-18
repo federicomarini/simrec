@@ -1,4 +1,3 @@
-
 #' simrec
 #'
 #' This function allows simulation of recurrent event data following the multiplicative
@@ -146,13 +145,22 @@
 #' simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z, par.z,
 #'                   dist.rec, par.rec, pfree, dfree)
 #' # print(simdata)  # only run for small N!
-########################################################################
-
-simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, beta.x=0, dist.z="gamma", par.z=0, dist.rec, par.rec, pfree=0, dfree=0) {
-
-
+simrec<- function(N, 
+                  fu.min, 
+                  fu.max, 
+                  cens.prob=0, 
+                  dist.x="binomial", 
+                  par.x=0, 
+                  beta.x=0, 
+                  dist.z="gamma", 
+                  par.z=0, 
+                  dist.rec, 
+                  par.rec, 
+                  pfree=0, 
+                  dfree=0) {
+  
   ID <- c(1:N)
-
+  
   # generating the follow-up
   # follow-up uniformly distributed in [fu.min, fu.max] if not censored
   # or uniformly distributed in [0, fu.max] if censored
@@ -161,17 +169,16 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   fu <- rbinom(N, 1, cens.prob)           # 1 = censored
   nr.cens <- sum(fu)
   if(nr.cens==0){                         # nobody censored
-   fu <- runif(N, min=fu.min, max=fu.max)
+    fu <- runif(N, min=fu.min, max=fu.max)
   } else{
     index.cens <- which(fu==1)
     fu[-index.cens] <- runif((N-nr.cens), min=fu.min, max=fu.max)
     fu[index.cens]  <- runif(nr.cens, min=0, max=fu.max)
   }
-
-
+  
   if(length(beta.x)!=length(dist.x)){stop("dimensions of beta.x and dist.x differ")}
   if(length(beta.x)!=length(par.x)){stop("dimensions of beta.x and par.x differ")}
-
+  
   # generating the covariate-matrix x
   nr.cov <- length(beta.x)       # number of covariates
   x<-matrix(0,N,nr.cov)        # matrix with N lines and one column for each covariate
@@ -188,7 +195,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
       x[,i]   <- c(rnorm(N, mean=mu.x, sd=sigma.x))
     }
   }
-
+  
   # generating the frailty variable z
   z <- rep(1,N)
   dist.z <- match.arg(dist.z, choices=c("gamma", "lognormal"))
@@ -204,8 +211,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
       z       <- exp(rnorm(N, mean = mu.z, sd=sigma.z))
     }
   }
-
-
+  
   # derivation of the distributional parameters for the recurrent event data
   dist.rec <- match.arg(dist.rec, choices=c("weibull", "lognormal", "gompertz", "step"))
   if (dist.rec=="lognormal") {                                       # lognormal
@@ -230,11 +236,11 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
     jump       <- par.rec[3]
     jumpinv    <- jump*fc
   }
-
+  
   if(length(pfree)!=1){stop("pfree has wrong dimension")}
   if(length(dfree)!=1){stop("dfree has wrong dimension")}
   if(pfree<0 || pfree>1){stop("pfree must be a probability between 0 and 1")}
-
+  
   # initial step: simulation of N first event times
   U <- runif(N)
   Y <- (-1)*log(U)*exp((-1)*x%*%beta.x)*1/z
@@ -254,7 +260,7 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   T  <- matrix(t,N,1)
   dirty <- rep(TRUE,N)
   T1 <- NULL
-
+  
   # recursive step: simulation of N subsequent event times
   while (any(dirty)) {
     pd <- rbinom(N,1,pfree)
@@ -280,12 +286,12 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
     if(!any(dirty)) break
     T <- cbind(T,ifelse(dirty,t,NA))
   }
-
+  
   # start times
   start.t     <- cbind(0,T1)
   start.t     <- as.vector(t(start.t))
   tab.start.t <- start.t[!is.na(start.t)]
-
+  
   # stop times
   stop.t <- cbind(T,NA)
   d <- apply(!is.na(T),1,sum)							# number of events per individual
@@ -295,29 +301,29 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   }
   stop.t     <- as.vector(t(stop.t))
   tab.stop.t <- stop.t[!is.na(stop.t)]
-
+  
   # deriving the censoring indicator variable and truncating stop times that are larger than FU
   e <- NULL
   for (i in 1:N) {
     e <- cbind(e,t(rep(1,d[i])),0)
   }
-
+  
   tab.ID <- rep(ID,f)
   tab.X  <- x[rep(1:nrow(x),f),]
   tab.Z  <- rep(z,f)
   tab.Fu <- rep(fu,f)
-
+  
   w <- tab.start.t>tab.stop.t
   v <- rep(0,length(w))
   for (i in 1:length(w)){
     if (w[i]) {v[i-1] <- 1}
   }
-
+  
   l <- tab.stop.t>tab.Fu
   for (i in 1:length(l)) {
     if (l[i]) {tab.stop.t[i] <- tab.Fu[i]; e[i]<-0}
   }
-
+  
   tab <- cbind(tab.ID,tab.X,tab.Z,tab.start.t,tab.stop.t,t(e),tab.Fu)
   for (i in 1:length(w)) {
     if(w[i]) {tab[i,] <- rep(NA, nr.cov+6)}
@@ -325,5 +331,4 @@ simrec<- function(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0, be
   tab<- data.frame(id=tab[,1], x=tab[,2:(nr.cov+1)], z=tab[,(nr.cov+2)], start=tab[,(nr.cov+3)], stop=tab[,(nr.cov+4)], status=tab[,(nr.cov+5)], fu=tab[,(nr.cov+6)])
   tab<-na.omit(tab)
   return(tab)
-
 }
