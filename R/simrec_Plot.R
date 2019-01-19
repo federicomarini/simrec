@@ -126,8 +126,8 @@ simrecPlot <- function(data,
 #' par.zc  <- 0.3
 #' dist.rec <- "weibull"
 #' par.rec  <- c(1,2)
-#' dist.comp	<- "weibull"
-#' par.comp 	<-c(1,2)
+#' dist.comp <- "weibull"
+#' par.comp  <-c(1,2)
 #' fu.min    <- 2
 #' fu.max    <- 2
 #' cens.prob <- 0.2

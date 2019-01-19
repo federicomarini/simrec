@@ -20,96 +20,98 @@
 #' @param N          Number of individuals
 #' @param fu.min     Minimum length of follow-up.
 #' @param fu.max     Maximum length of follow-up. Individuals length of follow-up is
-#'  generated from a uniform distribution on
-#'   \code{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common
-#'   follow-up.
+#' generated from a uniform distribution on
+#' \code{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common
+#' follow-up.
 #' @param cens.prob  Gives the probability of being censored due to loss to follow-up before
-#'   \code{fu.max}. For a random set of individuals defined by a B(N,\code{cens.prob})-distribution,
-#'   the time to censoring is generated from a uniform
-#'   distribution on \code{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring
-#'   due to loss to follow-up.
+#' \code{fu.max}. For a random set of individuals defined by a B(N,\code{cens.prob})-distribution,
+#' the time to censoring is generated from a uniform
+#' distribution on \code{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring
+#' due to loss to follow-up.
 #' @param dist.x     Distribution of the covariate(s) \eqn{X}. If there is more than one covariate,
-#'   \code{dist.x} must be a vector of distributions with one entry for each covariate. Possible
-#'   values are \code{"binomial"} and \code{"normal"}, default is \code{dist.x="binomial"}.
+#' \code{dist.x} must be a vector of distributions with one entry for each covariate. Possible
+#' values are \code{"binomial"} and \code{"normal"}, default is \code{dist.x="binomial"}.
 #' @param par.x      Parameters of the covariate distribution(s). For \code{"binomial", par.x} is
-#'   the probability for \eqn{x=1}. For \code{"normal"}, \code{par.x=c(}\eqn{\mu, \sigma}\code{)}
-#'   where \eqn{\mu} is the mean and \eqn{\sigma} is the standard deviation of a normal distribution.
-#'   If one of the covariates is defined to be normally distributed, \code{par.x} must be a list,
-#'   e.g. \code{ dist.x <- c("binomial", "normal")} and \code{par.x  <- list(0.5, c(1,2))}.
-#'   Default is \code{par.x=0}, i.e. \eqn{x=0} for all individuals.
+#' the probability for \eqn{x=1}. For \code{"normal"}, \code{par.x=c(}\eqn{\mu, \sigma}\code{)}
+#' where \eqn{\mu} is the mean and \eqn{\sigma} is the standard deviation of a normal distribution.
+#' If one of the covariates is defined to be normally distributed, \code{par.x} must be a list,
+#' e.g. \code{ dist.x <- c("binomial", "normal")} and \code{par.x  <- list(0.5, c(1,2))}.
+#' Default is \code{par.x=0}, i.e. \eqn{x=0} for all individuals.
 #' @param beta.xr  Regression coefficient(s) for the covariate(s) \eqn{x} corresponding to the
-#'    recurrent events. If there is more than one covariate,
-#'   \code{beta.xr} must be a vector of coefficients with one entry for each covariate.
-#'   \code{simreccomp} generates as many covariates as there are entries in \code{beta.xr}. Default is
-#'   \code{beta.xr=0}, corresponding to no effect of the covariate \eqn{x} on the recurrent events.
+#' recurrent events. If there is more than one covariate,
+#' \code{beta.xr} must be a vector of coefficients with one entry for each covariate.
+#' \code{simreccomp} generates as many covariates as there are entries in \code{beta.xr}. Default is
+#' \code{beta.xr=0}, corresponding to no effect of the covariate \eqn{x} on the recurrent events.
 #' @param beta.xc Regression coefficient(s) for the covariate(s) \eqn{x} corresponding to the
-#'   competing event. If there is more than one	covariate, \code{beta.xc}
-#'   must be a vector of coefficients with one entry for each covariate. Default is
-#'   \code{beta.xc=0}, corresponding to no effect of the covariate \eqn{x} on the competing event.
+#' competing event. If there is more than one covariate, \code{beta.xc}
+#' must be a vector of coefficients with one entry for each covariate. Default is
+#' \code{beta.xc=0}, corresponding to no effect of the covariate \eqn{x} on the competing event.
 #' @param dist.zr     Distribution of the frailty variable \eqn{Z_r} for the recurent events with \eqn{E(Z_r)=1} and
-#'   \eqn{Var(Z_r)=\theta_r}. Possible values are \code{"gamma"} for a Gamma distributed frailty
-#'    and \code{"lognormal"} for a lognormal distributed frailty.
-#'    Default is \code{dist.zr="gamma"}.
-#' @param par.zr      Parameter \eqn{\theta_r} for the frailty distribution: this parameter gives
-#'   the variance of the frailty variable \eqn{Z_r}.
-#'   Default is \code{par.zr=0}, which causes \eqn{Z_r=1}, i.e. no frailty effect for the recurrent events.
-#' @param dist.zc     Distribution of the frailty variable \eqn{Z_c} for the competing event with \eqn{E(Z_c)=1} and
-#'   \eqn{Var(Z_c)=\theta_c}. Possible values are \code{"gamma"} for a Gamma distributed frailty
-#'    and \code{"lognormal"} for a lognormal distributed frailty.
-#'    Default is \code{dist.zc=NULL}.
-#' @param par.zc      Parameter \eqn{\theta_c} for the frailty distribution: this parameter gives
-#'   the variance of the frailty variable \eqn{Z_c}.
-#'	 Default is \code{par.zc=NULL}.
-#' @param a 	Alternatively, the frailty distribution for the competing event can be computed through the distribution
-#'   of the frailty variable \eqn{Z_r} by \eqn{Z_c=Z_r**a}.
-#'	 Default is \code{a=NULL}.
-#' @param dist.rec   Form of the baseline hazard function for the recurrent events. Possible values are \code{"weibull"} or
-#'   \code{"gompertz"} or \code{"lognormal"} or \code{"step"}.
+#' \eqn{Var(Z_r)=\theta_r}. Possible values are \code{"gamma"} for a Gamma distributed frailty
+#' and \code{"lognormal"} for a lognormal distributed frailty.
+#' Default is \code{dist.zr="gamma"}.
+#' @param par.zr Parameter \eqn{\theta_r} for the frailty distribution: this parameter gives
+#' the variance of the frailty variable \eqn{Z_r}.
+#' Default is \code{par.zr=0}, which causes \eqn{Z_r=1}, i.e. no frailty effect for the recurrent events.
+#' @param dist.zc Distribution of the frailty variable \eqn{Z_c} for the competing event with \eqn{E(Z_c)=1} and
+#' \eqn{Var(Z_c)=\theta_c}. Possible values are \code{"gamma"} for a Gamma distributed frailty
+#' and \code{"lognormal"} for a lognormal distributed frailty.
+#' Default is \code{dist.zc=NULL}.
+#' @param par.zc Parameter \eqn{\theta_c} for the frailty distribution: this parameter gives
+#' the variance of the frailty variable \eqn{Z_c}.
+#' Default is \code{par.zc=NULL}.
+#' @param a Alternatively, the frailty distribution for the competing event can be computed through the distribution
+#' of the frailty variable \eqn{Z_r} by \eqn{Z_c=Z_r**a}.
+#' Default is \code{a=NULL}.
+#' @param dist.rec   Form of the baseline hazard function for the recurrent events. 
+#' Possible values are \code{"weibull"} or
+#' \code{"gompertz"} or \code{"lognormal"} or \code{"step"}.
 #' @param par.rec  Parameters for the distribution of the recurrent event data.
-#'   If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
-#'   where \eqn{\lambda>0} is the scale and \eqn{\nu>0} is the shape parameter. Then
-#'   \code{par.rec=c(}\eqn{\lambda, \nu}\code{)}. A special case
-#'   of this is the exponential distribution for \eqn{\nu=1}.
-#'   If \code{dist.rec="gompertz"}, the hazard function is \deqn{\lambda_0(t)=\lambda*exp(\alpha t),}
-#'   where \eqn{\lambda>0} is the scale and \eqn{\alpha\in(-\infty,+\infty)} is the shape parameter.
-#'   Then \code{par.rec=c(}\eqn{\lambda, \alpha}\code{)}.
-#'   If \code{dist.rec="lognormal"}, the hazard function is
-#'   \deqn{\lambda_0(t)=[(1/(\sigma t))*\phi((ln(t)-\mu)/\sigma)]/[\Phi((-ln(t)-\mu)/\sigma)],}
-#'   where \eqn{\phi} is the probability density function and \eqn{\Phi} is the cumulative
-#'   distribution function of the standard normal distribution, \eqn{\mu\in(-\infty,+\infty)} is a
-#'   location parameter and \eqn{\sigma>0} is a shape parameter. Then \code{par.rec=c(}\eqn{\mu,\sigma}\code{)}.
-#'   Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
-#'   specify the usual lognormal model (with covariates specified as effects on the parameters of the
-#'   lognormal distribution resulting in non-proportional hazards), but only defines the baseline
-#'   hazard and incorporates covariate effects using the proportional hazard assumtion.
-#'   If \code{dist.rec="step"} the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
-#'   Then \code{par.rec=c(}\eqn{a,b,t_1}\code{)}.
-#' @param dist.comp	Form of the baseline hazard function for the competing event. Possible values are \code{"weibull"} or
-#'   \code{"gompertz"} or \code{"lognormal"} or \code{"step"}       .
-#' @param par.comp  Parameters for the distribution of the competing event data. For more details see \code{par.rec}.
+#' If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
+#' where \eqn{\lambda>0} is the scale and \eqn{\nu>0} is the shape parameter. Then
+#' \code{par.rec=c(}\eqn{\lambda, \nu}\code{)}. A special case
+#' of this is the exponential distribution for \eqn{\nu=1}.
+#' If \code{dist.rec="gompertz"}, the hazard function is \deqn{\lambda_0(t)=\lambda*exp(\alpha t),}
+#' where \eqn{\lambda>0} is the scale and \eqn{\alpha\in(-\infty,+\infty)} is the shape parameter.
+#' Then \code{par.rec=c(}\eqn{\lambda, \alpha}\code{)}.
+#' If \code{dist.rec="lognormal"}, the hazard function is
+#' \deqn{\lambda_0(t)=[(1/(\sigma t))*\phi((ln(t)-\mu)/\sigma)]/[\Phi((-ln(t)-\mu)/\sigma)],}
+#' where \eqn{\phi} is the probability density function and \eqn{\Phi} is the cumulative
+#' distribution function of the standard normal distribution, \eqn{\mu\in(-\infty,+\infty)} is a
+#' location parameter and \eqn{\sigma>0} is a shape parameter. Then \code{par.rec=c(}\eqn{\mu,\sigma}\code{)}.
+#' Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
+#' specify the usual lognormal model (with covariates specified as effects on the parameters of the
+#' lognormal distribution resulting in non-proportional hazards), but only defines the baseline
+#' hazard and incorporates covariate effects using the proportional hazard assumtion.
+#' If \code{dist.rec="step"} the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
+#' Then \code{par.rec=c(}\eqn{a,b,t_1}\code{)}.
+#' @param dist.comp Form of the baseline hazard function for the competing event. 
+#' Possible values are \code{"weibull"} or
+#' \code{"gompertz"} or \code{"lognormal"} or \code{"step"}       .
+#' @param par.comp  Parameters for the distribution of the competing event data. 
+#' For more details see \code{par.rec}.
 #' @param pfree Probability that after experiencing an event the individual is not at risk
-#'   for experiencing further events for a length of \code{dfree} time units.
-#'   Default is \code{pfree=0}.
+#' for experiencing further events for a length of \code{dfree} time units.
+#' Default is \code{pfree=0}.
 #' @param dfree Length of the risk-free interval. Must be in the same time unit as \code{fu.max}.
-#'  Default is \code{dfree=0}, i.e. the individual is continously at risk for experiencing
-#'  events until end of follow-up.
+#' Default is \code{dfree=0}, i.e. the individual is continously at risk for experiencing
+#' events until end of follow-up.
 #' @return The output is a data.frame consisting of the columns:
-#'    \item{id}{An integer number for identification of each individual}
-#'    \item{x}{or \code{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the
-#'       randomly generated value of the covariate(s) \eqn{X} for each individual.}
-#'    \item{zr}{Contains the randomly generated value of the frailty variable \eqn{Z_r} for each individual.}
-#'    \item{zc}{Contains the randomly generated value of the frailty variable \eqn{Z_c} for each individual.}
-#'    \item{start}{The start of interval \code{[start, stop]}, when the individual
-#'       starts to be at risk for a next event.}
-#'    \item{stop}{The time of an event or censoring, i.e. the end of interval
-#'    \code{[start, stop]}.}
-#'    \item{status}{An indicator of whether an event occured at time \code{stop} (\code{status=1}),
-#'        the individual is censored at time \code{stop} (\code{status=0}) or the competing event occured at time
-#'        \code{stop} (\code{status=2}).}
-#'    \item{fu}{Length of follow-up period \code{[0,fu]} for each individual.}
-#'    For each individual there are as many lines as it experiences events,
-#'    plus one line if being censored.
-#'    The data format corresponds to the counting process format.
+#' \item{id}{An integer number for identification of each individual}
+#' \item{x}{or \code{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the
+#' randomly generated value of the covariate(s) \eqn{X} for each individual.}
+#' \item{zr}{Contains the randomly generated value of the frailty variable \eqn{Z_r} for each individual.}
+#' \item{zc}{Contains the randomly generated value of the frailty variable \eqn{Z_c} for each individual.}
+#' \item{start}{The start of interval \code{[start, stop]}, when the individual 
+#' starts to be at risk for a next event.}
+#' \item{stop}{The time of an event or censoring, i.e. the end of interval \code{[start, stop]}.}
+#' \item{status}{An indicator of whether an event occured at time \code{stop} (\code{status=1}),
+#' the individual is censored at time \code{stop} (\code{status=0}) or the competing event occured at time
+#' \code{stop} (\code{status=2}).}
+#' \item{fu}{Length of follow-up period \code{[0,fu]} for each individual.}
+#' For each individual there are as many lines as it experiences events,
+#' plus one line if being censored.
+#' The data format corresponds to the counting process format.
 #' @author Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher.
 #' Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI),
 #' University Medical Center of the Johannes Gutenberg-University Mainz, Germany
@@ -153,8 +155,8 @@
 #' ### and a Weibull-shaped baseline hazard for the competing event with shape parameter lambda=1
 #' ### and scale parameter nu=2
 #' 
-#'  dist.comp	<- "weibull"
-#'  par.comp 	<-c(1,2)
+#'  dist.comp <- "weibull"
+#'  par.comp <-c(1,2)
 #' 
 #' ### Subjects are to be followed for two years with 20% of the subjects
 #' ### being censored according to a uniformly distributed censoring time
@@ -382,11 +384,11 @@ simreccomp <- function(N,
   # simulation of N comp. events
   U2 <- runif(N)
   Y2 <- (-1)*log(U2)*exp((-1)*x%*%beta.xc)*1/zc
-  if (dist.comp=="lognormal") {		                     # lognormal
+  if (dist.comp=="lognormal") {                     # lognormal
     t2 <- exp(qnorm(1-exp((-1)*Y2))*sigma2 + mu2)
   } else if(dist.comp=="weibull"){                   # weibull
     t2 <- ((lambda2)^(-1)*Y2)^(1/nu2)
-  }	else if(dist.comp=="gompertz"){                  # gompertz
+  } else if(dist.comp=="gompertz"){                  # gompertz
     t2 <- (1/alpha2)*log((alpha2/lambdag2)*Y2+1)
   } else if(dist.comp=="step"){                      # step
     t2 <- rep(NA,N)
@@ -408,7 +410,7 @@ simreccomp <- function(N,
   
   # stop times
   stop.t <- cbind(T,NA)
-  d <- apply(!is.na(T),1,sum)							# number of events per individual
+  d <- apply(!is.na(T),1,sum)       # number of events per individual
   f <- d+1
   for (i in 1:N){
     stop.t[i,f[i]] <- fu[i]
@@ -432,7 +434,7 @@ simreccomp <- function(N,
   w <- tab.start.t>tab.stop.t
   # v <- rep(0,length(w))
   # for (i in 1:length(w)){
-  # 	if (w[i]) {v[i-1] <- 1}
+  #  if (w[i]) {v[i-1] <- 1}
   # }
   
   l <- tab.stop.t>tab.Fu
@@ -440,13 +442,13 @@ simreccomp <- function(N,
     if (l[i]) {tab.stop.t[i] <- tab.Fu[i]; e[i]<-0}
   }
   
-  s<-tab.start.t>tab.comp.event				# create vector which remembers the times which are after the comp.event and therefore do not exist.
+  s<-tab.start.t>tab.comp.event    # create vector which remembers the times which are after the comp.event and therefore do not exist.
   # r<-rep(0,length(s))
   # for (i in 1:length(s)){
-  # 	if (s[i]) {r[i-1]<-1}
+  #  if (s[i]) {r[i-1]<-1}
   # }
   
-  m<-tab.stop.t>tab.comp.event			# modify status vector, whenever the stop.time is greater than the comp. event it leads to status 2
+  m<-tab.stop.t>tab.comp.event   # modify status vector, whenever the stop.time is greater than the comp. event it leads to status 2
   for (i in 1:length(m)) {
     if (m[i]) {tab.stop.t[i]<-tab.comp.event[i]; e[i]<-2}
   }
@@ -454,10 +456,10 @@ simreccomp <- function(N,
   tab <- cbind(tab.ID,tab.X,tab.zr,tab.zc,tab.start.t,tab.stop.t,t(e),tab.Fu, tab.comp.event)
   
   for (i in 1:length(w)) {
-    if(w[i]) {tab[i,] <- rep(NA, nr.cov+8)}		# delete times, which are after the FU and therefore don't exist
+    if(w[i]) {tab[i,] <- rep(NA, nr.cov+8)}  # delete times, which are after the FU and therefore don't exist
   }
   for (i in 1:length(w)) {
-    if(s[i]) {tab[i,]<-rep(NA, nr.cov+8)}		# delete times, which are after the comp. event and therefore don't exist
+    if(s[i]) {tab[i,]<-rep(NA, nr.cov+8)}  # delete times, which are after the comp. event and therefore don't exist
   }
   
   tab<- data.frame(id=tab[,1], x=tab[,2:(nr.cov+1)], zr=tab[,(nr.cov+2)], zc=tab[,(nr.cov+3)], start=tab[,(nr.cov+4)], stop=tab[,(nr.cov+5)], status=tab[,(nr.cov+6)], fu=tab[,(nr.cov+7)])

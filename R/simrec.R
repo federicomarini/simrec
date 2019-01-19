@@ -294,7 +294,7 @@ simrec<- function(N,
   
   # stop times
   stop.t <- cbind(T,NA)
-  d <- apply(!is.na(T),1,sum)							# number of events per individual
+  d <- apply(!is.na(T),1,sum)       # number of events per individual
   f <- d+1
   for (i in 1:N){
     stop.t[i,f[i]] <- fu[i]

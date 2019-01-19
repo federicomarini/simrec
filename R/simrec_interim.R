@@ -58,7 +58,7 @@ simrecint <- function(data,
   tab     <- data                # previously generated data with columns including id, start, stop, status
   nr.rows <- length(tab$id)
   
-  ev <- NULL										 # number of "events" for each individual (including censoring)
+  ev <- NULL           # number of "events" for each individual (including censoring)
   for (j in 1:N) {
     ev[j] <- length(which(tab$id==j))
   }
@@ -68,7 +68,7 @@ simrecint <- function(data,
   tab$interimtime <- rep(tI, nr.rows)
   tab$stop_study  <- tab$stop + tab$rectime                            # stopping time in study time
   
-  m <- (tab$stop_study > tab$interimtime)				                       # if m[i]=TRUE -> event after interim analysis
+  m <- (tab$stop_study > tab$interimtime)                           # if m[i]=TRUE -> event after interim analysis
   for (i in 1:nr.rows) {                                               # Then time of interim analysis minus time of recruitment gives new stop time (in patient time)
     if (m[i]) { tab$stop[i]   <- tab$interimtime[i] - tab$rectime[i]   # this is negative, if patient is not recruited yet (see also below)
     tab$status[i] <- 0                                     # subsequent lines now equal, if more than one event after interim analysis
@@ -81,7 +81,7 @@ simrecint <- function(data,
   }
   
   for (i in 1:length(k)) {
-    if (k[i]) {is.na(tab[i+1,]) <- TRUE }					# cuts all events after interim time (accordinlgy to k as generated above), by setting the whole line to NA
+    if (k[i]) {is.na(tab[i+1,]) <- TRUE }     # cuts all events after interim time (accordinlgy to k as generated above), by setting the whole line to NA
   }
   
   tab <- na.omit(tab)
