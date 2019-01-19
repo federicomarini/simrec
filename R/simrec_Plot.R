@@ -41,9 +41,6 @@
 #' # pdf("Plot.pdf")
 #' # simrecPlot(simdata)
 #' # dev.off()
-
-########################################################################################
-
 simrecPlot <- function(data, 
                        id="id", 
                        start="start", 
@@ -108,7 +105,7 @@ simrecPlot <- function(data,
 #' @param start         the name of the \code{start} column, default is \code{"start"}
 #' @param Stop          the name of the \code{stop} column, default is \code{"stop"}
 #' @param status        the name of the \code{status} column, default is \code{"status"}
-
+#' 
 #' @return The output  is a plot of the data with a bullet indicating a recurrent event, an x indicating the competing event and a circle indicating censoring.
 #' @author Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher.
 #' Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI),
