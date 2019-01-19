@@ -13,19 +13,23 @@
 
 <<setup, include=FALSE, cache=FALSE>>=
 library(knitr)
-opts_chunk$set(#fig.path='./figures',
-fig.align='center', fig.show='asis', #fig.show='hold',dev="png",
-eval=TRUE,
-fig.width=4.5,
-fig.height=4.5,
-message=FALSE,
-size='small',
-comment='##',
-prompt=TRUE,
-echo=TRUE, # set to true for the vignette!
-results='hold',
-tidy=FALSE)
-options(replace.assign=TRUE, width=90, prompt="R> ")
+opts_chunk$set(
+  fig.align='center', 
+  fig.show='asis', 
+  eval=TRUE,
+  fig.width=4.5,
+  fig.height=4.5,
+  message=FALSE,
+  size='small',
+  comment='##',
+  prompt=TRUE,
+  echo=TRUE, # set to true for the vignette!
+  results='hold',
+  tidy=FALSE)
+
+options(replace.assign=TRUE,
+        width=90,
+        prompt="R> ")
 @
 
 %% almost as usual
@@ -103,7 +107,6 @@ between-subject-heterogeneity. Data output is in the counting process format.
 simrec(N, fu.min, fu.max, cens.prob = 0, dist.x = "binomial", par.x = 0,
   beta.x = 0, dist.z = "gamma", par.z = 0, dist.rec, par.rec, pfree = 0,
   dfree = 0)
-
 @
 
 
@@ -218,8 +221,6 @@ pfree <- 0.5
 simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x,
                     dist.z, par.z, dist.rec, par.rec, pfree, dfree)
 print(simdata[1:10,])
-
-
 @
 
 
@@ -248,8 +249,6 @@ simreccomp(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0,
            beta.xr=0, beta.xc=0, dist.zr="gamma", par.zr=0, a=NULL,
            dist.zc=NULL, par.zc=NULL, dist.rec, par.rec,
            dist.comp, par.comp, pfree=0, dfree=0)
-
-
 @
 
 
@@ -331,75 +330,75 @@ For each individual there are as many lines as it experiences events, plus one l
 
 <<Examplesimreccomp>>=
 library(simrec)
- ### Example:
- ### A sample of 10 individuals
+### Example:
+### A sample of 10 individuals
 
- N <- 10
+N <- 10
 
- ### with a binomially distributed covariate and a standard normally distributed
- ### covariate with regression coefficients of beta.xr=0.3 and beta.xr=0.2,
- ### respectively, for the recurrent events,
- ### as well as regression coefficients of beta.xc=0.5 and beta.xc=0.25,
- ### respectively, for the competing event.
+### with a binomially distributed covariate and a standard normally distributed
+### covariate with regression coefficients of beta.xr=0.3 and beta.xr=0.2,
+### respectively, for the recurrent events,
+### as well as regression coefficients of beta.xc=0.5 and beta.xc=0.25,
+### respectively, for the competing event.
 
- dist.x  <- c("binomial", "normal")
- par.x   <- list(0.5, c(0,1))
- beta.xr <- c(0.3, 0.2)
- beta.xc <- c(0.5,0.25)
+dist.x  <- c("binomial", "normal")
+par.x   <- list(0.5, c(0,1))
+beta.xr <- c(0.3, 0.2)
+beta.xc <- c(0.5,0.25)
 
- ### a gamma distributed frailty variable for the recurrent event with
- ### variance 0.25 and for the competing event with variance 0.3,
+### a gamma distributed frailty variable for the recurrent event with
+### variance 0.25 and for the competing event with variance 0.3,
 
- dist.zr <- "gamma"
- par.zr  <- 0.25
+dist.zr <- "gamma"
+par.zr  <- 0.25
 
- dist.zc <- "gamma"
- par.zc  <- 0.3
+dist.zc <- "gamma"
+par.zc  <- 0.3
 
- ### alternatively the frailty variable for the competing event can be computed
- ### via a:
- a <- 0.5
+### alternatively the frailty variable for the competing event can be computed
+### via a:
+a <- 0.5
 
- ### Furthermore a Weibull-shaped baseline hazard for the recurrent event with
- ### shape parameter lambda=1 and scale parameter nu=2,
+### Furthermore a Weibull-shaped baseline hazard for the recurrent event with
+### shape parameter lambda=1 and scale parameter nu=2,
 
- dist.rec <- "weibull"
- par.rec  <- c(1,2)
+dist.rec <- "weibull"
+par.rec  <- c(1,2)
 
- ### and a Weibull-shaped baseline hazard for the competing event with
- ### shape parameter lambda=1 and scale parameter nu=2
+### and a Weibull-shaped baseline hazard for the competing event with
+### shape parameter lambda=1 and scale parameter nu=2
 
- dist.comp	<- "weibull"
- par.comp 	<-c(1,2)
+dist.comp <- "weibull"
+par.comp  <- c(1,2)
 
- ### Subjects are to be followed for two years with 20% of the subjects
- ### being censored according to a uniformly distributed censoring time
- ### within [0,2] (in years).
+### Subjects are to be followed for two years with 20% of the subjects
+### being censored according to a uniformly distributed censoring time
+### within [0,2] (in years).
 
- fu.min    <- 2
- fu.max    <- 2
- cens.prob <- 0.2
+fu.min    <- 2
+fu.max    <- 2
+cens.prob <- 0.2
 
- ### After each event a subject is not at risk for experiencing further events
- ### for a period of 30 days with a probability of 50%.
+### After each event a subject is not at risk for experiencing further events
+### for a period of 30 days with a probability of 50%.
 
- dfree <- 30/365
- pfree <- 0.5
+dfree <- 30/365
+pfree <- 0.5
 
- simdata1 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
-                        dist.x=dist.x, par.x=par.x, beta.xr=beta.xr,
-                        beta.xc=beta.xc, dist.zr=dist.zr, par.zr=par.zr, a=a,
-                        dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp,
-                        par.comp=par.comp, pfree= pfree, dfree=dfree)
- simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
-                        dist.x=dist.x, par.x=par.x, beta.xr=beta.xr,
-                        beta.xc=beta.xc, dist.zr=dist.zr, par.zr=par.zr,
-                        dist.zc=dist.zc, par.zc=par.zc, dist.rec=dist.rec,
-                        par.rec=par.rec, dist.comp=dist.comp,
-                        par.comp=par.comp, pfree= pfree, dfree=dfree)
+simdata1 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
+                       dist.x=dist.x, par.x=par.x, beta.xr=beta.xr,
+                       beta.xc=beta.xc, dist.zr=dist.zr, par.zr=par.zr, a=a,
+                       dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp,
+                       par.comp=par.comp, pfree= pfree, dfree=dfree)
+simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
+                       dist.x=dist.x, par.x=par.x, beta.xr=beta.xr,
+                       beta.xc=beta.xc, dist.zr=dist.zr, par.zr=par.zr,
+                       dist.zc=dist.zc, par.zc=par.zc, dist.rec=dist.rec,
+                       par.rec=par.rec, dist.comp=dist.comp,
+                       par.comp=par.comp, pfree= pfree, dfree=dfree)
 
- print(simdata1[1:10,])
- #print(simdata2[1:10,])
+print(simdata1[1:10,])
+#print(simdata2[1:10,])
 @
 
 
@@ -511,7 +510,6 @@ The functions \code{simrecPlot} and \code{simreccompPlot} allow plotting of recu
 <<codeExampleplot,echo=TRUE,eval=FALSE>>=
 simrecPlot(simdata, id = "id", start = "start", Stop = "stop", status = "status")
 simreccompPlot(simdata, id = "id", start = "start", Stop = "stop", status = "status")
-
 @
 
 \subsection*{Parameters}
@@ -552,7 +550,6 @@ simreccompPlot(simdata1)
 \item Jahn-Eimermacher A, Ingel K, Ozga AK, Preussler S, Binder H (2015): Simulating recurrent event data with hazard functions defined on a total time scale. BMC Medical Research Methodology, 15:16  % doi:10.1186/s12874-015-0005-2
 }
 %\section{Acknowledgements}
-
 
 %\newpage
 %\bibliography{simrec}
