@@ -217,76 +217,63 @@ simreccomp(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0,
 
 ## Parameters
 
-- code{N} Number of individuals
-
-  -  \code{fu.min} Minimum length of follow-up.
-
-  -  `fu.max` Maximum length of follow-up. Individuals length of follow-up is generated from a uniform distribution on \code{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common follow-up.
-
-  -  \code{cens.prob} Gives the probability of being censored due to loss to follow-up before `fu.max`. For a random set of individuals defined by a B(N,\code{cens.prob})-distribution, the time to censoring is generated from a uniform distribution on \code{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring due to loss to follow-up.
-
-  -  `dist.x` Distribution of the covariate(s) $X$. If there is more than one covariate,
+- `N` Number of individuals
+- `fu.min` Minimum length of follow-up.
+- `fu.max` Maximum length of follow-up. Individuals length of follow-up is generated from a uniform distribution on `[fu.min, fu.max]`. If `fu.min=fu.max`, then all individuals have a common follow-up.
+- `cens.prob` Gives the probability of being censored due to loss to follow-up before `fu.max`. For a random set of individuals defined by a B(N,`cens.prob`)-distribution, the time to censoring is generated from a uniform distribution on `[0, fu.max]`. Default is `cens.prob=0`, i.e. no censoring due to loss to follow-up.
+-  `dist.x` Distribution of the covariate(s) $X$. If there is more than one covariate,
 `dist.x` must be a vector of distributions with one entry for each covariate. Possible
-values are \code{"binomial"} and \code{"normal"}, default is \code{dist.x="binomial"}.
+values are `"binomial"` and `"normal"`, default is `"binomial"`.
+- `par.x` Parameters of the covariate distribution(s). For `"binomial"`, `par.x` is the probability for $x=1$. For `"normal"`, `par.x` is the vector of ($\mu, \sigma$)} where $\mu$ is the mean and $\sigma$ is the standard deviation of a normal distribution. 
+  If one of the covariates is defined to be normally distributed, `par.x` must be a list, e.g. `dist.x <- c("binomial", "normal")` and `par.x  <- list(0.5, c(1,2))`. Default is `par.x = 0`, i.e. $x=0$ for all individuals.
+- `beta.xr` Regression coefficient(s) for the covariate(s) $x$ corresponding to the recurrent events. 
+  If there is more than one covariate, `beta.xr` must be a vector of coefficients with one entry for each covariate. `simreccomp` generates as many covariates as there are entries in `beta.xr`. Default is `beta.xr = 0`, corresponding to no effect of the covariate $x$ on the recurrent events.
+- `beta.xc` Regression coefficient(s) for the covariate(s) $x$ corresponding to the competing event. 
+  If there is more than one covariate, `beta.xc` must be a vector of coefficients with one entry for each covariate. `simreccomp` generates as many covariates as there are entries in `beta.xc`. Default is `beta.xc = 0`, corresponding to no effect of the covariate $x$ on the competing event.
+- `dist.zr` Distribution of the frailty variable $Z_r$ for the recurrent events with $E(Z_r)=1$ and $Var(Z_r)=\theta_r$. 
+  Possible values are `"gamma"` for a Gamma distributed frailty and `"lognormal"` for a lognormal distributed frailty. Default is `dist.zr="gamma"`.
+- `par.zr` Parameter $\theta_r$ for the frailty distribution: this parameter gives the variance of the frailty variable $Z_r$. Default is `par.zr=0`, which causes $Z\equiv 1$, i.e. no frailty effect for the recurrent events.
+- `dist.zc` Distribution of the frailty variable $Z_c$ for the competing event with $E(Z_c)=1$ and $Var(Z_c)=\theta_r$.
+  Possible values are `"gamma"` for a Gamma distributed frailty and `"lognormal"` for a lognormal distributed frailty.
+- `par.zc` Parameter $\theta_c$ for the frailty distribution: this parameter gives the variance of the frailty variable $Z_c$.
+- `a` Alternatively, the frailty distribution for the competing event can be computed through the distribution of the frailty variable $Z_r$ by $Z_c=Z_r^a$. Either `a` or `dist.zc` and `par.zc` must be specified.
+- `dist.rec` Form of the baseline hazard function for the recurrent events. Possible values are `"weibull"` or `"gompertz"` or `"lognormal"`  or `"step"`.
+- `par.rec` Parameters for the distribution of the recurrent event data. <br>
+  If `dist.rec="weibull"` the  hazard function is
+  $$\lambda_0(t)=\lambda\cdot\nu\cdot t^{\nu - 1}$$
+  where $\lambda>0$ is the scale and $\nu>0$ is the shape parameter. Then `par.rec=c(lambda, nu)`. A special case of this is the exponential distribution for $\nu=1$.\\
+  If `dist.rec="gompertz"`, the hazard function is
+  $$\lambda_0(t)=\lambda\cdot \exp(\alpha t)$$
+  where $\lambda>0$ is the scale and $\alpha\in(-\infty,+\infty)$ is the shape parameter. Then `par.rec=c(lambda, alpha)`. <br>
+  If `dist.rec="lognormal"`, the hazard function is
+  $$\lambda_0(t) = \frac{1}{\sigma t} \cdot \frac{\phi(\frac{ln(t)-\mu}{\sigma})}{\Phi(\frac{-ln(t)-\mu}{\sigma})}$$
+  where $\phi$ is the probability density function and $\Phi$ is the cumulative distribution function of the standard normal distribution, $\mu\in(-\infty,+\infty)$ is a location parameter and $\sigma>0$ is a shape parameter. Then `par.rec=c(mu,sigma)`. 
+  Please note that specifying `dist.rec="lognormal"` together with some covariates does not specify the usual lognormal model (with covariates specified as effects on the parameters of the lognormal distribution resulting in non-proportional hazards), but only defines the baseline hazard and incorporates covariate effects using the proportional hazard assumption. <br>
+  If `dist.rec="step"` the hazard function is 
+  $$\lambda_0(t)=\begin{cases} a, & t\leq t_1\cr b, & t>t_1\end{cases}$$
+  Then `par.rec=c(a,b,t_1)`, with $a,b\geq 0$.
 
-  -  \code{par.x} Parameters of the covariate distribution(s). For \code{"binomial", par.x} is the probability for $x=1$. For \code{"normal"}, \code{par.x=c(}$\mu, \sigma$\code{)} where $\mu$ is the mean and $\sigma$ is the standard deviation of a normal distribution. If one of the covariates is defined to be normally distributed, \code{par.x} must be a list, e.g. \code{ dist.x <- c("binomial", "normal")} and \code{par.x  <- list(0.5, c(1,2))}. Default is \code{par.x=0}, i.e. $x=0$ for all individuals.
-
-  -  \code{beta.xr} Regression coefficient(s) for the covariate(s) $x$ corresponding to the recurrent events. If there is more than one covariate, \code{beta.xr} must be a vector of coefficients with one entry for each covariate. `simreccomp` generates as many covariates as there are entries in \code{beta.xr}. Default is \code{beta.xr=0}, corresponding to no effect of the covariate $x$ on the recurrent events.
-
--  \code{beta.xc} Regression coefficient(s) for the covariate(s) $x$ corresponding to the competing event. If there is more than one covariate, \code{beta.xc} must be a vector of coefficients with one entry for each covariate. Default is \code{beta.xc=0}, corresponding to no effect of the covariate $x$ on the competing event.
-
-  -  \code{dist.zr} Distribution of the frailty variable $Z_r$ for the recurrent events with $E(Z_r)=1$ and $Var(Z_r)=\theta_r$. Possible values are \code{"gamma"} for a Gamma distributed frailty and \code{"lognormal"} for a lognormal distributed frailty. Default is \code{dist.zr="gamma"}.
-
-  -  \code{par.zr} Parameter $\theta_r$ for the frailty distribution: this parameter gives the variance of the frailty variable $Z_r$. Default is \code{par.zr=0}, which causes $Z_r\equiv 1$, i.e. no frailty effect for the recurrent events.
-
-  -  \code{dist.zc} Distribution of the frailty variable $Z_c$ for the competing event with $E(Z_c)=1$ and $Var(Z_c)=\theta_r$. Possible values are \code{"gamma"} for a Gamma distributed frailty and \code{"lognormal"} for a lognormal distributed frailty.
-
-  -  \code{par.zc} Parameter $\theta_c$ for the frailty distribution: this parameter gives the variance of the frailty variable $Z_c$.
-
-  -  \code{a} Alternatively, the frailty distribution for the competing event can be computed through the distribution of the frailty variable $Z_r$ by $Z_c=Z_r^a$. Either \code{a} or \code{dist.zc} and \code{par.zc} must be specified.
-
-  -  \code{dist.rec} Form of the baseline hazard function for the recurrent events. Possible values are \code{"weibull"} or \code{"gompertz"} or \code{"lognormal"} or \code{"step"}.
-
-  -  \code{par.rec} Parameters for the distribution of the recurrent event data.\\
-  If \code{dist.rec="weibull"} the  hazard function is
-  \[\lambda_0(t)=\lambda\cdot\nu\cdot t^{\nu - 1},\]
-  where $\lambda>0$ is the scale and $\nu>0$ is the shape parameter. Then \code{par.rec=c(}$\lambda, \nu$\code{)}. A special case of this is the exponential distribution for $\nu=1$.\\
-If \code{dist.rec="gompertz"}, the hazard function is
-\[\lambda_0(t)=\lambda\cdot \exp(\alpha t),\]
-where $\lambda>0$ is the scale and $\alpha\in(-\infty,+\infty)$ is the shape parameter. Then \code{par.rec=c(}$\lambda, \alpha$\code{)}.\\
-If \code{dist.rec="lognormal"}, the hazard function is
-\[\lambda_0(t)=\frac{1}{\sigma t}\cdot\frac{\phi(\frac{ln(t)-\mu}{\sigma})}{\Phi(\frac{-ln(t)-\mu}{\sigma})},\]
-where $\phi$ is the probability density function and $\Phi$ is the cumulative distribution function of the standard normal distribution, $\mu\in(-\infty,+\infty)$ is a location parameter and $\sigma>0$ is a shape parameter. Then \code{par.rec=c(}$\mu,\sigma$\code{)}. Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
-specify the usual lognormal model (with covariates specified as effects on the parameters of the
-lognormal distribution resulting in non-proportional hazards), but only defines the baseline
-hazard and incorporates covariate effects using the proportional hazard assumtion.\\
-If \code{dist.rec="step"} the hazard function is \[\lambda_0(t)=\begin{cases} a, & t\leq t_1\cr b, & t>t_1\end{cases}\]
-Then \code{par.rec=c(}$a,b,t_1$\code{)}, with $a,b\geq 0$.
-
-  -  \code{dist.comp} Form of the baseline hazard function for the competing event. Possible values are \code{"weibull"} or \code{"gompertz"} or \code{"lognormal"} or \code{"step"}.
-
-  -  \code{par.comp} Parameters for the distribution of the competing event data. For more details see \code{par.rec}.
-
--  \code{pfree} Probability that after experiencing an event the individual is not at risk for experiencing further events for a length of \code{dfree} time units. Default is \code{pfree=0}.
-
-  -  \code{dfree} Length of the risk-free interval. Must be in the same time unit as `fu.max`. Default is \code{dfree=0}, i.e. the individual is continously at risk for experiencing events until end of follow-up.
-
-
+- `dist.comp` Form of the baseline hazard function for the competing event. 
+  Possible values are `"weibull"` or `"gompertz"` or `"lognormal"`  or `"step"`.
+- `par.comp` Parameters for the distribution of the competing event data. For more details see `par.rec`.
+- `pfree` Probability that after experiencing an event the individual is not at risk for experiencing further events for a length of `dfree` time units. Default is `pfree = 0`.
+- `dfree` Length of the risk-free interval. Must be in the same time unit as `fu.max`. Default is `dfree = 0`, i.e. the individual is continously at risk for experiencing events until end of follow-up.
 
 ## Output
 
-The output is a \code{data.frame} consisting of the columns:
+The output is a `data.frame` consisting of the columns:
 
-   -  \code{id} An integer number for identification of each individual
-   -  \code{x} or \code{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the randomly generated value of the covariate(s) $X$ for each individual.
-   -  \code{zr} Contains the randomly generated value of the frailty variable $Z_r$ for each individual.
-   -  \code{zc} Contains the randomly generated value of the frailty variable $Z_c$ for each individual.
-   -  \code{start} The start of interval \code{[start, stop]}, when the individual starts to be at risk for a next event.
-   -  \code{stop} The time of an event or censoring, i.e. the end of interval \code{[start, stop]}.
-   -  \code{status} An indicator of whether an event occured at time \code{stop} (\code{status=1}) or the individual is censored at time \code{stop} (\code{status=0}) or the competing event occured at time \code{stop} (\code{status=2}).
-   -  \code{fu} Length of follow-up period \code{[0,fu]} for each individual.
+- `id` An integer number for identification of each individual
+- `x` or `x.V1, x.V2, ...` - depending on the covariate matrix. Contains the randomly generated value of the covariate(s) $X$ for each individual.
+- `zr` Contains the randomly generated value of the frailty variable $Z_r$ for each individual.
+- `zc` Contains the randomly generated value of the frailty variable $Z_c$ for each individual.
+- `start` The start of interval `[start, stop]`, when the individual starts to be at risk for a next event.
+- `stop` The time of an event or censoring, i.e. the end of interval `[start, stop]`.
+- `status` An indicator of whether an event occured at time `stop` (`status=1`) or the individual is censored at time `stop` (`status=0`) or the competing event occured at time `stop` (`status=2`).
+- `fu` Length of follow-up period `[0,fu]` for each individual.
 
-For each individual there are as many lines as it experiences events, plus one line if being censored. The data format corresponds to the counting process format.
+For each individual there are as many lines as it experiences events, plus one line if being censored.
+The data format corresponds to the counting process format.
 
 ## Example
 
@@ -360,7 +347,7 @@ simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
                        par.comp=par.comp, pfree= pfree, dfree=dfree)
 
 print(simdata1[1:10,])
-#print(simdata2[1:10,])
+print(simdata2[1:10,])
 ```
 
 
