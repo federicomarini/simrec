@@ -463,21 +463,20 @@ simreccompPlot(simdata, id = "id", start = "start", Stop = "stop", status = "sta
 
 ## Parameters {-}
 
--  \code{data}       A data set of recurrent event data to be plotted.\\
-                        The input-data must include columns corresponding to:
-                        
-                        -  \code{id} = patient-ID
-                        -  \code{start} = beginning of an interval where the patient is at risk for an event
-                        -  \code{stop} = end of the interval due to an event or censoring
-                        -  \code{status} = an indicator of the patient status at \code{stop} with = 0 censoring, 1 = event for `simrecPlot` and additionally 2 = competing event for `simreccompPlot`
-                        
--  \code{id}            the name of the \code{id} column, default is \code{"id"}
--  \code{start}         the name of the \code{start} column, default is \code{"start"}
--  \code{Stop}          the name of the \code{stop} column, default is \code{"stop"}
--  \code{status}        the name of the \code{status} column, default is \code{"status"}
+- `data` A data set of recurrent event data to be plotted. <br>
+  The input-data must include columns corresponding to:
+  - `id` - patient-ID
+  - `start` - beginning of an interval where the patient is at risk for an event
+  - `stop`  -end of the interval due to an event or censoring
+  - `status` - an indicator of the patient status at `stop` with = 0 censoring, 1 = event for `simrecPlot` and additionally 2 = competing event for `simreccompPlot`
+- `id`     the name of the id column, default is `"id"`
+- `start`  the name of the start column, default is `"start"`
+- `stop`   the name of the stop column, default is `"stop"`
+- `status` the name of the status column, default is `"status"`
 
 
 ## Output {-}
+
 The output is a plot of the data with a bullet ($\bullet$) indicating a recurrent event, a circle ($\circ$) indicating censoring and $\times$ indicating the competing event.
 
 ## Example {-}
@@ -490,9 +489,6 @@ simreccompPlot(simdata1)
 
 # References {-}
 
--  Andersen P, Gill R (1982): Cox's regression model for counting processes:
-   a large sample study. The Annals of Statistics 10:1100-1120
--  Bender R, Augustin T, Blettner M (2005): Generating survival times to simulate Cox
-  proportional hazards models. Statistics in Medicine 24:1713-1723
--  Jahn-Eimermacher A, Ingel K, Ozga AK, Preussler S, Binder H (2015): Simulating recurrent event data with hazard functions defined on a total time scale. BMC Medical Research Methodology, 15:16  % doi:10.1186/s12874-015-0005-2
-
+1.  Andersen P, Gill R (1982): Cox's regression model for counting processes: a large sample study. The Annals of Statistics 10:1100-1120
+2.  Bender R, Augustin T, Blettner M (2005): Generating survival times to simulate Cox proportional hazards models. Statistics in Medicine 24:1713-1723
+3. Jahn-Eimermacher A, Ingel K, Ozga AK, Preussler S, Binder H (2015): Simulating recurrent event data with hazard functions defined on a total time scale. BMC Medical Research Methodology, 15:16  % doi:10.1186/s12874-015-0005-2
