@@ -71,7 +71,7 @@ With `simrecPlot` and `simreccompPlot` the data can be plotted.
 
 # The `simrec` function 
 
-## Description
+## Description {-}
 
 The function `simrec` allows simulation of recurrent event data following the multiplicative intensity model described in Andersen and Gill [1] with the baseline hazard being a function of the total/calendar time. 
 To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated. 
@@ -89,7 +89,7 @@ simrec(N, fu.min, fu.max, cens.prob = 0, dist.x = "binomial", par.x = 0,
 ```
 
 
-## Parameters
+## Parameters {-}
 
 - `N` Number of individuals
 - `fu.min` Minimum length of follow-up.
@@ -123,7 +123,7 @@ values are `"binomial"` and `"normal"`, default is `"binomial"`.
 - `dfree` Length of the risk-free interval. Must be in the same time unit as `fu.max`. Default is `dfree = 0`, i.e. the individual is continously at risk for experiencing events until end of follow-up.
 
 
-## Output
+## Output {-}
 
 The output is a `data.frame` consisting of the columns:
 
@@ -138,11 +138,11 @@ The output is a `data.frame` consisting of the columns:
 For each individual there are as many lines as it experiences events, plus one line if being censored. 
 The data format corresponds to the counting process format.
 
-## Details
+## Details {-}
 
 Data are simulated by extending the methods proposed by Bender et al [2] to the multiplicative intensity model.
 
-## Example
+## Example {-}
 
 ```{r Examplesimrec}
 library(simrec)
@@ -192,7 +192,7 @@ print(simdata[1:10,])
 
 # The `simreccomp` function
 
-## Description
+## Description {-}
 
 The function `simreccomp` allows simulation of time-to-event-data that follow a multistate-model with recurrent events of one type and a competing event. 
 The baseline hazard for the cause-specific hazards are here functions of the total/calendar time.
@@ -215,7 +215,7 @@ simreccomp(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0,
 ```
 
 
-## Parameters
+## Parameters {-}
 
 - `N` Number of individuals
 - `fu.min` Minimum length of follow-up.
@@ -259,7 +259,7 @@ values are `"binomial"` and `"normal"`, default is `"binomial"`.
 - `pfree` Probability that after experiencing an event the individual is not at risk for experiencing further events for a length of `dfree` time units. Default is `pfree = 0`.
 - `dfree` Length of the risk-free interval. Must be in the same time unit as `fu.max`. Default is `dfree = 0`, i.e. the individual is continously at risk for experiencing events until end of follow-up.
 
-## Output
+## Output {-}
 
 The output is a `data.frame` consisting of the columns:
 
@@ -275,7 +275,7 @@ The output is a `data.frame` consisting of the columns:
 For each individual there are as many lines as it experiences events, plus one line if being censored.
 The data format corresponds to the counting process format.
 
-## Example
+## Example {-}
 
 ```{r Examplesimreccomp}
 library(simrec)
@@ -353,23 +353,18 @@ print(simdata2[1:10,])
 
 # The `simrecint` function
 
-## Description
+## Description {-}
 
-With this function previously simulated data (for example simulated by the use of `simrec` or `simreccomp`)
-can be cut to an interim data set.
-The simulated data must be in patient time (i.e. time since the patient entered the study, for an example see below),
-and must be in the counting process format. Furthermore the dataset must have the variables \code{id}, \code{start}, \code{stop} and \code{status},
-like data simulated by the use of `simrec` or `simreccomp`.
-Then for every individual additionally a recruitment time is generated in study time (i.e. time since start of the study, for an example see below),
-which is uniformly distributed on $[0, t_R]$.
-The timing of the interim analysis $t_I$ is set in study time and
-data are being cut to all data, that are available at the interim analysis.
+With this function previously simulated data (for example simulated by the use of `simrec` or `simreccomp`) can be cut to an interim data set.
+The simulated data must be in patient time (i.e. time since the patient entered the study, for an example see below), and must be in the counting process format. 
+Furthermore, the dataset must have the variables `id`, `start`,`stop`, and `status`, like data simulated by the use of `simrec` or `simreccomp`.
+Then for every individual additionally a recruitment time is generated in study time (i.e. time since start of the study, for an example see below), which is uniformly distributed on $[0, t_R]$.
+The timing of the interim analysis $t_I$ is set in study time and data are being cut to all data, that are available at the interim analysis.
 If you only wish to simulate a recruitment time, $t_I$ can be set to $t_R + fu.max$ or something else beyond the end of the study.
-
 
 Simulated data in patient time:
 
-\begin{center}
+```{r tikz1, engine = "tikz", echo=FALSE, eval=FALSE}
 \begin{tikzpicture}
 \draw[->] (0,0) -- (0,4.5) node [anchor=east,text width=4.1em] {individual};
 \draw[->] (0,0) -- (7,0) node [below=2pt] {patient time};
@@ -378,11 +373,15 @@ Simulated data in patient time:
 \draw[thick] (0,3) -- (4,3) node[circle,fill=black,inner sep=1.5pt]{} node at (2,3) [fill=black, inner sep=1.5pt]{} node at (0,3)[left=2pt]{3} ;
 \draw[thick] (0,4) -- (4,4) node[circle,fill=black,inner sep=1.5pt]{} node at (0.9,4) [fill=black, inner sep=1.5pt]{} node at (1.4,4) [fill=black, inner sep=1.5pt]{} node at (0,4)[left=2pt]{4} ;
 \end{tikzpicture}
-\end{center}
+```
+
+```{r, echo = FALSE, out.width=600}
+knitr::include_graphics("tikzout_1.png")
+```
 
 Simulated data in study time with time of interim analysis ($t_I$), end of recruitment period ($t_R$) and end of study
 
-\begin{center}
+```{r tikz2, engine = "tikz", echo=FALSE, eval=FALSE}
 \begin{tikzpicture}
 \draw[->] (0,0) -- (0,4.5) node [anchor=east,text width=4.1em] {individual};
 \draw[->] (0,0) -- (7,0) node [below=2pt] {study time};
@@ -397,33 +396,34 @@ Simulated data in study time with time of interim analysis ($t_I$), end of recru
 \draw[thick, color=blue] (1.7,-0.1) -- (1.7, 4.3) node at (1.7,-0.1)[below]{interim analysis ($t_I$)};
 \draw[thick, color=red] (6,-0.1) -- (6, 4.3) node at (6, -0.6)[below]{end of study};
 \end{tikzpicture}
-\end{center}
+```
+
+```{r, echo = FALSE, out.width=600}
+knitr::include_graphics("tikzout_2.png")
+```
 
 ```{r codeExampleint,echo=TRUE,eval=FALSE}
 simrecint(data, N, tR, tI)
 ```
 
-## Parameters
+## Parameters {-}
 
+- `data` Previously generated data (in patient time), that shall be cut to interim data
+- `N` Number of individuals, for which `data` was generated
+- `tR` Length of the recruitment period (in study time)
+- `tI` Timing of the interim analysis (in study time)
 
--  \code{data} Previously generated data (in patient time), that shall be cut to interim data
--  \code{N} Number of individuals, for which \code{data} was generated
--  \code{tR} Length of the recruitment period (in study time)
--  \code{tI} Timing of the interim analysis (in study time)
+## Output {-}
 
+The output is a `data.frame` consisting of the columns, that were put into, and additionally the following columns:
 
-## Output
+- `rectime` The recruitment time for each individual (in study time).
+- `interimtime` The time of the interim analysis `tI` (in study time).
+- `stop_study` The stopping time for each event in study time.
 
-The output is a data.frame consisting of the columns, that were put into, and additionally the following columns:
+Individuals that are not already recruited at the interim analysis are left out here.
 
-   -  \code{rectime} The recruitment time for each individual (in study time).
-   -  \code{interimtime} The time of the interim analysis \code{tI} (in study time).
-   -  \code{stop_study} The stopping time for each event in study time.
-
- Individuals that are not already recruited at the interim analysis are left out here.
-
-
-## Example
+## Example {-}
 
 ```{r Examplesimrecint}
 ### Example - see example for simrec
@@ -447,12 +447,12 @@ simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z,
 ### and cut data to the time of the interim analysis at tI=1:
 
 simdataint <- simrecint(simdata, N=N, tR=2, tI=1)
-# print(simdataint)  # only run for small N!
+print(simdataint)  # only run for small N!
 ```
 
-# Plotting the Data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Plotting the Data with 
 
-\subsection*{Description}
+## Description {-}
 
 The functions `simrecPlot` and `simreccompPlot` allow plotting of recurrent event data, possibly with a competing event.
 
@@ -461,7 +461,7 @@ simrecPlot(simdata, id = "id", start = "start", Stop = "stop", status = "status"
 simreccompPlot(simdata, id = "id", start = "start", Stop = "stop", status = "status")
 ```
 
-\subsection*{Parameters}
+## Parameters {-}
 
 -  \code{data}       A data set of recurrent event data to be plotted.\\
                         The input-data must include columns corresponding to:
@@ -477,22 +477,19 @@ simreccompPlot(simdata, id = "id", start = "start", Stop = "stop", status = "sta
 -  \code{status}        the name of the \code{status} column, default is \code{"status"}
 
 
-\subsection*{Output}
+## Output {-}
 The output is a plot of the data with a bullet ($\bullet$) indicating a recurrent event, a circle ($\circ$) indicating censoring and $\times$ indicating the competing event.
 
-\subsection*{Example}
+## Example {-}
 
-\begin{figure}[h!]
 ```{r ExamplePlot}
-# simrecPlot(simdata)
+simrecPlot(simdata)
 simreccompPlot(simdata1)
 ```
-\end{figure}
-%\newpage
 
-# References 
 
-\enumerate{
+# References {-}
+
 -  Andersen P, Gill R (1982): Cox's regression model for counting processes:
    a large sample study. The Annals of Statistics 10:1100-1120
 -  Bender R, Augustin T, Blettner M (2005): Generating survival times to simulate Cox
