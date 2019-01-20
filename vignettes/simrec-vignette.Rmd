@@ -23,18 +23,18 @@ vignette: >
 ```{r setup, include=FALSE, cache=FALSE}
 library(knitr)
 opts_chunk$set(
-  fig.align='center', 
-  fig.show='asis', 
-  eval=TRUE,
-  fig.width=4.5,
-  fig.height=4.5,
-  message=FALSE,
-  size='small',
-  comment='##',
-  prompt=TRUE,
-  echo=TRUE, # set to true for the vignette!
-  results='hold',
-  tidy=FALSE)
+  fig.align = 'center', 
+  fig.show = 'asis', 
+  eval = TRUE,
+  fig.width = 4.5,
+  fig.height = 4.5,
+  message = FALSE,
+  size = 'small',
+  comment = '##',
+  prompt = FALSE,
+  echo = TRUE, # set to true for the vignette!
+  results = 'hold',
+  tidy = FALSE)
 
 options(replace.assign=TRUE,
         width=90
@@ -55,7 +55,7 @@ With `simrecPlot` and `simreccompPlot` the data can be plotted.
 <!-- \usepackage{amsmath, amssymb} -->
 <!-- \usepackage{tikz} -->
 
-%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
+<!-- %% Note that you should use the \pkg{}, \proglang{} and \code{} commands. -->
 
 
 # Introduction 
@@ -104,49 +104,45 @@ values are `"binomial"` and `"normal"`, default is `"binomial"`.
 - `dist.z` Distribution of the frailty variable $Z$ with $E(Z)=1$ and $Var(Z)=\theta$. Possible values are `"gamma"` for a Gamma distributed frailty and `"lognormal"` for a lognormal distributed frailty. Default is `dist.z="gamma"`.
 - `par.z` Parameter $\theta$ for the frailty distribution: this parameter gives the variance of the frailty variable $Z$. Default is `par.z=0`, which causes $Z\equiv 1$, i.e. no frailty effect.
 - `dist.rec` Form of the baseline hazard function. Possible values are `"weibull"` or `"gompertz"` or `"lognormal"`  or `"step"`.
+- `par.rec` Parameters for the distribution of the event data. <br>
+  If `dist.rec="weibull"` the  hazard function is
+  $$\lambda_0(t)=\lambda\cdot\nu\cdot t^{\nu - 1}$$
+  where $\lambda>0$ is the scale and $\nu>0$ is the shape parameter. Then `par.rec=c(lambda, nu)`. A special case of this is the exponential distribution for $\nu=1$.\\
+  If `dist.rec="gompertz"`, the hazard function is
+  $$\lambda_0(t)=\lambda\cdot \exp(\alpha t)$$
+  where $\lambda>0$ is the scale and $\alpha\in(-\infty,+\infty)$ is the shape parameter. Then `par.rec=c(lambda, alpha)`. <br>
+  If `dist.rec="lognormal"`, the hazard function is
+  $$\lambda_0(t) = \frac{1}{\sigma t} \cdot \frac{\phi(\frac{ln(t)-\mu}{\sigma})}{\Phi(\frac{-ln(t)-\mu}{\sigma})}$$
+  where $\phi$ is the probability density function and $\Phi$ is the cumulative distribution function of the standard normal distribution, $\mu\in(-\infty,+\infty)$ is a location parameter and $\sigma>0$ is a shape parameter. Then `par.rec=c(mu,sigma)`. 
+  Please note that specifying `dist.rec="lognormal"` together with some covariates does not specify the usual lognormal model (with covariates specified as effects on the parameters of the lognormal distribution resulting in non-proportional hazards), but only defines the baseline hazard and incorporates covariate effects using the proportional hazard assumption. <br>
+  If `dist.rec="step"` the hazard function is 
+  $$\lambda_0(t)=\begin{cases} a, & t\leq t_1\cr b, & t>t_1\end{cases}$$
+  Then `par.rec=c(a,b,t_1)`, with $a,b\geq 0$.
 
-  -  \code{par.rec} Parameters for the distribution of the event data.\\
-  If \code{dist.rec="weibull"} the  hazard function is
-  \[\lambda_0(t)=\lambda\cdot\nu\cdot t^{\nu - 1},\]
-  where $\lambda>0$ is the scale and $\nu>0$ is the shape parameter. Then \code{par.rec=c(}$\lambda, \nu$\code{)}. A special case of this is the exponential distribution for $\nu=1$.\\
-If \code{dist.rec="gompertz"}, the hazard function is
-\[\lambda_0(t)=\lambda\cdot \exp(\alpha t),\]
-where $\lambda>0$ is the scale and $\alpha\in(-\infty,+\infty)$ is the shape parameter. Then \code{par.rec=c(}$\lambda, \alpha$\code{)}.\\
-If \code{dist.rec="lognormal"}, the hazard function is
-\[\lambda_0(t)=\frac{1}{\sigma t}\cdot\frac{\phi(\frac{ln(t)-\mu}{\sigma})}{\Phi(\frac{-ln(t)-\mu}{\sigma})},\]
-where $\phi$ is the probability density function and $\Phi$ is the cumulative distribution function of the standard normal distribution, $\mu\in(-\infty,+\infty)$ is a location parameter and $\sigma>0$ is a shape parameter. Then \code{par.rec=c(}$\mu,\sigma$\code{)}. Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
-specify the usual lognormal model (with covariates specified as effects on the parameters of the
-lognormal distribution resulting in non-proportional hazards), but only defines the baseline
-hazard and incorporates covariate effects using the proportional hazard assumtion.\\
-If \code{dist.rec="step"} the hazard function is \[\lambda_0(t)=\begin{cases} a, & t\leq t_1\cr b, & t>t_1\end{cases}\]
-Then \code{par.rec=c(}$a,b,t_1$\code{)}, with $a,b\geq 0$.
-
-  -  \code{pfree} Probability that after experiencing an event the individual is not at risk for experiencing further events for a length of \code{dfree} time units. Default is \code{pfree=0}.
-
-  -  \code{dfree} Length of the risk-free interval. Must be in the same time unit as `fu.max`. Default is \code{dfree=0}, i.e. the individual is continously at risk for experiencing events until end of follow-up.
-
+- `pfree` Probability that after experiencing an event the individual is not at risk for experiencing further events for a length of `dfree` time units. Default is `pfree = 0`.
+- `dfree` Length of the risk-free interval. Must be in the same time unit as `fu.max`. Default is `dfree = 0`, i.e. the individual is continously at risk for experiencing events until end of follow-up.
 
 
 ## Output
 
-The output is a \code{data.frame} consisting of the columns:
+The output is a `data.frame` consisting of the columns:
 
-   -  \code{id} An integer number for identification of each individual
-   -  \code{x} or \code{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the randomly generated value of the covariate(s) $X$ for each individual.
-   -  \code{z} Contains the randomly generated value of the frailty variable $Z$ for each individual.
-   -  \code{start} The start of interval \code{[start, stop]}, when the individual starts to be at risk for a next event.
-   -  \code{stop} The time of an event or censoring, i.e. the end of interval \code{[start, stop]}.
-   -  \code{status} An indicator of whether an event occured at time \code{stop} (\code{status=1}) or the individual is censored at time \code{stop} (\code{status=0}).
-   -  \code{fu} Length of follow-up period \code{[0,fu]} for each individual.
+- `id` An integer number for identification of each individual
+- `x` or `x.V1, x.V2, ...` - depending on the covariate matrix. Contains the randomly generated value of the covariate(s) $X$ for each individual.
+- `z` Contains the randomly generated value of the frailty variable $Z$ for each individual.
+- `start` The start of interval `[start, stop]`, when the individual starts to be at risk for a next event.
+- `stop` The time of an event or censoring, i.e. the end of interval `[start, stop]`.
+- `status` An indicator of whether an event occured at time `stop` (`status=1`) or the individual is censored at time `stop` (`status=0`).
+- `fu` Length of follow-up period `[0,fu]` for each individual.
 
-For each individual there are as many lines as it experiences events, plus one line if being censored. The data format corresponds to the counting process format.
-
+For each individual there are as many lines as it experiences events, plus one line if being censored. 
+The data format corresponds to the counting process format.
 
 ## Details
 
 Data are simulated by extending the methods proposed by Bender et al [2] to the multiplicative intensity model.
 
-\subsection*{Example}
+## Example
 
 ```{r Examplesimrec}
 library(simrec)
@@ -189,29 +185,26 @@ dfree <- 30/365
 pfree <- 0.5
 
 simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x,
-                    dist.z, par.z, dist.rec, par.rec, pfree, dfree)
+                  dist.z, par.z, dist.rec, par.rec, pfree, dfree)
 print(simdata[1:10,])
 ```
 
 
-# simreccomp %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# The `simreccomp` function
 
-\subsection*{Description}
+## Description
 
-The function `simreccomp` allows simulation of time-to-event-data that follow a multistate-model
-with recurrent events of one type and a competing event. The baseline hazard for the
-cause-specific hazards are here functions of the total/calendar time.
-To induce between-subject-heterogeneity a random
-effect covariate (frailty term) can be incorporated for the recurrent and the competing event.\\
-Data for the recurrent events of the individual $i$ are generated
-according to the cause-specific hazards \[\lambda_{0r}(t)\cdot Z_{ri} \cdot \exp(\beta_r^t X_i),\]
+The function `simreccomp` allows simulation of time-to-event-data that follow a multistate-model with recurrent events of one type and a competing event. 
+The baseline hazard for the cause-specific hazards are here functions of the total/calendar time.
+To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated for the recurrent and the competing event.
+
+Data for the recurrent events of the individual $i$ are generated according to the cause-specific hazards
+$$\lambda_{0r}(t)\cdot Z_{ri} \cdot \exp(\beta_r^t X_i)$$
 where $X_i$ defines the covariate vector and $\beta_r$ the regression coefficient vector.
-$\lambda_{0r}(t)$ denotes the baseline hazard, being a function of the total/calendar
-time $t$ and $Z_{ri}$ denotes the frailty variables with $(Z_{ri})_i$ iid with $E(Z_{ri})=1$ and
-$Var(Z_{ri})=\theta_r$. The parameter $\theta_r$ describes the degree of
-between-subject-heterogeneity for the recurrent event.\\
-Analougously the competing event is generated according to the cause-specific hazard conditionally
-on the frailty variable and covariates: \[\lambda_{0c}(t)\cdot Z_{ci} \cdot \exp(\beta_c^t X_i)\]
+$\lambda_{0r}(t)$ denotes the baseline hazard, being a function of the total/calendar time $t$ and $Z_{ri}$ denotes the frailty variables with $(Z_{ri})_i$ iid with $E(Z_{ri})=1$ and $Var(Z_{ri})=\theta_r$. 
+The parameter $\theta_r$ describes the degree of between-subject-heterogeneity for the recurrent event.
+Analougously the competing event is generated according to the cause-specific hazard conditionally on the frailty variable and covariates: 
+$$\lambda_{0c}(t)\cdot Z_{ci} \cdot \exp(\beta_c^t X_i)$$
 Data output is in the counting process format.
 
 ```{r codeExamplecomp,echo=TRUE,eval=FALSE}
@@ -222,10 +215,9 @@ simreccomp(N, fu.min, fu.max, cens.prob=0, dist.x="binomial", par.x=0,
 ```
 
 
-\subsection*{Parameters}
+## Parameters
 
-
-  -  \code{N} Number of individuals
+- code{N} Number of individuals
 
   -  \code{fu.min} Minimum length of follow-up.
 
@@ -281,7 +273,7 @@ Then \code{par.rec=c(}$a,b,t_1$\code{)}, with $a,b\geq 0$.
 
 
 
-\subsection*{Output}
+## Output
 
 The output is a \code{data.frame} consisting of the columns:
 
@@ -296,7 +288,7 @@ The output is a \code{data.frame} consisting of the columns:
 
 For each individual there are as many lines as it experiences events, plus one line if being censored. The data format corresponds to the counting process format.
 
-\subsection*{Example}
+## Example
 
 ```{r Examplesimreccomp}
 library(simrec)
@@ -372,9 +364,9 @@ print(simdata1[1:10,])
 ```
 
 
-# simrecint %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# The `simrecint` function
 
-\subsection*{Description}
+## Description
 
 With this function previously simulated data (for example simulated by the use of `simrec` or `simreccomp`)
 can be cut to an interim data set.
@@ -424,7 +416,7 @@ Simulated data in study time with time of interim analysis ($t_I$), end of recru
 simrecint(data, N, tR, tI)
 ```
 
-\subsection*{Parameters}
+## Parameters
 
 
 -  \code{data} Previously generated data (in patient time), that shall be cut to interim data
@@ -433,7 +425,7 @@ simrecint(data, N, tR, tI)
 -  \code{tI} Timing of the interim analysis (in study time)
 
 
-\subsection*{Output}
+## Output
 
 The output is a data.frame consisting of the columns, that were put into, and additionally the following columns:
 
@@ -444,7 +436,7 @@ The output is a data.frame consisting of the columns, that were put into, and ad
  Individuals that are not already recruited at the interim analysis are left out here.
 
 
-\subsection*{Example}
+## Example
 
 ```{r Examplesimrecint}
 ### Example - see example for simrec
@@ -511,17 +503,12 @@ simreccompPlot(simdata1)
 \end{figure}
 %\newpage
 
-# References %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# References 
+
 \enumerate{
 -  Andersen P, Gill R (1982): Cox's regression model for counting processes:
    a large sample study. The Annals of Statistics 10:1100-1120
 -  Bender R, Augustin T, Blettner M (2005): Generating survival times to simulate Cox
   proportional hazards models. Statistics in Medicine 24:1713-1723
 -  Jahn-Eimermacher A, Ingel K, Ozga AK, Preussler S, Binder H (2015): Simulating recurrent event data with hazard functions defined on a total time scale. BMC Medical Research Methodology, 15:16  % doi:10.1186/s12874-015-0005-2
-}
-%# Acknowledgements
 
-%\newpage
-%\bibliography{simrec}
-% \printbibliography
-\end{document}
