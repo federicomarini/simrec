@@ -187,6 +187,7 @@ pfree <- 0.5
 simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x,
                   dist.z, par.z, dist.rec, par.rec, pfree, dfree)
 print(simdata[1:10,])
+DT::datatable(simdata)
 ```
 
 
@@ -348,6 +349,8 @@ simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
 
 print(simdata1[1:10,])
 print(simdata2[1:10,])
+DT::datatable(simdata1)
+DT::datatable(simdata2)
 ```
 
 
@@ -448,9 +451,10 @@ simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z,
 
 simdataint <- simrecint(simdata, N=N, tR=2, tI=1)
 print(simdataint)  # only run for small N!
+DT::datatable(simdataint)
 ```
 
-# Plotting the Data with 
+# Plotting the Data
 
 ## Description {-}
 
