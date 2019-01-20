@@ -17,7 +17,8 @@ Imports:
     stats
 VignetteBuilder: knitr
 Suggests:
-    knitr
+    knitr,
+    rmarkdown
 License: GPL-2
 LazyData: true
 RoxygenNote: 6.1.1
