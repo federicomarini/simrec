@@ -62,7 +62,7 @@
 #'   Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
 #'   specify the usual lognormal model (with covariates specified as effects on the parameters of the
 #'   lognormal distribution resulting in non-proportional hazards), but only defines the baseline
-#'   hazard and incorporates covariate effects using the proportional hazard assumtion.\\
+#'   hazard and incorporates covariate effects using the proportional hazard assumption.\\
 #'   If \code{dist.rec="step"} the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
 #'   Then \code{par.rec=c(}\eqn{a,b,t_1}\code{)}.
 #' @param pfree Probability that after experiencing an event the individual is not at risk
