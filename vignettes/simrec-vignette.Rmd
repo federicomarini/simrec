@@ -18,6 +18,7 @@ vignette: >
   %\VignetteKeywords{simrec simulation recurrent events}
   %\VignettePackage{simrec}
   %\VignetteEngine{knitr::knitr}
+bibliography: simrec.bib  
 ---
 
 ```{r setup, include=FALSE, cache=FALSE}
@@ -44,7 +45,7 @@ options(replace.assign=TRUE,
 
 # Abstract {-}
 
-`simrec` allows simulation of recurrent event data following the multiplicative intensity model described in Andersen and Gill [1] with the baseline hazard being a function of the total/calendar time. 
+`simrec` allows simulation of recurrent event data following the multiplicative intensity model described in [@Andersen1982] with the baseline hazard being a function of the total/calendar time. 
 To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated. 
 Furthermore, via `simreccomp` simulation of data following a multistate model with recurrent event data of one type and a competing event is possible. 
 `simrecint` gives the possibility to additionally simulate a recruitment time for each individual and cut the data to an interim data set. 
@@ -73,7 +74,7 @@ With `simrecPlot` and `simreccompPlot` the data can be plotted.
 
 ## Description {-}
 
-The function `simrec` allows simulation of recurrent event data following the multiplicative intensity model described in Andersen and Gill [1] with the baseline hazard being a function of the total/calendar time. 
+The function `simrec` allows simulation of recurrent event data following the multiplicative intensity model described in Andersen and Gill [@Andersen1982] with the baseline hazard being a function of the total/calendar time. 
 To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated. 
 Data for individual $i$ are generated according to the intensity process 
 $$Y_i(t)\cdot \lambda_0(t)\cdot Z_i \cdot \exp(\beta^t X_i)$$
@@ -140,8 +141,8 @@ The data format corresponds to the counting process format.
 
 ## Details {-}
 
-Data are simulated by extending the methods proposed by Bender et al [2] to the multiplicative intensity model.
-You can read more on this in our work (Jahn-Eimermacher et al. [3]).
+Data are simulated by extending the methods proposed by Bender [@Bender2005] to the multiplicative intensity model.
+You can read more on this in our work [@Jahn-Eimermacher2015].
 
 ## Example {-}
 
@@ -494,6 +495,3 @@ simreccompPlot(simdata1)
 
 # References {-}
 
-1.  Andersen P, Gill R (1982): Cox's regression model for counting processes: a large sample study. The Annals of Statistics 10:1100-1120
-2.  Bender R, Augustin T, Blettner M (2005): Generating survival times to simulate Cox proportional hazards models. Statistics in Medicine 24:1713-1723
-3. Jahn-Eimermacher A, Ingel K, Ozga AK, Preussler S, Binder H (2015): Simulating recurrent event data with hazard functions defined on a total time scale. BMC Medical Research Methodology, 15:16  % doi:10.1186/s12874-015-0005-2
