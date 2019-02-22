@@ -1,9 +1,9 @@
 ---
 title: "simrec: An R-Package for Simulation of Recurrent Event Data"
-author: "Katharina Ingel - Institute of Medical Biostatistics, Epidemiology and Informatics ([IMBEI](http://www.unimedizin-mainz.de/imbei)) - ingel@uni-mainz.de</br>
-  Stella Preussler - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI)</br>
-  Federico Marini - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI) - marinif@uni-mainz.de</br>
-  Antje Jahn-Eimermacher - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI) - jahna@uni-mainz.de</br>
+author: "Katharina Ingel - Institute of Medical Biostatistics, Epidemiology and Informatics ([IMBEI](http://www.unimedizin-mainz.de/imbei), Mainz) - ingel@uni-mainz.de</br>
+  Stella Preussler - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz), current affiliation: Institute of Medical Biometry and Informatics (IMBI, Heidelberg)</br>
+  Federico Marini - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz) - marinif@uni-mainz.de</br>
+  Antje Jahn-Eimermacher - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz), current affiliation: University of Applied Sciences Darmstadt, antje.jahn@h-da.de</br></br>
   University Medical Center - Mainz (Germany)"
 output: 
   html_document:
@@ -26,8 +26,8 @@ opts_chunk$set(
   fig.align = 'center', 
   fig.show = 'asis', 
   eval = TRUE,
-  fig.width = 4.5,
-  fig.height = 4.5,
+  fig.width = 6,
+  fig.height = 6,
   message = FALSE,
   size = 'small',
   comment = '##',
@@ -141,6 +141,7 @@ The data format corresponds to the counting process format.
 ## Details {-}
 
 Data are simulated by extending the methods proposed by Bender et al [2] to the multiplicative intensity model.
+You can read more on this in our work (Jahn-Eimermacher et al. [3]).
 
 ## Example {-}
 
