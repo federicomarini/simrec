@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>simrec: An R-Package for Simulation of Recurrent Event Data • simrec</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="simrec: An R-Package for Simulation of Recurrent Event Data">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -67,17 +68,18 @@
 <!--/.navbar -->
 
       
+
       </header><script src="simrec-vignette_files/htmlwidgets-1.3/htmlwidgets.js"></script><script src="simrec-vignette_files/jquery-1.12.4/jquery.min.js"></script><link href="simrec-vignette_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="simrec-vignette_files/datatables-binding-0.5/datatables.js"></script><link href="simrec-vignette_files/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="simrec-vignette_files/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="simrec-vignette_files/dt-core-1.10.16/js/jquery.dataTables.min.js"></script><link href="simrec-vignette_files/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet">
+<script src="simrec-vignette_files/datatables-binding-0.9/datatables.js"></script><link href="simrec-vignette_files/dt-core-1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="simrec-vignette_files/dt-core-1.10.19/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="simrec-vignette_files/dt-core-1.10.19/js/jquery.dataTables.min.js"></script><link href="simrec-vignette_files/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet">
 <script src="simrec-vignette_files/crosstalk-1.0.0/js/crosstalk.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>simrec: An R-Package for Simulation of Recurrent Event Data</h1>
-                        <h4 class="author">Katharina Ingel - Institute of Medical Biostatistics, Epidemiology and Informatics (<a href="http://www.unimedizin-mainz.de/imbei">IMBEI</a>, Mainz) - <a href="mailto:ingel@uni-mainz.de" class="email">ingel@uni-mainz.de</a> Stella Preussler - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz), current affiliation: Institute of Medical Biometry and Informatics (IMBI, Heidelberg) Federico Marini - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz) - <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a> Antje Jahn-Eimermacher - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz), current affiliation: University of Applied Sciences Darmstadt, <a href="mailto:antje.jahn@h-da.de" class="email">antje.jahn@h-da.de</a> University Medical Center - Mainz (Germany)</h4>
+                        <h4 class="author">Katharina Ingel - Institute of Medical Biostatistics, Epidemiology and Informatics (<a href="http://www.unimedizin-mainz.de/imbei">IMBEI</a>, Mainz) - <a href="mailto:ingel@uni-mainz.de" class="email">ingel@uni-mainz.de</a>; currently at BIOTRONIK SE &amp; Co. KG Stella Preussler - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz), current affiliation: Institute of Medical Biometry and Informatics (IMBI, Heidelberg) Federico Marini - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz) - <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a> Antje Jahn-Eimermacher - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz), current affiliation: University of Applied Sciences Darmstadt, <a href="mailto:antje.jahn@h-da.de" class="email">antje.jahn@h-da.de</a> University Medical Center - Mainz (Germany)</h4>
             
-            <h4 class="date">2019-02-22</h4>
+            <h4 class="date">2019-09-24</h4>
       
       
       <div class="hidden name"><code>simrec-vignette.Rmd</code></div>
@@ -172,7 +174,7 @@
 <div id="example" class="section level2 unnumbered">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(simrec)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(simrec)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">### Example:</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">### A sample of 10 individuals</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"></a>
@@ -182,9 +184,9 @@
 <a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">### of beta=0.3, and a standard normally distributed covariate with a</span></a>
 <a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">### regression coefficient of beta=0.2,</span></a>
 <a class="sourceLine" id="cb2-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">dist.x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"binomial"</span>, <span class="st">"normal"</span>)</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">par.x  &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="fl">0.5</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">beta.x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.3</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">dist.x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"binomial"</span>, <span class="st">"normal"</span>)</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">par.x  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0.5</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">beta.x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.3</span>, <span class="fl">0.2</span>)</a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"></a>
 <a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">### a gamma distributed frailty variable with variance 0.25</span></a>
 <a class="sourceLine" id="cb2-16" data-line-number="16"></a>
@@ -195,7 +197,7 @@
 <a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">### and scale parameter nu=2.</span></a>
 <a class="sourceLine" id="cb2-22" data-line-number="22"></a>
 <a class="sourceLine" id="cb2-23" data-line-number="23">dist.rec &lt;-<span class="st"> "weibull"</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24">par.rec  &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">par.rec  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb2-25" data-line-number="25"></a>
 <a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">### Subjects are to be followed for two years with 20\% of the subjects</span></a>
 <a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">### being censored according to a uniformly distributed censoring time</span></a>
@@ -213,21 +215,21 @@
 <a class="sourceLine" id="cb2-39" data-line-number="39"></a>
 <a class="sourceLine" id="cb2-40" data-line-number="40">simdata &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simrec.html">simrec</a></span>(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x,</a>
 <a class="sourceLine" id="cb2-41" data-line-number="41">                  dist.z, par.z, dist.rec, par.rec, pfree, dfree)</a>
-<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(simdata[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</a>
-<a class="sourceLine" id="cb2-43" data-line-number="43">DT<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/DT/topics/datatable">datatable</a></span>(simdata)</a></code></pre></div>
-<pre><code>##    id x.V1       x.V2         z     start      stop status       fu
-## 1   1    1 -0.2208361 0.4827575 0.0000000 0.4650157      1 2.000000
-## 2   1    1 -0.2208361 0.4827575 0.4650157 0.5464772      1 2.000000
-## 3   1    1 -0.2208361 0.4827575 0.5464772 1.5539795      1 2.000000
-## 4   1    1 -0.2208361 0.4827575 1.6361713 1.8347587      1 2.000000
-## 5   1    1 -0.2208361 0.4827575 1.9169504 1.9932690      1 2.000000
-## 7   2    0 -1.0154536 0.7753512 0.0000000 0.7954833      1 2.000000
-## 8   2    0 -1.0154536 0.7753512 0.7954833 2.0000000      0 2.000000
-## 9   3    0  1.6409616 1.9342630 0.0000000 1.1209076      0 1.120908
-## 11  4    1 -2.9415318 0.4816302 0.0000000 0.9538752      1 2.000000
-## 12  4    1 -2.9415318 0.4816302 1.0360670 1.4576929      1 2.000000</code></pre>
-<div id="htmlwidget-e8e330956565ee9f0838" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e8e330956565ee9f0838">{"x":{"filter":"none","data":[["1","2","3","4","5","7","8","9","11","12","13","14","15","16","17","18","19","21","22","23","24","26","28","30","31","32","33","34","35","36","37","38","39","40"],[1,1,1,1,1,2,2,3,4,4,4,5,5,5,5,5,5,6,6,6,7,8,9,10,10,10,10,10,10,10,10,10,10,10],[1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[-0.220836146308641,-0.220836146308641,-0.220836146308641,-0.220836146308641,-0.220836146308641,-1.01545361526391,-1.01545361526391,1.64096156599065,-2.94153177596282,-2.94153177596282,-2.94153177596282,1.17895814698814,1.17895814698814,1.17895814698814,1.17895814698814,1.17895814698814,1.17895814698814,-0.297127115389017,-0.297127115389017,-0.297127115389017,-2.33503704850047,0.540611477811609,-1.85450530652654,1.15403526780145,1.15403526780145,1.15403526780145,1.15403526780145,1.15403526780145,1.15403526780145,1.15403526780145,1.15403526780145,1.15403526780145,1.15403526780145,1.15403526780145],[0.482757461781957,0.482757461781957,0.482757461781957,0.482757461781957,0.482757461781957,0.775351237860205,0.775351237860205,1.93426302155081,0.48163017048029,0.48163017048029,0.48163017048029,1.56556340225676,1.56556340225676,1.56556340225676,1.56556340225676,1.56556340225676,1.56556340225676,1.67452380287773,1.67452380287773,1.67452380287773,0.883767543552903,0.479148090208588,1.02035612345821,1.91932165213659,1.91932165213659,1.91932165213659,1.91932165213659,1.91932165213659,1.91932165213659,1.91932165213659,1.91932165213659,1.91932165213659,1.91932165213659,1.91932165213659],[0,0.465015654458234,0.546477240124874,1.63617130857472,1.9169504420135,0,0.795483290034344,0,0,1.03606702789557,1.45769291104738,0,0.605607342203871,0.98219724110132,1.41549789979786,1.5709529480808,1.86748236444173,0,0.381943990229119,1.14748449581283,0,0,0,0,0.37668452458345,0.89186151202841,1.08953648625747,1.12439206846552,1.13259217108498,1.33725755490632,1.53178006416667,1.65672554323365,1.84381527959554,1.98262185546675],[0.465015654458234,0.546477240124874,1.5539795277528,1.83475866119158,1.99326898294163,0.795483290034344,2,1.12090761074796,0.953875247073652,1.45769291104738,2,0.605607342203871,0.98219724110132,1.33330611897594,1.5709529480808,1.86748236444173,1.99131685992603,0.299752209407202,1.06529271499092,1.42227028077468,2,2,2,0.294492743761533,0.809669731206492,1.00734470543555,1.12439206846552,1.13259217108498,1.25506577408441,1.44958828334475,1.57453376241173,1.76162349877362,1.98262185546675,2],[1,1,1,1,1,1,0,0,1,1,0,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0],[2,2,2,2,2,2,2,1.12090761074796,2,2,2,2,2,2,2,2,2,1.42227028077468,1.42227028077468,1.42227028077468,2,2,2,2,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>z<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(simdata[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</a>
+<a class="sourceLine" id="cb2-43" data-line-number="43">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(simdata)</a></code></pre></div>
+<pre><code>##    id x.V1       x.V2         z     start      stop status fu
+## 1   1    0  0.9738531 0.4417416 0.0000000 0.2373415      1  2
+## 2   1    0  0.9738531 0.4417416 0.2373415 0.6368245      1  2
+## 3   1    0  0.9738531 0.4417416 0.6368245 2.0000000      0  2
+## 4   2    0 -0.2670875 1.3859630 0.0000000 1.3628454      1  2
+## 5   2    0 -0.2670875 1.3859630 1.4450372 1.9719142      1  2
+## 6   2    0 -0.2670875 1.3859630 1.9719142 1.9870557      1  2
+## 7   2    0 -0.2670875 1.3859630 1.9870557 1.9985409      1  2
+## 9   3    0 -0.2850339 0.5346350 0.0000000 1.3853573      1  2
+## 10  3    0 -0.2850339 0.5346350 1.4675491 1.5138300      1  2
+## 11  3    0 -0.2850339 0.5346350 1.5960218 2.0000000      0  2</code></pre>
+<div id="htmlwidget-5688cb2562bd76f165fa" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5688cb2562bd76f165fa">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","43","44","45","46","47","49"],[1,1,1,2,2,2,2,3,3,3,4,4,4,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,9,9,9,9,9,10],[0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],[0.973853097471726,0.973853097471726,0.973853097471726,-0.267087498140517,-0.267087498140517,-0.267087498140517,-0.267087498140517,-0.285033917318361,-0.285033917318361,-0.285033917318361,-0.240404678464457,-0.240404678464457,-0.240404678464457,1.0312988595718,1.0312988595718,1.0312988595718,1.0312988595718,-0.801097880739342,-0.801097880739342,-0.801097880739342,-0.801097880739342,-0.801097880739342,-0.801097880739342,-0.801097880739342,-0.801097880739342,1.94489399544773,1.94489399544773,1.94489399544773,1.94489399544773,1.94489399544773,1.94489399544773,1.94489399544773,1.94489399544773,1.0739994138531,1.0739994138531,1.0739994138531,1.0739994138531,1.0739994138531,1.0739994138531,1.0739994138531,0.742174391323461,0.742174391323461,0.742174391323461,0.742174391323461,0.742174391323461,0.762298624626436],[0.441741645799057,0.441741645799057,0.441741645799057,1.38596295059972,1.38596295059972,1.38596295059972,1.38596295059972,0.53463497433522,0.53463497433522,0.53463497433522,0.515990584650693,0.515990584650693,0.515990584650693,1.00683923632985,1.00683923632985,1.00683923632985,1.00683923632985,2.67349103320094,2.67349103320094,2.67349103320094,2.67349103320094,2.67349103320094,2.67349103320094,2.67349103320094,2.67349103320094,0.719207789876695,0.719207789876695,0.719207789876695,0.719207789876695,0.719207789876695,0.719207789876695,0.719207789876695,0.719207789876695,1.53171985328357,1.53171985328357,1.53171985328357,1.53171985328357,1.53171985328357,1.53171985328357,1.53171985328357,1.10453735490212,1.10453735490212,1.10453735490212,1.10453735490212,1.10453735490212,0.946331541301539],[0,0.237341462314628,0.636824456306127,0,1.44503721281326,1.97191420035222,1.98705572914935,0,1.46754908896143,1.59602179643667,0,1.0081667849215,1.80530807860514,0,0.772372508788217,1.31997460354755,1.67093030567833,0,0.606964122960529,1.0471558253247,1.38633932298643,1.49051716558703,1.53332339387506,1.77054463550695,1.88385571940892,0,0.871666743252329,1.07879387355736,1.20419566138292,1.26799923004052,1.59595735394388,1.70240812947895,1.91915140828507,0,1.08380492438379,1.23708342258221,1.33144677382719,1.61057729881643,1.74465084387363,1.7494140033777,0,0.288119728119456,1.49267397329912,1.50782540479199,1.8711991149662,0],[0.237341462314628,0.636824456306127,2,1.36284543199134,1.97191420035222,1.98705572914935,1.99854085518944,1.38535730813952,1.51383001561475,2,1.0081667849215,1.72311629778322,2,0.772372508788217,1.31997460354755,1.58873852485642,2,0.606964122960529,1.0471558253247,1.38633932298643,1.40832538476511,1.53332339387506,1.68835285468503,1.801663938587,2,0.789474962430411,0.996602092735443,1.20419566138292,1.26799923004052,1.51376557312196,1.70240812947895,1.83695962746315,2,1.08380492438379,1.15489164176029,1.24925499300527,1.52838551799451,1.66245906305171,1.7494140033777,1.99121591860196,0.288119728119456,1.49267397329912,1.50782540479199,1.78900733414428,1.96566346047218,2],[1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0],[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>z<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="the-simreccomp-function" class="section level1">
@@ -312,7 +314,7 @@
 <div id="example-1" class="section level2 unnumbered">
 <h2 class="hasAnchor">
 <a href="#example-1" class="anchor"></a>Example</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(simrec)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(simrec)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">### Example:</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">### A sample of 10 individuals</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"></a>
@@ -324,10 +326,10 @@
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">### as well as regression coefficients of beta.xc=0.5 and beta.xc=0.25,</span></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">### respectively, for the competing event.</span></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">dist.x  &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"binomial"</span>, <span class="st">"normal"</span>)</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">par.x   &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="fl">0.5</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb5-15" data-line-number="15">beta.xr &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.3</span>, <span class="fl">0.2</span>)</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">beta.xc &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.5</span>,<span class="fl">0.25</span>)</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">dist.x  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"binomial"</span>, <span class="st">"normal"</span>)</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">par.x   &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0.5</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">beta.xr &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.3</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">beta.xc &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>,<span class="fl">0.25</span>)</a>
 <a class="sourceLine" id="cb5-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">### a gamma distributed frailty variable for the recurrent event with</span></a>
 <a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">### variance 0.25 and for the competing event with variance 0.3,</span></a>
@@ -346,13 +348,13 @@
 <a class="sourceLine" id="cb5-32" data-line-number="32"><span class="co">### shape parameter lambda=1 and scale parameter nu=2,</span></a>
 <a class="sourceLine" id="cb5-33" data-line-number="33"></a>
 <a class="sourceLine" id="cb5-34" data-line-number="34">dist.rec &lt;-<span class="st"> "weibull"</span></a>
-<a class="sourceLine" id="cb5-35" data-line-number="35">par.rec  &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb5-35" data-line-number="35">par.rec  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb5-36" data-line-number="36"></a>
 <a class="sourceLine" id="cb5-37" data-line-number="37"><span class="co">### and a Weibull-shaped baseline hazard for the competing event with</span></a>
 <a class="sourceLine" id="cb5-38" data-line-number="38"><span class="co">### shape parameter lambda=1 and scale parameter nu=2</span></a>
 <a class="sourceLine" id="cb5-39" data-line-number="39"></a>
 <a class="sourceLine" id="cb5-40" data-line-number="40">dist.comp &lt;-<span class="st"> "weibull"</span></a>
-<a class="sourceLine" id="cb5-41" data-line-number="41">par.comp  &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb5-41" data-line-number="41">par.comp  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb5-42" data-line-number="42"></a>
 <a class="sourceLine" id="cb5-43" data-line-number="43"><span class="co">### Subjects are to be followed for two years with 20% of the subjects</span></a>
 <a class="sourceLine" id="cb5-44" data-line-number="44"><span class="co">### being censored according to a uniformly distributed censoring time</span></a>
@@ -380,36 +382,36 @@
 <a class="sourceLine" id="cb5-66" data-line-number="66">                       <span class="dt">par.rec=</span>par.rec, <span class="dt">dist.comp=</span>dist.comp,</a>
 <a class="sourceLine" id="cb5-67" data-line-number="67">                       <span class="dt">par.comp=</span>par.comp, <span class="dt">pfree=</span> pfree, <span class="dt">dfree=</span>dfree)</a>
 <a class="sourceLine" id="cb5-68" data-line-number="68"></a>
-<a class="sourceLine" id="cb5-69" data-line-number="69"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(simdata1[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</a>
-<a class="sourceLine" id="cb5-70" data-line-number="70"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(simdata2[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</a>
-<a class="sourceLine" id="cb5-71" data-line-number="71">DT<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/DT/topics/datatable">datatable</a></span>(simdata1)</a>
-<a class="sourceLine" id="cb5-72" data-line-number="72">DT<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/DT/topics/datatable">datatable</a></span>(simdata2)</a></code></pre></div>
-<pre><code>##    id x.V1        x.V2        zr        zc     start      stop status        fu
-## 1   1    0 -0.02825016 0.7378733 0.8589955 0.0000000 0.3101108      2 0.9233206
-## 3   2    0 -1.45064805 0.7122568 0.8439531 0.0000000 0.5233763      2 0.6642038
-## 5   3    0 -3.64527785 0.7519311 0.8671396 0.0000000 0.4208170      2 2.0000000
-## 7   4    1 -0.90419413 0.8265256 0.9091346 0.0000000 0.6924981      1 2.0000000
-## 8   4    1 -0.90419413 0.8265256 0.9091346 0.6924981 0.7775932      2 2.0000000
-## 12  5    0  0.72289783 0.8205927 0.9058657 0.0000000 0.3661069      1 2.0000000
-## 13  5    0  0.72289783 0.8205927 0.9058657 0.3661069 1.2025864      2 2.0000000
-## 15  6    0  0.58363883 1.9381928 1.3921899 0.0000000 0.6182951      2 2.0000000
-## 22  7    1 -0.69832798 0.6334830 0.7959164 0.0000000 0.2177461      2 1.1060421
-## 25  8    0  1.70835894 0.7331633 0.8562496 0.0000000 0.8296040      2 2.0000000
-##    id x.V1       x.V2        zr        zc     start      stop status fu
-## 1   1    0  0.1362423 0.3984326 0.7370529 0.0000000 0.2129047      2  2
-## 5   2    0  2.5832661 1.1122121 0.4428964 0.0000000 0.1832264      1  2
-## 6   2    0  2.5832661 1.1122121 0.4428964 0.2654182 0.3977167      1  2
-## 7   2    0  2.5832661 1.1122121 0.4428964 0.4799085 0.4879383      2  2
-## 12  3    1 -1.4266770 0.9690839 0.6022964 0.0000000 1.1203165      2  2
-## 15  4    1 -0.5272070 0.7174526 0.2974819 0.0000000 0.3612869      2  2
-## 18  5    1  2.1330685 1.3419968 1.0491709 0.0000000 0.3696675      1  2
-## 19  5    1  2.1330685 1.3419968 1.0491709 0.3696675 0.8042087      1  2
-## 20  5    1  2.1330685 1.3419968 1.0491709 0.8042087 0.9374310      1  2
-## 21  5    1  2.1330685 1.3419968 1.0491709 0.9374310 1.0646882      2  2</code></pre>
+<a class="sourceLine" id="cb5-69" data-line-number="69"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(simdata1[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</a>
+<a class="sourceLine" id="cb5-70" data-line-number="70"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(simdata2[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</a>
+<a class="sourceLine" id="cb5-71" data-line-number="71">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(simdata1)</a>
+<a class="sourceLine" id="cb5-72" data-line-number="72">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(simdata2)</a></code></pre></div>
+<pre><code>##    id x.V1       x.V2        zr        zc     start      stop status       fu
+## 1   1    0  0.8237278 1.5412261 1.2414613 0.0000000 0.2704888      1 2.000000
+## 2   1    0  0.8237278 1.5412261 1.2414613 0.3526806 0.5686292      2 2.000000
+## 9   2    0 -0.7452515 0.3839375 0.6196269 0.0000000 1.6963888      2 2.000000
+## 11  3    1  0.3953734 1.1236755 1.0600356 0.0000000 0.8339610      2 2.000000
+## 14  4    0 -0.6900000 0.8553610 0.9248573 0.0000000 0.3094409      2 2.000000
+## 18  5    1 -0.6813320 0.7754685 0.8806069 0.0000000 0.1978150      2 2.000000
+## 22  6    1  0.4210785 2.0659767 1.4373506 0.0000000 0.6479327      1 1.954965
+## 28  7    0 -0.2128887 0.9632948 0.9814758 0.0000000 0.5495516      2 2.000000
+## 34  8    0  0.8158648 1.2530151 1.1193816 0.0000000 0.4725965      1 2.000000
+## 39  9    1  1.4769909 0.5522801 0.7431555 0.0000000 0.6488637      2 2.000000
+##    id x.V1       x.V2        zr         zc     start      stop status        fu
+## 1   1    0 -0.4996795 0.8273376 0.09074851 0.0000000 0.4318910      0 0.4318910
+## 3   2    1 -1.8460708 1.7274399 1.46914441 0.0000000 0.1798778      2 0.1950016
+## 5   3    0 -1.2407352 1.6519523 1.56130139 0.0000000 0.2180115      2 2.0000000
+## 11  4    0 -0.1806545 2.2283724 0.81189775 0.0000000 0.6744923      1 2.0000000
+## 12  4    0 -0.1806545 2.2283724 0.81189775 0.6744923 0.8939100      2 2.0000000
+## 15  5    0  0.4486388 1.1117852 1.59377864 0.0000000 0.4550100      1 2.0000000
+## 16  5    0  0.4486388 1.1117852 1.59377864 0.4550100 0.5740843      2 2.0000000
+## 19  6    1  0.8552818 1.3138336 1.02558913 0.0000000 0.2067822      1 2.0000000
+## 20  6    1  0.8552818 1.3138336 1.02558913 0.2889740 0.5528056      1 2.0000000
+## 21  6    1  0.8552818 1.3138336 1.02558913 0.5528056 0.9798425      1 2.0000000</code></pre>
 <p></p>
-<div id="htmlwidget-76558d212d38f852779b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-76558d212d38f852779b">{"x":{"filter":"none","data":[["1","3","5","7","8","12","13","15","22","25","28","31","32","33"],[1,2,3,4,4,5,5,6,7,8,9,10,10,10],[0,0,0,1,1,0,0,0,1,0,1,1,1,1],[-0.028250160185185,-1.45064805019279,-3.64527785037511,-0.904194130097154,-0.904194130097154,0.722897825323994,0.722897825323994,0.583638833931379,-0.698327976139093,1.70835894356618,1.11382120107034,-0.00217953422223945,-0.00217953422223945,-0.00217953422223945],[0.73787334879516,0.71225684985095,0.751931115315596,0.826525634212184,0.826525634212184,0.82059270993535,0.82059270993535,1.93819279742636,0.633482991670828,0.733163343426257,0.494588547157498,1.5448669064384,1.5448669064384,1.5448669064384],[0.858995546434997,0.843953108798676,0.867139616968107,0.909134552314554,0.909134552314554,0.905865724009552,0.905865724009552,1.39218992864708,0.795916447669495,0.856249580102821,0.703269896382248,1.24292675023044,1.24292675023044,1.24292675023044],[0,0,0,0,0.69249810808853,0,0.366106867057395,0,0,0,0,0,0.927667234198852,0.952117111104425],[0.310110753011463,0.523376266353531,0.420816986219183,0.69249810808853,0.777593192163482,0.366106867057395,1.20258639984775,0.618295122219353,0.21774614185448,0.829604026849316,0.630941402604117,0.927667234198852,0.952117111104425,1.04619488798036],[2,2,2,1,2,1,2,2,2,2,2,1,1,2],[0.923320586793125,0.664203822612762,2,2,2,2,2,2,1.10604210291058,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>zr<\/th>\n      <th>zc<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-24a2937dc7123700fb2e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-24a2937dc7123700fb2e">{"x":{"filter":"none","data":[["1","5","6","7","12","15","18","19","20","21","29","30","31","32","33","34","36","37","41","42","46","47"],[1,2,2,2,3,4,5,5,5,5,6,6,7,7,7,7,8,8,9,9,10,10],[0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0],[0.136242314785965,2.58326608799753,2.58326608799753,2.58326608799753,-1.4266770262213,-0.527206969518404,2.13306845637893,2.13306845637893,2.13306845637893,2.13306845637893,0.369463789839472,0.369463789839472,-0.172180375536926,-0.172180375536926,-0.172180375536926,-0.172180375536926,0.493456617145454,0.493456617145454,-1.97375861720025,-1.97375861720025,0.625605902184582,0.625605902184582],[0.39843256994867,1.11221206090455,1.11221206090455,1.11221206090455,0.969083936530533,0.717452627411633,1.34199681233611,1.34199681233611,1.34199681233611,1.34199681233611,0.337323211377613,0.337323211377613,1.12783909753604,1.12783909753604,1.12783909753604,1.12783909753604,1.08045499266152,1.08045499266152,0.690740891091844,0.690740891091844,1.01469142976804,1.01469142976804],[0.737052908068855,0.442896437897494,0.442896437897494,0.442896437897494,0.602296399242705,0.297481853700198,1.04917089417198,1.04917089417198,1.04917089417198,1.04917089417198,0.75154583256557,0.75154583256557,0.744262028794325,0.744262028794325,0.744262028794325,0.744262028794325,0.561122706829915,0.561122706829915,1.2780086152319,1.2780086152319,0.900826940361101,0.900826940361101],[0,0,0.265418176287614,0.47990849765579,0,0,0,0.369667453002153,0.804208701482111,0.937431009288236,0,1.37599683028883,0,0.557233127952602,1.27585517005392,1.30986712224934,0,1.17473734928753,0,0.14290773666476,0,0.454487663865277],[0.212904663043094,0.183226395465696,0.397716716833872,0.487938330531057,1.12031654316997,0.361286925007615,0.369667453002153,0.804208701482111,0.937431009288236,1.06468823251942,1.37599683028883,1.40995793332212,0.557233127952602,1.27585517005392,1.30986712224934,1.50852523835137,1.17473734928753,1.22358562825502,0.0607159558428422,0.481864004659803,0.454487663865277,0.722316221412061],[2,1,1,2,2,2,1,1,1,2,1,2,1,1,1,2,1,1,1,2,1,2],[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>zr<\/th>\n      <th>zc<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3c55c7d72836a55f9c86" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3c55c7d72836a55f9c86">{"x":{"filter":"none","data":[["1","2","9","11","14","18","22","28","34","39","44","45","46","47","48","49","50"],[1,1,2,3,4,5,6,7,8,9,10,10,10,10,10,10,10],[0,0,0,1,0,1,1,0,0,1,1,1,1,1,1,1,1],[0.823727767409937,0.823727767409937,-0.745251508186276,0.395373359736573,-0.690000039182747,-0.681331957582988,0.421078500213598,-0.212888652346518,0.81586482773703,1.47699090707126,0.656407806586576,0.656407806586576,0.656407806586576,0.656407806586576,0.656407806586576,0.656407806586576,0.656407806586576],[1.54122611036761,1.54122611036761,0.383937545234482,1.12367554542169,0.855360978721965,0.775468481814285,2.06597666325255,0.963294768816334,1.25301513286389,0.552280068518791,3.07482734713537,3.07482734713537,3.07482734713537,3.07482734713537,3.07482734713537,3.07482734713537,3.07482734713537],[1.24146128025308,1.24146128025308,0.619626940371771,1.06003563403392,0.924857274784583,0.880606882674832,1.43735057075598,0.981475811630798,1.11938158501196,0.743155480716378,1.75351856195917,1.75351856195917,1.75351856195917,1.75351856195917,1.75351856195917,1.75351856195917,1.75351856195917],[0,0.352680611245852,0,0,0,0,0,0,0,0,0,0.154945388508633,0.244668032282969,0.49693636125029,0.773460636448037,0.895466269705987,1.19753373694325],[0.270488830423934,0.568629157355225,1.69638883357228,0.833960998164834,0.309440944056925,0.197815013956612,0.647932724890576,0.549551643632253,0.472596499865122,0.648863686316082,0.0727536076867148,0.162476251461052,0.414744580428373,0.691268855626119,0.895466269705987,1.11534195612133,1.25727365765608],[1,2,2,2,2,2,1,2,1,2,1,1,1,1,1,1,1],[2,2,2,2,2,2,1.95496498188004,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>zr<\/th>\n      <th>zc<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-278232622359b6be1571" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-278232622359b6be1571">{"x":{"filter":"none","data":[["1","3","5","11","12","15","16","19","20","21","22","23","24","31","34","36","38","39"],[1,2,3,4,4,5,5,6,6,6,6,6,6,7,8,9,10,10],[0,1,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,1],[-0.499679490480298,-1.84607082640806,-1.24073521489452,-0.180654496148042,-0.180654496148042,0.448638765720481,0.448638765720481,0.855281793999166,0.855281793999166,0.855281793999166,0.855281793999166,0.855281793999166,0.855281793999166,0.467633380923631,-0.0643514888406629,0.137580670632501,-1.38695641149824,-1.38695641149824],[0.8273375977778,1.72743991966094,1.65195234534396,2.22837235584179,2.22837235584179,1.11178522012543,1.11178522012543,1.31383360259481,1.31383360259481,1.31383360259481,1.31383360259481,1.31383360259481,1.31383360259481,0.932105547007391,0.618587441968221,1.48924773621522,0.77967297022125,0.77967297022125],[0.0907485129011888,1.46914440524955,1.5613013852412,0.811897746532481,0.811897746532481,1.59377864143272,1.59377864143272,1.02558912790036,1.02558912790036,1.02558912790036,1.02558912790036,1.02558912790036,1.02558912790036,1.93961152429709,1.36039620399357,0.475575617678744,0.384256010072532,0.384256010072532],[0,0,0,0,0.674492302094082,0,0.45501002816934,0,0.288973957831012,0.552805563816252,1.06203425255736,1.178319249932,1.2133525636385,0,0,0,0,0.645687867373021],[0.431891041342169,0.179877788886024,0.218011528598921,0.674492302094082,0.893909979865926,0.45501002816934,0.574084281690989,0.206782177009095,0.552805563816252,0.97984247173544,1.178319249932,1.2133525636385,1.37265724271759,0.336962574282239,1.08561298444947,0.789548141881824,0.645687867373021,0.753082679269151],[0,2,2,1,2,1,2,1,1,1,1,1,1,2,2,0,1,2],[0.431891041342169,0.195001564454287,2,2,2,2,2,2,2,2,2,2,2,2,2,0.789548141881824,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>zr<\/th>\n      <th>zc<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="the-simrecint-function" class="section level1">
@@ -457,15 +459,15 @@
 <h2 class="hasAnchor">
 <a href="#example-2" class="anchor"></a>Example</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">### Example - see example for simrec</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(simrec)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(simrec)</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">N         &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">dist.x    &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"binomial"</span>, <span class="st">"normal"</span>)</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">par.x     &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="fl">0.5</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">beta.x    &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.3</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">dist.x    &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"binomial"</span>, <span class="st">"normal"</span>)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">par.x     &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fl">0.5</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">beta.x    &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.3</span>, <span class="fl">0.2</span>)</a>
 <a class="sourceLine" id="cb8-7" data-line-number="7">dist.z    &lt;-<span class="st"> "gamma"</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8">par.z     &lt;-<span class="st"> </span><span class="fl">0.25</span></a>
 <a class="sourceLine" id="cb8-9" data-line-number="9">dist.rec  &lt;-<span class="st"> "weibull"</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10">par.rec   &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">par.rec   &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>,<span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb8-11" data-line-number="11">fu.min    &lt;-<span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12">fu.max    &lt;-<span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb8-13" data-line-number="13">cens.prob &lt;-<span class="st"> </span><span class="fl">0.2</span></a>
@@ -477,26 +479,26 @@
 <a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">### and cut data to the time of the interim analysis at tI=1:</span></a>
 <a class="sourceLine" id="cb8-20" data-line-number="20"></a>
 <a class="sourceLine" id="cb8-21" data-line-number="21">simdataint &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simrecint.html">simrecint</a></span>(simdata, <span class="dt">N=</span>N, <span class="dt">tR=</span><span class="dv">2</span>, <span class="dt">tI=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(simdataint)  <span class="co"># only run for small N!</span></a>
-<a class="sourceLine" id="cb8-23" data-line-number="23">DT<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/DT/topics/datatable">datatable</a></span>(simdataint)</a></code></pre></div>
-<pre><code>##    id x.V1       x.V2         z     start      stop status        fu   rectime
-## 1   1    0 -0.5967448 1.1850610 0.0000000 0.4543173      0 0.4543173 0.4106625
-## 11  4    0  0.4491770 1.0984319 0.0000000 0.4904040      0 0.7307440 0.5095960
-## 13  5    0 -0.9120017 0.5973220 0.0000000 0.4868048      0 2.0000000 0.5131952
-## 20  7    1 -0.2212670 0.8710405 0.0000000 0.1834206      0 2.0000000 0.8165794
-## 24  8    0  1.8876200 1.3113778 0.0000000 0.4426316      0 2.0000000 0.5573684
-## 38 10    1 -0.4422954 0.9100822 0.0000000 0.3570926      1 2.0000000 0.3918887
-## 39 10    1 -0.4422954 0.9100822 0.3570926 0.6081113      0 2.0000000 0.3918887
-##    interimtime stop_study
-## 1            1  0.8649798
-## 11           1  1.2403401
-## 13           1  1.4539670
-## 20           1  2.0036690
-## 24           1  1.7308580
-## 38           1  0.7489813
-## 39           1  1.3880391</code></pre>
-<div id="htmlwidget-27c3bcb8a83e31f4dbde" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-27c3bcb8a83e31f4dbde">{"x":{"filter":"none","data":[["1","11","13","20","24","38","39"],[1,4,5,7,8,10,10],[0,0,0,1,0,1,1],[-0.596744765512741,0.449177046328255,-0.912001732128996,-0.22126696075169,1.8876199524049,-0.442295354674299,-0.442295354674299],[1.18506101425091,1.09843185248283,0.597322022337293,0.871040458505767,1.31137782238478,0.910082159063509,0.910082159063509],[0,0,0,0,0,0,0.357092595603796],[0.454317312687635,0.490403970703483,0.486804821528494,0.183420572895557,0.442631559912115,0.357092595603796,0.608111325651407],[0,0,0,0,0,1,0],[0.454317312687635,0.730744048021734,2,2,2,2,2],[0.410662522073835,0.509596029296517,0.513195178471506,0.816579427104443,0.557368440087885,0.391888674348593,0.391888674348593],[1,1,1,1,1,1,1],[0.864979834761471,1.24034007731825,1.45396701100109,2.0036690318658,1.73085803966912,0.748981269952389,1.38803914305954]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>z<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n      <th>rectime<\/th>\n      <th>interimtime<\/th>\n      <th>stop_study<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(simdataint)  <span class="co"># only run for small N!</span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(simdataint)</a></code></pre></div>
+<pre><code>##    id x.V1      x.V2         z     start      stop status       fu    rectime interimtime
+## 4   2    0 1.1221533 2.2172266 0.0000000 0.4060051      0 2.000000 0.59399493           1
+## 14  3    1 0.6611015 0.5594427 0.0000000 0.4528932      0 2.000000 0.54710684           1
+## 22  5    0 0.8418101 1.2606780 0.0000000 0.7158763      1 1.505054 0.01461495           1
+## 23  5    0 0.8418101 1.2606780 0.7158763 0.7419807      1 1.505054 0.01461495           1
+## 24  5    0 0.8418101 1.2606780 0.7419807 0.9853850      0 1.505054 0.01461495           1
+## 50 10    0 0.5165787 0.9078364 0.0000000 0.2303675      1 2.000000 0.69231009           1
+## 51 10    0 0.5165787 0.9078364 0.2303675 0.3076899      0 2.000000 0.69231009           1
+##    stop_study
+## 4   1.1241478
+## 14  2.0988675
+## 22  0.7304912
+## 23  0.7565957
+## 24  1.2425497
+## 50  0.9226775
+## 51  1.7565083</code></pre>
+<div id="htmlwidget-15c4ab6bd1ef0b1f8085" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-15c4ab6bd1ef0b1f8085">{"x":{"filter":"none","data":[["4","14","22","23","24","50","51"],[2,3,5,5,5,10,10],[0,1,0,0,0,0,0],[1.12215328042532,0.661101464022878,0.841810123947625,0.841810123947625,0.841810123947625,0.516578741188614,0.516578741188614],[2.21722656964177,0.559442679901392,1.26067799550668,1.26067799550668,1.26067799550668,0.907836383693623,0.907836383693623],[0,0,0,0.715876253342462,0.741980704229786,0,0.230367451960718],[0.406005065888166,0.45289315842092,0.715876253342462,0.741980704229786,0.98538504820317,0.230367451960718,0.307689908426255],[0,0,1,1,0,1,0],[2,2,1.50505435327068,1.50505435327068,1.50505435327068,2,2],[0.593994934111834,0.54710684157908,0.0146149517968297,0.0146149517968297,0.0146149517968297,0.692310091573745,0.692310091573745],[1,1,1,1,1,1,1],[1.12414782309748,2.09886747838143,0.730491205139291,0.756595656026615,1.24254972027257,0.922677543534463,1.75650827286287]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>z<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n      <th>rectime<\/th>\n      <th>interimtime<\/th>\n      <th>stop_study<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="plotting-the-data" class="section level1">
@@ -573,6 +575,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -620,17 +623,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Katharina Ingel, Antje Jahn-Eimermacher, Stella Preussler, <a href="https://federicomarini.github.io">Federico Marini</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
