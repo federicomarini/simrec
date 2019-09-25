@@ -20,7 +20,8 @@ VignetteBuilder: knitr
 Suggests:
     knitr,
     rmarkdown,
-    DT
+    DT,
+    webshot
 License: GPL-2
 LazyData: true
 RoxygenNote: 6.1.1
