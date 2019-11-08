@@ -205,6 +205,15 @@ simreccomp <- function(N,
                        par.comp, 
                        pfree=0, 
                        dfree=0) {
+  
+  if ((cens.prob > 0) & (fu.min != fu.max)) {
+    warning(
+      paste0("The censoring scheme for parameters cens.prob greater than 0 and fu.min != fu.max is undefined. \n",
+             "The package properly implements two censoring schemes depending on parameters cens.prob, fu.min, and fu.max: \n",
+             "a) cens.prob>0 and fu.min=fu.max: follow-up ends at time fu.max with a probability of 1-cens.prob and follow-up ends uniformly distributed in [0, fu.max] with a probability of cens.prob. \n",
+             "b) cens.prob=0 and fu.min<fu.max: follow-up ends uniformly distributed in [0,fu.max] for each subject."))
+  }
+  
   ID <- c(1:N)
   # generating the follow-up  *****************************************************************
   # follow-up uniformly distributed in [fu.min, fu.max] if not censored
