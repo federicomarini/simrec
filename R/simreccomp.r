@@ -453,7 +453,11 @@ simreccomp <- function(N,
     if (m[i]) {tab.stop.t[i]<-tab.comp.event[i]; e[i]<-2}
   }
   
-  tab <- cbind(tab.ID,tab.X,tab.zr,tab.zc,tab.start.t,tab.stop.t,t(e),tab.Fu, tab.comp.event)
+  tab <- cbind(tab.ID,tab.X,tab.zr,tab.zc,tab.start.t,tab.stop.t,
+               t(e),
+               pmin(tab.Fu,tab.comp.event),
+               tab.comp.event)
+  
   
   for (i in 1:length(w)) {
     if(w[i]) {tab[i,] <- rep(NA, nr.cov+8)}  # delete times, which are after the FU and therefore don't exist
