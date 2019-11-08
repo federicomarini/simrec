@@ -338,7 +338,7 @@ simreccomp <- function(N,
     Y  <- (-1)*log(U)*exp((-1)*x%*%beta.xr)*1/zr
     t1 <- t+pd*dfree
     if (dist.rec=="lognormal") {                                                      # lognormal
-      t <- (t1 + exp(qnorm(1-exp(log(1-pnorm((log(t1)-mu/sigma)))-Y))*sigma+mu)-(t1))
+      t <- (t1 + exp(qnorm(1-exp(log(1-pnorm((log(t1)-mu)/sigma))-Y))*sigma+mu)-(t1))
     } else if (dist.rec=="weibull"){                                                  # weibull
       t <- (t1 + ((Y+lambda*(t1)^(nu))/lambda)^(1/nu)-(t1))
     } else if(dist.rec=="gompertz"){                                                  # gompertz
