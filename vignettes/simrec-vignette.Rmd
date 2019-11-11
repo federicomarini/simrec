@@ -17,7 +17,8 @@ vignette: >
   %\VignetteIndexEntry{simrec: An R-Package for Simulation of Recurrent Event Data}
   %\VignetteKeywords{simrec simulation recurrent events}
   %\VignettePackage{simrec}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 bibliography: simrec.bib  
 ---
 

@@ -18,8 +18,8 @@ To install the development version for the package **simrec**, please start a cu
 ```r 
 # currently this can be done via github
 install.packages("devtools") # if needed
-devtools::install_github("katharinaingel/simrec") # or if needed:
-devtools::install_github("katharinaingel/simrec", build_vignettes=TRUE, dependencies = TRUE)
+devtools::install_github("federicomarini/simrec") # or if needed:
+devtools::install_github("federicomarini/simrec", build_vignettes=TRUE, dependencies = TRUE)
 ```
 
 ### Vignette
