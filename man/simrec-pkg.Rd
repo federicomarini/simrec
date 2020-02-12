@@ -3,7 +3,6 @@
 \docType{package}
 \name{simrec-pkg}
 \alias{simrec-pkg}
-\alias{simrec-pkg-package}
 \title{simrec}
 \description{
 Simulation of recurrent event data for non-constant baseline hazard

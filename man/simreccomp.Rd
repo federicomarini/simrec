@@ -4,10 +4,27 @@
 \alias{simreccomp}
 \title{simreccomp}
 \usage{
-simreccomp(N, fu.min, fu.max, cens.prob = 0, dist.x = "binomial",
-  par.x = 0, beta.xr = 0, beta.xc = 0, dist.zr = "gamma",
-  par.zr = 0, a = NULL, dist.zc = NULL, par.zc = NULL, dist.rec,
-  par.rec, dist.comp, par.comp, pfree = 0, dfree = 0)
+simreccomp(
+  N,
+  fu.min,
+  fu.max,
+  cens.prob = 0,
+  dist.x = "binomial",
+  par.x = 0,
+  beta.xr = 0,
+  beta.xc = 0,
+  dist.zr = "gamma",
+  par.zr = 0,
+  a = NULL,
+  dist.zc = NULL,
+  par.zc = NULL,
+  dist.rec,
+  par.rec,
+  dist.comp,
+  par.comp,
+  pfree = 0,
+  dfree = 0
+)
 }
 \arguments{
 \item{N}{Number of individuals}

@@ -4,8 +4,13 @@
 \alias{simreccompPlot}
 \title{simreccompPlot}
 \usage{
-simreccompPlot(data, id = "id", start = "start", Stop = "stop",
-  status = "status")
+simreccompPlot(
+  data,
+  id = "id",
+  start = "start",
+  Stop = "stop",
+  status = "status"
+)
 }
 \arguments{
 \item{data}{A data set of recurrent event data to be plotted.
@@ -30,7 +35,7 @@ This function allows plotting of recurrent event data with a competing event.
 }
 \examples{
 ### Example:
-### First simulate a sample of 10 individuals (for more details see the help of \\code{simreccomp})
+### First simulate a sample of 10 individuals (for more details see the help of \code{simreccomp})
 N <- 10
 dist.x <- c("binomial", "normal")
 par.x  <- list(0.5, c(0,1))

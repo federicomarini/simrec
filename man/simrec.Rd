@@ -4,9 +4,21 @@
 \alias{simrec}
 \title{simrec}
 \usage{
-simrec(N, fu.min, fu.max, cens.prob = 0, dist.x = "binomial",
-  par.x = 0, beta.x = 0, dist.z = "gamma", par.z = 0, dist.rec,
-  par.rec, pfree = 0, dfree = 0)
+simrec(
+  N,
+  fu.min,
+  fu.max,
+  cens.prob = 0,
+  dist.x = "binomial",
+  par.x = 0,
+  beta.x = 0,
+  dist.z = "gamma",
+  par.z = 0,
+  dist.rec,
+  par.rec,
+  pfree = 0,
+  dfree = 0
+)
 }
 \arguments{
 \item{N}{Number of individuals}

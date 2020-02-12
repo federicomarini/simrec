@@ -4,8 +4,7 @@
 \alias{simrecPlot}
 \title{simrecPlot}
 \usage{
-simrecPlot(data, id = "id", start = "start", Stop = "stop",
-  status = "status")
+simrecPlot(data, id = "id", start = "start", Stop = "stop", status = "status")
 }
 \arguments{
 \item{data}{A data set of recurrent event data to be plotted.
@@ -30,7 +29,7 @@ This function allows plotting of recurrent event data.
 }
 \examples{
 ### Example:
-### First simulate a sample of 10 individuals (for more details see the help of \\code{simrec})
+### First simulate a sample of 10 individuals (for more details see the help of \code{simrec})
 N <- 10
 dist.x <- c("binomial", "normal")
 par.x  <- list(0.5, c(0,1))
