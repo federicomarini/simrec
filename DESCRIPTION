@@ -21,6 +21,7 @@ Suggests:
     knitr,
     rmarkdown,
     DT
+URL: https://github.com/federicomarini/simrec
 License: GPL-2
 LazyData: true
 RoxygenNote: 7.1.1

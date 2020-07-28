@@ -5,3 +5,26 @@ authors:
 template:
   params:
     bootswatch: cosmo
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: 'simrec: An R-Package for Simulation of Recurrent Event Data'
+        href: articles/simrec-vignette.html
