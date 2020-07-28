@@ -45,7 +45,7 @@ jobs:
 
       - name: Install remotes
         run: |
-          install.packages('remotes')
+          install.packages(c('remotes', 'BiocManager'))
         shell: Rscript {0}
 
       - name: Query dependencies
