@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -52,7 +56,6 @@ between-subject-heterogeneity for the recurrent event.
 Analougously the competing event is generated according to the cause-specific hazard conditionally
 on the frailty variable and covariates: $$\lambda_{0c}(t)* Z_{ci} *exp(\beta_c^t X_i)$$
 Data output is in the counting process format." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -70,7 +73,7 @@ Data output is in the counting process format." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -84,7 +87,7 @@ Data output is in the counting process format." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simrec</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
       </span>
     </div>
 
@@ -113,7 +116,12 @@ Data output is in the counting process format." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/federicomarini/simrec/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,7 +136,7 @@ Data output is in the counting process format." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>simreccomp</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/federicomarini/simrec/blob/master/R/simreccomp.R'><code>R/simreccomp.R</code></a></small>
     <div class="hidden name"><code>simreccomp.Rd</code></div>
     </div>
 
@@ -151,10 +159,27 @@ on the frailty variable and covariates: $$\lambda_{0c}(t)* Z_{ci} *exp(\beta_c^t
 Data output is in the counting process format.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>simreccomp</span>(<span class='no'>N</span>, <span class='no'>fu.min</span>, <span class='no'>fu.max</span>, <span class='kw'>cens.prob</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>dist.x</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>,
-  <span class='kw'>par.x</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>beta.xr</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>beta.xc</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>dist.zr</span> <span class='kw'>=</span> <span class='st'>"gamma"</span>,
-  <span class='kw'>par.zr</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dist.zc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>par.zc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>dist.rec</span>,
-  <span class='no'>par.rec</span>, <span class='no'>dist.comp</span>, <span class='no'>par.comp</span>, <span class='kw'>pfree</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>dfree</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>simreccomp</span>(
+  <span class='no'>N</span>,
+  <span class='no'>fu.min</span>,
+  <span class='no'>fu.max</span>,
+  <span class='kw'>cens.prob</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>dist.x</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>,
+  <span class='kw'>par.x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>beta.xr</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>beta.xc</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>dist.zr</span> <span class='kw'>=</span> <span class='st'>"gamma"</span>,
+  <span class='kw'>par.zr</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>a</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dist.zc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>par.zc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>dist.rec</span>,
+  <span class='no'>par.rec</span>,
+  <span class='no'>dist.comp</span>,
+  <span class='no'>par.comp</span>,
+  <span class='kw'>pfree</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>dfree</span> <span class='kw'>=</span> <span class='fl'>0</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -405,22 +430,22 @@ The data format corresponds to the counting process format.
 #&gt; 45 10    1  0.563380077 1.7862755 1.3365162 0.6578697 0.8426681      1
 #&gt; 46 10    1  0.563380077 1.7862755 1.3365162 0.8426681 0.8568313      2
 #&gt;           fu
-#&gt; 1  2.0000000
-#&gt; 4  2.0000000
-#&gt; 12 2.0000000
-#&gt; 20 2.0000000
-#&gt; 24 2.0000000
-#&gt; 25 2.0000000
-#&gt; 26 2.0000000
-#&gt; 33 2.0000000
-#&gt; 34 2.0000000
-#&gt; 37 2.0000000
+#&gt; 1  0.6644770
+#&gt; 4  0.3188520
+#&gt; 12 0.5608202
+#&gt; 20 0.4889408
+#&gt; 24 0.5738317
+#&gt; 25 0.5738317
+#&gt; 26 0.5738317
+#&gt; 33 1.1937865
+#&gt; 34 1.1937865
+#&gt; 37 1.4533993
 #&gt; 40 0.1163513
-#&gt; 42 2.0000000
-#&gt; 43 2.0000000
-#&gt; 44 2.0000000
-#&gt; 45 2.0000000
-#&gt; 46 2.0000000</div><div class='input'><span class='no'>simdata2</span></div><div class='output co'>#&gt;    id x.V1       x.V2        zr        zc      start       stop status
+#&gt; 42 1.0342616
+#&gt; 43 1.0342616
+#&gt; 44 0.8568313
+#&gt; 45 0.8568313
+#&gt; 46 0.8568313</div><div class='input'><span class='no'>simdata2</span></div><div class='output co'>#&gt;    id x.V1       x.V2        zr        zc      start       stop status
 #&gt; 1   1    1 -1.3416861 1.1945898 1.5479373 0.00000000 0.41497436      2
 #&gt; 8   2    0  1.1589792 2.1337248 1.7948531 0.00000000 0.07861212      1
 #&gt; 9   2    0  1.1589792 2.1337248 1.7948531 0.07861212 0.59840312      2
@@ -438,36 +463,27 @@ The data format corresponds to the counting process format.
 #&gt; 47 10    1 -1.1848187 0.9551871 0.6523226 0.65681185 0.81835914      1
 #&gt; 48 10    1 -1.1848187 0.9551871 0.6523226 0.81835914 0.93634381      2
 #&gt;           fu
-#&gt; 1  2.0000000
-#&gt; 8  2.0000000
-#&gt; 9  2.0000000
-#&gt; 17 2.0000000
-#&gt; 20 2.0000000
-#&gt; 27 0.6802385
-#&gt; 29 2.0000000
-#&gt; 37 2.0000000
-#&gt; 39 2.0000000
-#&gt; 40 2.0000000
-#&gt; 41 2.0000000
-#&gt; 43 2.0000000
-#&gt; 45 1.2547320
-#&gt; 46 1.2547320
-#&gt; 47 1.2547320
-#&gt; 48 1.2547320</div></pre>
+#&gt; 1  0.4149744
+#&gt; 8  0.5984031
+#&gt; 9  0.5984031
+#&gt; 17 1.1940405
+#&gt; 20 0.6051738
+#&gt; 27 0.6044933
+#&gt; 29 0.2674837
+#&gt; 37 0.5764470
+#&gt; 39 1.3185666
+#&gt; 40 1.3185666
+#&gt; 41 1.3185666
+#&gt; 43 0.1611603
+#&gt; 45 0.9363438
+#&gt; 46 0.9363438
+#&gt; 47 0.9363438
+#&gt; 48 0.9363438</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher.
-Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI),
-University Medical Center of the Johannes Gutenberg-University Mainz, Germany</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -478,7 +494,7 @@ University Medical Center of the Johannes Gutenberg-University Mainz, Germany</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
