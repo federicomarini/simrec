@@ -32,19 +32,21 @@ This function allows plotting of recurrent event data.
 ### First simulate a sample of 10 individuals (for more details see the help of \code{simrec})
 N <- 10
 dist.x <- c("binomial", "normal")
-par.x  <- list(0.5, c(0,1))
-beta.x   <- c(0.3, 0.2)
+par.x <- list(0.5, c(0, 1))
+beta.x <- c(0.3, 0.2)
 dist.z <- "gamma"
-par.z  <- 0.25
+par.z <- 0.25
 dist.rec <- "weibull"
-par.rec  <- c(1,2)
-fu.min    <- 2
-fu.max    <- 2
+par.rec <- c(1, 2)
+fu.min <- 2
+fu.max <- 2
 cens.prob <- 0.2
-dfree <- 30/365
+dfree <- 30 / 365
 pfree <- 0.5
-simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x,
-                  dist.z, par.z, dist.rec, par.rec, pfree, dfree)
+simdata <- simrec(
+  N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x,
+  dist.z, par.z, dist.rec, par.rec, pfree, dfree
+)
 simrecPlot(simdata)
 # or possibly:
 # pdf("Plot.pdf")

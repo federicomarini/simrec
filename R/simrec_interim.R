@@ -30,62 +30,66 @@
 #' @examples
 #' ### Example - see example for simrec
 #' library(simrec)
-#' N         <- 10
-#' dist.x    <- c("binomial", "normal")
-#' par.x     <- list(0.5, c(0,1))
-#' beta.x    <- c(0.3, 0.2)
-#' dist.z    <- "gamma"
-#' par.z     <- 0.25
-#' dist.rec  <- "weibull"
-#' par.rec   <- c(1,2)
-#' fu.min    <- 2
-#' fu.max    <- 2
+#' N <- 10
+#' dist.x <- c("binomial", "normal")
+#' par.x <- list(0.5, c(0, 1))
+#' beta.x <- c(0.3, 0.2)
+#' dist.z <- "gamma"
+#' par.z <- 0.25
+#' dist.rec <- "weibull"
+#' par.rec <- c(1, 2)
+#' fu.min <- 2
+#' fu.max <- 2
 #' cens.prob <- 0.2
 #'
-#' simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z,
-#'                   par.z, dist.rec, par.rec)
+#' simdata <- simrec(
+#'   N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z,
+#'   par.z, dist.rec, par.rec
+#' )
 #'
 #' ### Now simulate for each patient a recruitment time in [0,tR=2]
 #' ### and cut data to the time of the interim analysis at tI=1:
 #'
-#' simdataint <- simrecint(simdata, N=N, tR=2, tI=1)
+#' simdataint <- simrecint(simdata, N = N, tR = 2, tI = 1)
 #' # print(simdataint)  # only run for small N!
-simrecint <- function(data, 
-                      N, 
-                      tR, 
-                      tI){
-  
-  tab     <- data                # previously generated data with columns including id, start, stop, status
+simrecint <- function(data,
+                      N,
+                      tR,
+                      tI) {
+  tab <- data # previously generated data with columns including id, start, stop, status
   nr.rows <- length(tab$id)
-  
-  ev <- NULL           # number of "events" for each individual (including censoring)
+
+  ev <- NULL # number of "events" for each individual (including censoring)
   for (j in 1:N) {
-    ev[j] <- length(which(tab$id==j))
+    ev[j] <- length(which(tab$id == j))
   }
-  
-  rectime         <- runif(N, min = 0, max = tR)                       # generate recruitment time for each individual
-  tab$rectime     <- rep(rectime, ev)
+
+  rectime <- runif(N, min = 0, max = tR) # generate recruitment time for each individual
+  tab$rectime <- rep(rectime, ev)
   tab$interimtime <- rep(tI, nr.rows)
-  tab$stop_study  <- tab$stop + tab$rectime                            # stopping time in study time
-  
-  m <- (tab$stop_study > tab$interimtime)                           # if m[i]=TRUE -> event after interim analysis
-  for (i in 1:nr.rows) {                                               # Then time of interim analysis minus time of recruitment gives new stop time (in patient time)
-    if (m[i]) { tab$stop[i]   <- tab$interimtime[i] - tab$rectime[i]   # this is negative, if patient is not recruited yet (see also below)
-    tab$status[i] <- 0                                     # subsequent lines now equal, if more than one event after interim analysis
-    }                                                        # Events after interim analysis are now censored at time of interim (status = 0)
+  tab$stop_study <- tab$stop + tab$rectime # stopping time in study time
+
+  m <- (tab$stop_study > tab$interimtime) # if m[i]=TRUE -> event after interim analysis
+  for (i in 1:nr.rows) { # Then time of interim analysis minus time of recruitment gives new stop time (in patient time)
+    if (m[i]) {
+      tab$stop[i] <- tab$interimtime[i] - tab$rectime[i] # this is negative, if patient is not recruited yet (see also below)
+      tab$status[i] <- 0 # subsequent lines now equal, if more than one event after interim analysis
+    } # Events after interim analysis are now censored at time of interim (status = 0)
   }
-  
+
   k <- NULL
-  for (i in 1:nr.rows-1) {
-    k[i] <- (tab$stop[i]==tab$stop[i+1] & tab$id[i]==tab$id[i+1])      # if stop-time and ID in the following line are the same, set to TRUE
+  for (i in 1:nr.rows - 1) {
+    k[i] <- (tab$stop[i] == tab$stop[i + 1] & tab$id[i] == tab$id[i + 1]) # if stop-time and ID in the following line are the same, set to TRUE
   }
-  
+
   for (i in 1:length(k)) {
-    if (k[i]) {is.na(tab[i+1,]) <- TRUE }     # cuts all events after interim time (accordinlgy to k as generated above), by setting the whole line to NA
+    if (k[i]) {
+      is.na(tab[i + 1, ]) <- TRUE
+    } # cuts all events after interim time (accordinlgy to k as generated above), by setting the whole line to NA
   }
-  
+
   tab <- na.omit(tab)
-  tab <- tab[tab$rectime < tab$interimtime,]      # only patients, that were already recruited at interim
-  
+  tab <- tab[tab$rectime < tab$interimtime, ] # only patients, that were already recruited at interim
+
   return(tab)
 }

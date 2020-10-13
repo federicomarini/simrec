@@ -138,36 +138,38 @@ N <- 10
 ### regression coefficient of beta=0.2,
 
 dist.x <- c("binomial", "normal")
-par.x  <- list(0.5, c(0,1))
-beta.x   <- c(0.3, 0.2)
+par.x <- list(0.5, c(0, 1))
+beta.x <- c(0.3, 0.2)
 
 ### a gamma distributed frailty variable with variance 0.25
 
 dist.z <- "gamma"
-par.z  <- 0.25
+par.z <- 0.25
 
 ### and a Weibull-shaped baseline hazard with shape parameter lambda=1
 ### and scale parameter nu=2.
 
 dist.rec <- "weibull"
-par.rec  <- c(1,2)
+par.rec <- c(1, 2)
 
 ### Subjects are to be followed for two years with 20\% of the subjects
 ### being censored according to a uniformly distributed censoring time
 ### within [0,2] (in years).
 
-fu.min    <- 2
-fu.max    <- 2
+fu.min <- 2
+fu.max <- 2
 cens.prob <- 0.2
 
 ### After each event a subject is not at risk for experiencing further events
 ### for a period of 30 days with a probability of 50\%.
 
-dfree <- 30/365
+dfree <- 30 / 365
 pfree <- 0.5
 
-simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z, par.z,
-                  dist.rec, par.rec, pfree, dfree)
+simdata <- simrec(
+  N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z, par.z,
+  dist.rec, par.rec, pfree, dfree
+)
 # print(simdata)  # only run for small N!
 }
 \references{

@@ -38,25 +38,27 @@ If you only wish to simulate a recruitment time, \code{tI} can be set to \code{t
 \examples{
 ### Example - see example for simrec
 library(simrec)
-N         <- 10
-dist.x    <- c("binomial", "normal")
-par.x     <- list(0.5, c(0,1))
-beta.x    <- c(0.3, 0.2)
-dist.z    <- "gamma"
-par.z     <- 0.25
-dist.rec  <- "weibull"
-par.rec   <- c(1,2)
-fu.min    <- 2
-fu.max    <- 2
+N <- 10
+dist.x <- c("binomial", "normal")
+par.x <- list(0.5, c(0, 1))
+beta.x <- c(0.3, 0.2)
+dist.z <- "gamma"
+par.z <- 0.25
+dist.rec <- "weibull"
+par.rec <- c(1, 2)
+fu.min <- 2
+fu.max <- 2
 cens.prob <- 0.2
 
-simdata <- simrec(N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z,
-                  par.z, dist.rec, par.rec)
+simdata <- simrec(
+  N, fu.min, fu.max, cens.prob, dist.x, par.x, beta.x, dist.z,
+  par.z, dist.rec, par.rec
+)
 
 ### Now simulate for each patient a recruitment time in [0,tR=2]
 ### and cut data to the time of the interim analysis at tI=1:
 
-simdataint <- simrecint(simdata, N=N, tR=2, tI=1)
+simdataint <- simrecint(simdata, N = N, tR = 2, tI = 1)
 # print(simdataint)  # only run for small N!
 }
 \seealso{

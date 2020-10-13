@@ -38,27 +38,29 @@ This function allows plotting of recurrent event data with a competing event.
 ### First simulate a sample of 10 individuals (for more details see the help of \code{simreccomp})
 N <- 10
 dist.x <- c("binomial", "normal")
-par.x  <- list(0.5, c(0,1))
+par.x <- list(0.5, c(0, 1))
 beta.xr <- c(0.3, 0.2)
-beta.xc <- c(0.5,0.25)
+beta.xc <- c(0.5, 0.25)
 dist.zr <- "gamma"
-par.zr  <- 0.25
+par.zr <- 0.25
 dist.zc <- "gamma"
-par.zc  <- 0.3
+par.zc <- 0.3
 dist.rec <- "weibull"
-par.rec  <- c(1,2)
+par.rec <- c(1, 2)
 dist.comp <- "weibull"
-par.comp  <-c(1,2)
-fu.min    <- 2
-fu.max    <- 2
+par.comp <- c(1, 2)
+fu.min <- 2
+fu.max <- 2
 cens.prob <- 0.2
-dfree <- 30/365
+dfree <- 30 / 365
 pfree <- 0.5
-simdata <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
-                      dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
-                      dist.zr=dist.zr, par.zr=par.zr,dist.zc=dist.zc, par.zc=par.zc,
-                      dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
-                      pfree= pfree, dfree=dfree)
+simdata <- simreccomp(
+  N = N, fu.min = fu.min, fu.max = fu.max, cens.prob = cens.prob,
+  dist.x = dist.x, par.x = par.x, beta.xr = beta.xr, beta.xc = beta.xc,
+  dist.zr = dist.zr, par.zr = par.zr, dist.zc = dist.zc, par.zc = par.zc,
+  dist.rec = dist.rec, par.rec = par.rec, dist.comp = dist.comp, par.comp = par.comp,
+  pfree = pfree, dfree = dfree
+)
 simreccompPlot(simdata)
 # or possibly:
 # pdf("Plot.pdf")

@@ -86,7 +86,7 @@ Default is \code{dist.zc=NULL}.}
 the variance of the frailty variable \eqn{Z_c}.
 Default is \code{par.zc=NULL}.}
 
-\item{dist.rec}{Form of the baseline hazard function for the recurrent events. 
+\item{dist.rec}{Form of the baseline hazard function for the recurrent events.
 Possible values are \code{"weibull"} or
 \code{"gompertz"} or \code{"lognormal"} or \code{"step"}.}
 
@@ -110,11 +110,11 @@ hazard and incorporates covariate effects using the proportional hazard assumpti
 If \code{dist.rec="step"} the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
 Then \code{par.rec=c(}\eqn{a,b,t_1}\code{)}.}
 
-\item{dist.comp}{Form of the baseline hazard function for the competing event. 
+\item{dist.comp}{Form of the baseline hazard function for the competing event.
 Possible values are \code{"weibull"} or
 \code{"gompertz"} or \code{"lognormal"} or \code{"step"}       .}
 
-\item{par.comp}{Parameters for the distribution of the competing event data. 
+\item{par.comp}{Parameters for the distribution of the competing event data.
 For more details see \code{par.rec}.}
 
 \item{pfree}{Probability that after experiencing an event the individual is not at risk
@@ -132,7 +132,7 @@ The output is a data.frame consisting of the columns:
 randomly generated value of the covariate(s) \eqn{X} for each individual.}
 \item{zr}{Contains the randomly generated value of the frailty variable \eqn{Z_r} for each individual.}
 \item{zc}{Contains the randomly generated value of the frailty variable \eqn{Z_c} for each individual.}
-\item{start}{The start of interval \code{[start, stop]}, when the individual 
+\item{start}{The start of interval \code{[start, stop]}, when the individual
 starts to be at risk for a next event.}
 \item{stop}{The time of an event or censoring, i.e. the end of interval \code{[start, stop]}.}
 \item{status}{An indicator of whether an event occured at time \code{stop} (\code{status=1}),
@@ -173,60 +173,64 @@ N <- 10
 ### as well as regression coefficients of beta.xc=0.5 and beta.xc=0.25, respectively,
 ### for the competing event.
 
- dist.x  <- c("binomial", "normal")
- par.x   <- list(0.5, c(0,1))
- beta.xr <- c(0.3, 0.2)
- beta.xc <- c(0.5,0.25)
+dist.x <- c("binomial", "normal")
+par.x <- list(0.5, c(0, 1))
+beta.xr <- c(0.3, 0.2)
+beta.xc <- c(0.5, 0.25)
 
 ### a gamma distributed frailty variable for the recurrent event with variance 0.25
 ### and for the competing event with variance 0.3,
 
- dist.zr <- "gamma"
- par.zr  <- 0.25
+dist.zr <- "gamma"
+par.zr <- 0.25
 
- dist.zc <- "gamma"
- par.zc  <- 0.3
+dist.zc <- "gamma"
+par.zc <- 0.3
 
 ### alternatively the frailty variable for the competing event can be computed via a:
- a <- 0.5
+a <- 0.5
 
 ### Furthermore a Weibull-shaped baseline hazard for the recurrent event with shape parameter
 ### lambda=1 and scale parameter nu=2,
 
- dist.rec <- "weibull"
- par.rec  <- c(1,2)
+dist.rec <- "weibull"
+par.rec <- c(1, 2)
 
 ### and a Weibull-shaped baseline hazard for the competing event with shape parameter lambda=1
 ### and scale parameter nu=2
 
- dist.comp <- "weibull"
- par.comp <-c(1,2)
+dist.comp <- "weibull"
+par.comp <- c(1, 2)
 
 ### Subjects are to be followed for two years with 20\% of the subjects
 ### being censored according to a uniformly distributed censoring time
 ### within [0,2] (in years).
 
- fu.min    <- 2
- fu.max    <- 2
- cens.prob <- 0.2
+fu.min <- 2
+fu.max <- 2
+cens.prob <- 0.2
 
 ### After each event a subject is not at risk for experiencing further events
 ### for a period of 30 days with a probability of 50\%.
 
- dfree <- 30/365
- pfree <- 0.5
+dfree <- 30 / 365
+pfree <- 0.5
 
-simdata1 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
-                       dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
-                       dist.zr=dist.zr, par.zr=par.zr, a=a,
-                       dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
-                       pfree= pfree, dfree=dfree)
+simdata1 <- simreccomp(
+  N = N, fu.min = fu.min, fu.max = fu.max, cens.prob = cens.prob,
+  dist.x = dist.x, par.x = par.x, beta.xr = beta.xr, beta.xc = beta.xc,
+  dist.zr = dist.zr, par.zr = par.zr, a = a,
+  dist.rec = dist.rec, par.rec = par.rec, dist.comp = dist.comp, par.comp = par.comp,
+  pfree = pfree, dfree = dfree
+)
 
-simdata2 <- simreccomp(N=N, fu.min=fu.min, fu.max=fu.max, cens.prob=cens.prob,
-                       dist.x=dist.x, par.x=par.x, beta.xr=beta.xr, beta.xc=beta.xc,
-                       dist.zr=dist.zr, par.zr=par.zr,dist.zc=dist.zc, par.zc=par.zc,
-                       dist.rec=dist.rec, par.rec=par.rec, dist.comp=dist.comp, par.comp=par.comp,
-                       pfree= pfree, dfree=dfree)
+simdata2 <- simreccomp(
+  N = N, fu.min = fu.min, fu.max = fu.max, cens.prob = cens.prob,
+  dist.x = dist.x, par.x = par.x, beta.xr = beta.xr, beta.xc = beta.xc,
+  dist.zr = dist.zr, par.zr = par.zr, dist.zc = dist.zc, par.zc = par.zc,
+  dist.rec = dist.rec, par.rec = par.rec, dist.comp = dist.comp, par.comp = par.comp,
+  pfree = pfree, dfree = dfree
+)
 
 simdata1
 simdata2

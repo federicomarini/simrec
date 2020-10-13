@@ -9,9 +9,9 @@ Simulation of recurrent event data for non-constant baseline hazard
 (total-time model)
 }
 \details{
-Simulation of recurrent event data for non-constant baseline hazard 
-in the total time model with risk-free intervalls and possibly a competing 
-event. The simrec package enables to cut the data to an interim data set, 
+Simulation of recurrent event data for non-constant baseline hazard
+in the total time model with risk-free intervalls and possibly a competing
+event. The simrec package enables to cut the data to an interim data set,
 and provides functionality to plot.
 }
 \author{
