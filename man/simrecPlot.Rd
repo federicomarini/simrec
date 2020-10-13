@@ -4,7 +4,7 @@
 \alias{simrecPlot}
 \title{simrecPlot}
 \usage{
-simrecPlot(data, id = "id", start = "start", Stop = "stop", status = "status")
+simrecPlot(data, id = "id", start = "start", stop = "stop", status = "status")
 }
 \arguments{
 \item{data}{A data set of recurrent event data to be plotted.
@@ -17,7 +17,7 @@ The input-data must include columns corresponding to:
 
 \item{start}{the name of the \code{start} column, default is \code{"start"}}
 
-\item{Stop}{the name of the \code{stop} column, default is \code{"stop"}}
+\item{stop}{the name of the \code{stop} column, default is \code{"stop"}}
 
 \item{status}{the name of the \code{status} column, default is \code{"status"}}
 }

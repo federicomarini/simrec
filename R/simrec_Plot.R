@@ -9,7 +9,7 @@
 #'                      \code{status} (= an indicator of the patient status at \code{stop} with = 0 censoring, 1 = event)
 #' @param id            the name of the \code{id} column, default is \code{"id"}
 #' @param start         the name of the \code{start} column, default is \code{"start"}
-#' @param Stop          the name of the \code{stop} column, default is \code{"stop"}
+#' @param stop          the name of the \code{stop} column, default is \code{"stop"}
 #' @param status        the name of the \code{status} column, default is \code{"status"}
 #'
 #' @return The output  is a plot of the data with a bullet indicating a recurrent event and a circle indicating censoring.
@@ -46,7 +46,7 @@
 simrecPlot <- function(data,
                        id = "id",
                        start = "start",
-                       Stop = "stop",
+                       stop = "stop",
                        status = "status") {
   if (!(id %in% colnames(data))) {
     stop("Please give the name of the id-column")
@@ -54,7 +54,7 @@ simrecPlot <- function(data,
   if (!(start %in% colnames(data))) {
     stop("Please give the name of the start-column")
   }
-  if (!(Stop %in% colnames(data))) {
+  if (!(stop %in% colnames(data))) {
     stop("Please give the name of the stop-column")
   }
   if (!(status %in% colnames(data))) {
@@ -63,7 +63,7 @@ simrecPlot <- function(data,
 
   colnames(data)[colnames(data) == id] <- "id"
   colnames(data)[colnames(data) == start] <- "start"
-  colnames(data)[colnames(data) == Stop] <- "stop"
+  colnames(data)[colnames(data) == stop] <- "stop"
   colnames(data)[colnames(data) == status] <- "status"
 
   data <- data[order(data$id), ] # data ordered by id
@@ -113,7 +113,7 @@ simrecPlot <- function(data,
 #'                      \code{status} (= an indicator of the patient status at \code{stop} with = 0 censoring, 1 = event, 2 = competing event)
 #' @param id            the name of the \code{id} column, default is \code{"id"}
 #' @param start         the name of the \code{start} column, default is \code{"start"}
-#' @param Stop          the name of the \code{stop} column, default is \code{"stop"}
+#' @param stop          the name of the \code{stop} column, default is \code{"stop"}
 #' @param status        the name of the \code{status} column, default is \code{"status"}
 #'
 #' @return The output  is a plot of the data with a bullet indicating a recurrent event, an x indicating the competing event and a circle indicating censoring.
@@ -158,7 +158,7 @@ simrecPlot <- function(data,
 simreccompPlot <- function(data,
                            id = "id",
                            start = "start",
-                           Stop = "stop",
+                           stop = "stop",
                            status = "status") {
   if (!(id %in% colnames(data))) {
     stop("Please give the name of the id-column")
@@ -166,7 +166,7 @@ simreccompPlot <- function(data,
   if (!(start %in% colnames(data))) {
     stop("Please give the name of the start-column")
   }
-  if (!(Stop %in% colnames(data))) {
+  if (!(stop %in% colnames(data))) {
     stop("Please give the name of the stop-column")
   }
   if (!(status %in% colnames(data))) {
@@ -175,7 +175,7 @@ simreccompPlot <- function(data,
 
   colnames(data)[colnames(data) == id] <- "id"
   colnames(data)[colnames(data) == start] <- "start"
-  colnames(data)[colnames(data) == Stop] <- "stop"
+  colnames(data)[colnames(data) == stop] <- "stop"
   colnames(data)[colnames(data) == status] <- "status"
 
   data <- data[order(data$id), ] # data ordered by id

@@ -464,8 +464,8 @@ DT::datatable(simdataint)
 The functions `simrecPlot` and `simreccompPlot` allow plotting of recurrent event data, possibly with a competing event.
 
 ```{r codeExampleplot,echo=TRUE,eval=FALSE}
-simrecPlot(simdata, id = "id", start = "start", Stop = "stop", status = "status")
-simreccompPlot(simdata, id = "id", start = "start", Stop = "stop", status = "status")
+simrecPlot(simdata, id = "id", start = "start", stop = "stop", status = "status")
+simreccompPlot(simdata, id = "id", start = "start", stop = "stop", status = "status")
 ```
 
 ## Parameters {-}
