@@ -1,10 +1,14 @@
 ---
 title: "simrec: An R-Package for Simulation of Recurrent Event Data"
-author: "Katharina Ingel - Institute of Medical Biostatistics, Epidemiology and Informatics ([IMBEI](http://www.unimedizin-mainz.de/imbei), Mainz) - ingel@uni-mainz.de; currently at BIOTRONIK SE & Co. KG</br>
-  Stella Preussler - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz), current affiliation: Institute of Medical Biometry and Informatics (IMBI, Heidelberg);</br>
-  Federico Marini - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz) - marinif@uni-mainz.de;</br>
-  Antje Jahn-Eimermacher - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI, Mainz), current affiliation: University of Applied Sciences Darmstadt, antje.jahn@h-da.de;</br></br>
-  University Medical Center - Mainz (Germany)"
+author:
+- name: Katharina Ingel^[ingel@uni-mainz.de; currently at BIOTRONIK SE & Co. KG]
+  affiliation: Institute of Medical Biostatistics, Epidemiology and Informatics ([IMBEI, Mainz](http://www.unimedizin-mainz.de/imbei))
+- name: Stella Preussler^[currently at Institute of Medical Biometry and Informatics (IMBI, Heidelberg)]
+  affiliation: Institute of Medical Biostatistics, Epidemiology and Informatics ([IMBEI, Mainz](http://www.unimedizin-mainz.de/imbei))
+- name: Federico Marini^[marinif@uni-mainz.de]
+  affiliation: Institute of Medical Biostatistics, Epidemiology and Informatics ([IMBEI, Mainz](http://www.unimedizin-mainz.de/imbei))
+- name: Antje Jahn-Eimermacher^[currently at University of Applied Sciences Darmstadt, antje.jahn@h-da.de]
+  affiliation: Institute of Medical Biostatistics, Epidemiology and Informatics ([IMBEI, Mainz](http://www.unimedizin-mainz.de/imbei))
 output: 
   html_document:
     toc: true
