@@ -6,7 +6,7 @@ simrec
 [![Travis build status](https://travis-ci.org/federicomarini/simrec.svg?branch=master)](https://travis-ci.org/federicomarini/simrec)
 <!-- badges: end -->
 
-#### An R-Package for Simulation of Recurrent Events
+## An R-Package for Simulation of Recurrent Events
 
 **simrec** allows simulation of recurrent event data following the multiplicative intensity model described in Andersen and Gill (1982), with the baseline hazard being a function of the total/calendar time. 
 
