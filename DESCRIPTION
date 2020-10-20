@@ -1,16 +1,28 @@
 Package: simrec
 Title: Simulation of recurrent event data for non-constant baseline hazard
     (total-time model)
-Version: 0.1
-Author: Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher
-Maintainer: Katharina Ingel <ingel@uni-mainz.de>
+Version: 0.3
+Date: 2019-11-08
+Authors@R: c(person("Katharina", "Ingel", role = c("aut", "cre"), email = "ingel@uni-mainz.de"),
+    person("Antje", "Jahn-Eimermacher", role="aut"),
+    person("Stella", "Preussler", role="aut"),
+    person("Federico", "Marini", role="aut", email="marinif@uni-mainz.de", comment = c(ORCID = '0000-0003-3252-7758')))
+Maintainer: Antje Jahn-Eimermacher <antje.jahn@h-da.de>
 Description: Simulation of recurrent event data for non-constant baseline
-    hazard in the total time model with risk-free intervalls and possibly a competing event.
+    hazard in the total time model with risk-free intervals and possibly a competing event.
     Possibility to cut the data to an interim data set. Data can be plotted.
 Depends:
     R (>= 2.10)
+Imports:
+    graphics,
+    stats
 VignetteBuilder: knitr
 Suggests:
-    knitr
+    knitr,
+    rmarkdown,
+    DT
+URL: https://github.com/federicomarini/simrec
 License: GPL-2
 LazyData: true
+RoxygenNote: 7.1.1
+Encoding: UTF-8
