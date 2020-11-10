@@ -3,7 +3,6 @@ simrec
 
 <!-- badges: start -->
 [![R build status](https://github.com/federicomarini/simrec/workflows/R-CMD-check/badge.svg)](https://github.com/federicomarini/simrec/actions)
-[![Travis build status](https://travis-ci.org/federicomarini/simrec.svg?branch=master)](https://travis-ci.org/federicomarini/simrec)
 <!-- badges: end -->
 
 ## An R-Package for Simulation of Recurrent Events
