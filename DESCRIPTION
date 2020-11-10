@@ -3,10 +3,11 @@ Title: Simulation of recurrent event data for non-constant baseline hazard
     (total-time model)
 Version: 1.0.0
 Date: 2020-11-10
-Authors@R: c(person("Katharina", "Ingel", role = c("aut", "cre"), email = "ingel@uni-mainz.de"),
-    person("Antje", "Jahn-Eimermacher", role="aut"),
-    person("Stella", "Preussler", role="aut"),
-    person("Federico", "Marini", role="aut", email="marinif@uni-mainz.de", comment = c(ORCID = '0000-0003-3252-7758')))
+Authors@R: c(
+    person("Katharina", "Ingel", role = "aut", email = "ingel@uni-mainz.de"),
+    person("Antje", "Jahn-Eimermacher", role = "aut"),
+    person("Stella", "Preussler", role = "aut"),
+    person("Federico", "Marini", role = c("aut", "cre"), email = "marinif@uni-mainz.de", comment = c(ORCID = '0000-0003-3252-7758')))
 Maintainer: Antje Jahn-Eimermacher <antje.jahn@h-da.de>
 Description: Simulation of recurrent event data for non-constant baseline
     hazard in the total time model with risk-free intervals and possibly a competing event.
