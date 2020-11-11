@@ -1,3 +1,11 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* Changed http --> https, adding the trailing slashes; the links are correct, as 
+there is a simple redirect from this shorter and compact format
+* Added a reference to the method in the Description: field, using the <doi:...> format 
+
 ## Test environments
 
 * local R installation, R 4.0.3
