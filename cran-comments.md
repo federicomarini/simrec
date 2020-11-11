@@ -2,8 +2,8 @@
 
 This is a resubmission. In this version I have:
 
-* Changed http --> https, adding the trailing slashes; the links are correct, as 
-there is a simple redirect from this shorter and compact format
+* Changed http --> https, adding the trailing slashes; the links are now directing to the 
+correct location of the content
 * Added a reference to the method in the Description: field, using the <doi:...> format 
 
 ## Test environments
