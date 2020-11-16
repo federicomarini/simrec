@@ -39,10 +39,6 @@
 #'   dist.z, par.z, dist.rec, par.rec, pfree, dfree
 #' )
 #' simrecPlot(simdata)
-#' # or possibly:
-#' # pdf("Plot.pdf")
-#' # simrecPlot(simdata)
-#' # dev.off()
 simrecPlot <- function(data,
                        id = "id",
                        start = "start",
@@ -151,10 +147,6 @@ simrecPlot <- function(data,
 #'   pfree = pfree, dfree = dfree
 #' )
 #' simreccompPlot(simdata)
-#' # or possibly:
-#' # pdf("Plot.pdf")
-#' # simreccompPlot(simdata)
-#' # dev.off()
 simreccompPlot <- function(data,
                            id = "id",
                            start = "start",

@@ -48,10 +48,6 @@ simdata <- simrec(
   dist.z, par.z, dist.rec, par.rec, pfree, dfree
 )
 simrecPlot(simdata)
-# or possibly:
-# pdf("Plot.pdf")
-# simrecPlot(simdata)
-# dev.off()
 }
 \seealso{
 simrec, simreccomp, simreccompPlot

@@ -62,10 +62,6 @@ simdata <- simreccomp(
   pfree = pfree, dfree = dfree
 )
 simreccompPlot(simdata)
-# or possibly:
-# pdf("Plot.pdf")
-# simreccompPlot(simdata)
-# dev.off()
 }
 \seealso{
 simrec, simreccomp, simrecPlot
