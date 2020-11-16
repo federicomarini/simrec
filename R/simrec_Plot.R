@@ -81,7 +81,9 @@ simrecPlot <- function(data,
   nevents <- length(events) # how many event times    ...  if no events: events = numeric(0) and length(events)=0
   ncens <- length(cens) # how many censoring times
 
-  par(las = 1, cex.axis = 0.5)
+  opar <- par(las = 1, cex.axis = 0.5)
+  on.exit(par(opar))
+  
   plot(c(events, cens), c(idevents, idcens), # plot time points vs. corresponding patient-id
     pch = c(rep(20, nevents), rep(1, ncens)), # symbol for event: filled circle / symbol for censoring: circle
     xlab = "time", ylab = "patient", yaxt = "n", # axes=FALSE,
@@ -192,7 +194,9 @@ simreccompPlot <- function(data,
   ncens <- length(cens) # how many censoring times
   ncompev <- length(compev) # how many competing events
 
-  par(las = 1, cex.axis = 0.5)
+  opar <- par(las = 1, cex.axis = 0.5)
+  on.exit(par(opar))
+  
   plot(c(events, cens, compev), c(idevents, idcens, idcompev), # plot time points vs. corresponding patient-id
     pch = c(rep(20, nevents), rep(1, ncens), rep(4, ncompev)), # symbol for event: filled circle / symbol for censoring: circle / symbol for comp. event: x
     xlab = "time", ylab = "patient", yaxt = "n", # axes=FALSE,
