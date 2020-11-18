@@ -1,5 +1,5 @@
 Package: simrec
-Title: Simulation of Recurrent Event Data for Non-Constant Baseline Hazard (Total-Time Model)
+Title: Simulation of Recurrent Event Data for Non-Constant Baseline Hazard
 Version: 1.0.0
 Date: 2020-11-10
 Authors@R: c(

@@ -5,6 +5,9 @@ This is a resubmission. In this version I have:
 * Changed http --> https, adding the trailing slashes; the links are now directing to the 
 correct location of the content
 * Added a reference to the method in the Description: field, using the <doi:...> format 
+* Shortened the title
+* Removed commented code from the examples
+* Handled gently the setting of global graphical parameters in the functions
 
 ## Test environments
 
