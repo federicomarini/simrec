@@ -81,10 +81,10 @@
 
       
 
-      </header><script src="simrec-vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="simrec-vignette_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="simrec-vignette_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="simrec-vignette_files/datatables-binding-0.24/datatables.js"></script><link href="simrec-vignette_files/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="simrec-vignette_files/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="simrec-vignette_files/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="simrec-vignette_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+      </header><script src="simrec-vignette_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="simrec-vignette_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="simrec-vignette_files/datatables-binding-0.26/datatables.js"></script><link href="simrec-vignette_files/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="simrec-vignette_files/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="simrec-vignette_files/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="simrec-vignette_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="simrec-vignette_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -101,7 +101,7 @@
       Institute of Medical Biostatistics, Epidemiology and Informatics (<a href="https://www.unimedizin-mainz.de/imbei/imbei/welcome-page.html?L=1" class="external-link">IMBEI, Mainz</a>)<br><h4 data-toc-skip class="author">Antje Jahn-Eimermacher<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>
 </h4>
             <address class="author_afil">
-      Institute of Medical Biostatistics, Epidemiology and Informatics (<a href="https://www.unimedizin-mainz.de/imbei/imbei/welcome-page.html?L=1" class="external-link">IMBEI, Mainz</a>)<br><h4 data-toc-skip class="date">2022-09-07</h4>
+      Institute of Medical Biostatistics, Epidemiology and Informatics (<a href="https://www.unimedizin-mainz.de/imbei/imbei/welcome-page.html?L=1" class="external-link">IMBEI, Mainz</a>)<br><h4 data-toc-skip class="date">2022-10-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/federicomarini/simrec/blob/HEAD/vignettes/simrec-vignette.Rmd" class="external-link"><code>vignettes/simrec-vignette.Rmd</code></a></small>
       <div class="hidden name"><code>simrec-vignette.Rmd</code></div>
@@ -115,7 +115,7 @@
     
     
 <div class="section level2">
-<h2 id="abstract">Abstract<a class="anchor" aria-label="anchor" href="#abstract"></a>
+<h2 class="unnumbered" id="abstract">Abstract<a class="anchor" aria-label="anchor" href="#abstract"></a>
 </h2>
 <p><code>simrec</code> allows simulation of recurrent event data following the multiplicative intensity model described in <span class="citation">(Andersen and Gill 1982)</span> with the baseline hazard being a function of the total/calendar time. To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated. Furthermore, via <code>simreccomp</code> simulation of data following a multistate model with recurrent event data of one type and a competing event is possible. <code>simrecint</code> gives the possibility to additionally simulate a recruitment time for each individual and cut the data to an interim data set. With <code>simrecPlot</code> and <code>simreccompPlot</code> the data can be plotted.</p>
 <p><strong>Keywords</strong>: recurrent event data, competing event, frailty, simulation, total-time model</p>
@@ -133,7 +133,7 @@
 <h2 id="the-simrec-function">The <code>simrec</code> function<a class="anchor" aria-label="anchor" href="#the-simrec-function"></a>
 </h2>
 <div class="section level3">
-<h3 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
+<h3 class="unnumbered" id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
 </h3>
 <p>The function <code>simrec</code> allows simulation of recurrent event data following the multiplicative intensity model described in Andersen and Gill <span class="citation">(Andersen and Gill 1982)</span> with the baseline hazard being a function of the total/calendar time. To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated. Data for individual <span class="math inline">\(i\)</span> are generated according to the intensity process <span class="math display">\[Y_i(t)\cdot \lambda_0(t)\cdot Z_i \cdot \exp(\beta^t X_i)\]</span> where <span class="math inline">\(X_i\)</span> defines the covariate vector, and <span class="math inline">\(\beta\)</span> the regression coefficient vector. <span class="math inline">\(\lambda_0(t)\)</span> denotes the baseline hazard, being a function of the total/calendar time <span class="math inline">\(t\)</span>, and <span class="math inline">\(Y_i(t)\)</span> the predictable process that equals one as long as individual <span class="math inline">\(i\)</span> is under observation and at risk for experiencing events. <span class="math inline">\(Z_i\)</span> denotes the frailty variable with <span class="math inline">\((Z_i)_i\)</span> iid with <span class="math inline">\(E(Z_i)=1\)</span> and <span class="math inline">\(Var(Z_i)=\theta\)</span>. The parameter <span class="math inline">\(\theta\)</span> describes the degree of between-subject-heterogeneity. Data output is in the counting process format.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -142,7 +142,7 @@
 <span>  dfree <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a>
+<h3 class="unnumbered" id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a>
 </h3>
 <ul>
 <li><p><code>N</code> Number of individuals</p></li>
@@ -161,7 +161,7 @@
 </ul>
 </div>
 <div class="section level3">
-<h3 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
+<h3 class="unnumbered" id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
 </h3>
 <p>The output is a <code>data.frame</code> consisting of the columns:</p>
 <ul>
@@ -183,12 +183,12 @@
 <p>For each individual there are as many lines as it experiences events, plus one line if being censored. The data format corresponds to the counting process format.</p>
 </div>
 <div class="section level3">
-<h3 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
+<h3 class="unnumbered" id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
 </h3>
 <p>Data are simulated by extending the methods proposed by Bender <span class="citation">(Bender, Augustin, and Blettner 2005)</span> to the multiplicative intensity model. You can read more on this in our work <span class="citation">(Jahn-Eimermacher et al. 2015)</span>.</p>
 </div>
 <div class="section level3">
-<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h3 class="unnumbered" id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/federicomarini/simrec" class="external-link">simrec</a></span><span class="op">)</span></span>
@@ -234,26 +234,26 @@
 <span>                  <span class="va">dist.z</span>, <span class="va">par.z</span>, <span class="va">dist.rec</span>, <span class="va">par.rec</span>, <span class="va">pfree</span>, <span class="va">dfree</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">simdata</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html" class="external-link">datatable</a></span><span class="op">(</span><span class="va">simdata</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##    id x.V1        x.V2         z     start      stop status fu</span></span>
-<span><span class="co">## 1   1    1 -0.05939659 1.3929243 0.0000000 1.0111408      1  2</span></span>
-<span><span class="co">## 2   1    1 -0.05939659 1.3929243 1.0111408 1.1469427      1  2</span></span>
-<span><span class="co">## 3   1    1 -0.05939659 1.3929243 1.2291345 1.8233466      1  2</span></span>
-<span><span class="co">## 4   1    1 -0.05939659 1.3929243 1.8233466 2.0000000      0  2</span></span>
-<span><span class="co">## 5   2    1 -0.68689227 0.9725336 0.0000000 0.1021872      1  2</span></span>
-<span><span class="co">## 6   2    1 -0.68689227 0.9725336 0.1021872 0.5549089      1  2</span></span>
-<span><span class="co">## 7   2    1 -0.68689227 0.9725336 0.6371007 0.9316965      1  2</span></span>
-<span><span class="co">## 8   2    1 -0.68689227 0.9725336 0.9316965 1.6188521      1  2</span></span>
-<span><span class="co">## 9   2    1 -0.68689227 0.9725336 1.7010439 1.8940581      1  2</span></span>
-<span><span class="co">## 10  2    1 -0.68689227 0.9725336 1.8940581 2.0000000      0  2</span></span></code></pre>
-<div id="htmlwidget-2e56749347f9497d05c4" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2e56749347f9497d05c4">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48"],[1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,6,7,7,7,8,8,8,9,9,9,9,9,9,9,9,9,9,10,10,10],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[-0.0593965860673752,-0.0593965860673752,-0.0593965860673752,-0.0593965860673752,-0.686892266303192,-0.686892266303192,-0.686892266303192,-0.686892266303192,-0.686892266303192,-0.686892266303192,-0.963166845738938,-0.963166845738938,-0.963166845738938,-0.963166845738938,-0.963166845738938,0.536906873367574,0.536906873367574,0.536906873367574,0.536906873367574,1.54577834025078,1.54577834025078,1.54577834025078,1.54577834025078,-0.473135832449457,-0.473135832449457,-0.473135832449457,-0.473135832449457,-0.473135832449457,1.49459025659196,1.49459025659196,1.49459025659196,-0.132638794577357,-0.132638794577357,-0.132638794577357,1.50795561821747,1.50795561821747,1.50795561821747,1.50795561821747,1.50795561821747,1.50795561821747,1.50795561821747,1.50795561821747,1.50795561821747,1.50795561821747,0.754075302236732,0.754075302236732,0.754075302236732],[1.39292428029353,1.39292428029353,1.39292428029353,1.39292428029353,0.972533585502681,0.972533585502681,0.972533585502681,0.972533585502681,0.972533585502681,0.972533585502681,0.994240585465379,0.994240585465379,0.994240585465379,0.994240585465379,0.994240585465379,0.981880891953872,0.981880891953872,0.981880891953872,0.981880891953872,0.323622177719061,0.323622177719061,0.323622177719061,0.323622177719061,1.39793872075321,1.39793872075321,1.39793872075321,1.39793872075321,1.39793872075321,0.850824507929154,0.850824507929154,0.850824507929154,0.744976524613078,0.744976524613078,0.744976524613078,1.36793769556129,1.36793769556129,1.36793769556129,1.36793769556129,1.36793769556129,1.36793769556129,1.36793769556129,1.36793769556129,1.36793769556129,1.36793769556129,0.435714478324119,0.435714478324119,0.435714478324119],[0,1.0111407579105,1.22913450922912,1.8233466367986,0,0.102187230885409,0.637100693718562,0.931696461285398,1.70104392922514,1.89405809705741,0,0.482581494082564,0.775839874015147,1.20220680056926,1.35805503960959,0,0.990702180100997,1.59504633185065,1.8678973848586,0,1.54795949441169,1.86284040100908,1.99630277967607,0,1.05886056493627,1.2540995556387,1.63009865509991,1.86551686590338,0,1.10571732292729,1.8701018860616,0,1.26008393305341,1.44332537623849,0,0.463347515991745,0.92299152386626,1.1316529783982,1.24314313250659,1.24951370511834,1.28954464184933,1.65931523011301,1.90917245682002,1.95384615229715,0,1.35108347972696,1.76176002746464],[1.0111407579105,1.1469427284072,1.8233466367986,2,0.102187230885409,0.554908912896645,0.931696461285398,1.61885214840322,1.89405809705741,2,0.482581494082564,0.775839874015147,1.12001501974734,1.27586325878768,1.93761042661883,0.990702180100997,1.59504633185065,1.8678973848586,2,1.46576771358977,1.86284040100908,1.99630277967607,2,0.976668784114353,1.17190777481678,1.54790687427799,1.78332508508146,2,1.02352554210538,1.78791010523968,2,1.26008393305341,1.36113359541658,2,0.463347515991745,0.92299152386626,1.04946119757628,1.16095135168467,1.24951370511834,1.28954464184933,1.57712344929109,1.8269806759981,1.95384615229715,2,1.35108347972696,1.76176002746464,1.95020708363672],[1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1],[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>z<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre><code><span><span class="co">##    id x.V1       x.V2         z     start      stop status        fu</span></span>
+<span><span class="co">## 1   1    1  0.1638272 0.5137187 0.0000000 0.9627376      1 2.0000000</span></span>
+<span><span class="co">## 2   1    1  0.1638272 0.5137187 1.0449294 1.7739094      1 2.0000000</span></span>
+<span><span class="co">## 3   1    1  0.1638272 0.5137187 1.7739094 2.0000000      0 2.0000000</span></span>
+<span><span class="co">## 4   2    1  0.1915412 0.4805607 0.0000000 0.6462235      0 0.6462235</span></span>
+<span><span class="co">## 6   3    1 -0.3361396 0.9447259 0.0000000 0.7969238      1 1.6182465</span></span>
+<span><span class="co">## 7   3    1 -0.3361396 0.9447259 0.8791156 1.5893294      1 1.6182465</span></span>
+<span><span class="co">## 8   3    1 -0.3361396 0.9447259 1.5893294 1.5951860      1 1.6182465</span></span>
+<span><span class="co">## 9   3    1 -0.3361396 0.9447259 1.5951860 1.6182465      0 1.6182465</span></span>
+<span><span class="co">## 10  4    0  0.4676015 1.1219868 0.0000000 0.8016642      1 2.0000000</span></span>
+<span><span class="co">## 11  4    0  0.4676015 1.1219868 0.8838560 1.0094392      1 2.0000000</span></span></code></pre>
+<div id="htmlwidget-499c35665ef06e897c94" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-499c35665ef06e897c94">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46"],[1,1,1,2,3,3,3,3,4,4,4,4,4,5,5,5,5,5,5,5,6,6,7,7,7,8,8,8,8,8,9,9,9,9,9,9,9,9,9,10,10,10,10,10],[1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1],[0.16382718748637,0.16382718748637,0.16382718748637,0.191541219097076,-0.336139636198877,-0.336139636198877,-0.336139636198877,-0.336139636198877,0.467601468264356,0.467601468264356,0.467601468264356,0.467601468264356,0.467601468264356,-0.102912369196958,-0.102912369196958,-0.102912369196958,-0.102912369196958,-0.102912369196958,-0.102912369196958,-0.102912369196958,-0.496871569190251,-0.496871569190251,0.873450266555523,0.873450266555523,0.873450266555523,0.618569791507502,0.618569791507502,0.618569791507502,0.618569791507502,0.618569791507502,0.535093575438716,0.535093575438716,0.535093575438716,0.535093575438716,0.535093575438716,0.535093575438716,0.535093575438716,0.535093575438716,0.535093575438716,0.136048538883575,0.136048538883575,0.136048538883575,0.136048538883575,0.136048538883575],[0.513718666367887,0.513718666367887,0.513718666367887,0.480560711805471,0.944725892390548,0.944725892390548,0.944725892390548,0.944725892390548,1.12198680428906,1.12198680428906,1.12198680428906,1.12198680428906,1.12198680428906,1.3234568916103,1.3234568916103,1.3234568916103,1.3234568916103,1.3234568916103,1.3234568916103,1.3234568916103,0.548111062222122,0.548111062222122,0.287435058689233,0.287435058689233,0.287435058689233,0.712801704238401,0.712801704238401,0.712801704238401,0.712801704238401,0.712801704238401,1.63243200904768,1.63243200904768,1.63243200904768,1.63243200904768,1.63243200904768,1.63243200904768,1.63243200904768,1.63243200904768,1.63243200904768,1.32729621693312,1.32729621693312,1.32729621693312,1.32729621693312,1.32729621693312],[0,1.04492941516809,1.77390942346863,0,0,0.879115614216276,1.58932936561361,1.59518595941391,0,0.883855986797281,1.00943917568014,1.55887896506087,1.9344779886134,0,0.590507657366234,0.763274241192022,1.35441393908072,1.49270882061888,1.61867462626021,1.73610671166291,0,0.881208513778908,0,0.682487364247768,1.70969992786067,0,0.660605073474038,1.04877625324925,1.28796186946927,1.88253253273896,0,0.332844378937062,0.902597183695038,1.23943435422133,1.32189658847052,1.38338783720108,1.567038210978,1.70224021839189,1.96970717466513,0,0.319979577331948,1.06700108006365,1.67265389840472,1.82358662277496],[0.962737634346175,1.77390942346863,2,0.64622347522527,0.796923833394358,1.58932936561361,1.59518595941391,1.61824653344229,0.801664205975363,1.00943917568014,1.55887896506087,1.85228620779149,2,0.508315876544316,0.763274241192022,1.35441393908072,1.41051703979696,1.53648284543829,1.65391493084099,1.95620016816068,0.881208513778908,1.74867646023631,0.600295583425851,1.70969992786067,2,0.660605073474038,1.04877625324925,1.20577008864736,1.80034075191704,2,0.332844378937062,0.902597183695038,1.23943435422133,1.32189658847052,1.38338783720108,1.567038210978,1.70224021839189,1.88751539384321,2,0.319979577331948,0.984809299241736,1.59046211758281,1.74139484195304,1.9300123215653],[1,1,0,0,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,0],[2,2,2,0.64622347522527,1.61824653344229,1.61824653344229,1.61824653344229,1.61824653344229,2,2,2,2,2,2,2,2,2,2,2,2,1.74867646023631,1.74867646023631,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1.9300123215653,1.9300123215653,1.9300123215653,1.9300123215653,1.9300123215653]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>z<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="section level2">
 <h2 id="the-simreccomp-function">The <code>simreccomp</code> function<a class="anchor" aria-label="anchor" href="#the-simreccomp-function"></a>
 </h2>
 <div class="section level3">
-<h3 id="description-1">Description<a class="anchor" aria-label="anchor" href="#description-1"></a>
+<h3 class="unnumbered" id="description-1">Description<a class="anchor" aria-label="anchor" href="#description-1"></a>
 </h3>
 <p>The function <code>simreccomp</code> allows simulation of time-to-event-data that follow a multistate-model with recurrent events of one type and a competing event. The baseline hazard for the cause-specific hazards are here functions of the total/calendar time. To induce between-subject-heterogeneity a random effect covariate (frailty term) can be incorporated for the recurrent and the competing event.</p>
 <p>Data for the recurrent events of the individual <span class="math inline">\(i\)</span> are generated according to the cause-specific hazards <span class="math display">\[\lambda_{0r}(t)\cdot Z_{ri} \cdot \exp(\beta_r^t X_i)\]</span> where <span class="math inline">\(X_i\)</span> defines the covariate vector and <span class="math inline">\(\beta_r\)</span> the regression coefficient vector. <span class="math inline">\(\lambda_{0r}(t)\)</span> denotes the baseline hazard, being a function of the total/calendar time <span class="math inline">\(t\)</span> and <span class="math inline">\(Z_{ri}\)</span> denotes the frailty variables with <span class="math inline">\((Z_{ri})_i\)</span> iid with <span class="math inline">\(E(Z_{ri})=1\)</span> and <span class="math inline">\(Var(Z_{ri})=\theta_r\)</span>. The parameter <span class="math inline">\(\theta_r\)</span> describes the degree of between-subject-heterogeneity for the recurrent event. Analougously the competing event is generated according to the cause-specific hazard conditionally on the frailty variable and covariates: <span class="math display">\[\lambda_{0c}(t)\cdot Z_{ci} \cdot \exp(\beta_c^t X_i)\]</span> Data output is in the counting process format.</p>
@@ -264,7 +264,7 @@
 <span>           <span class="va">dist.comp</span>, <span class="va">par.comp</span>, pfree <span class="op">=</span> <span class="fl">0</span>, dfree <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="parameters-1">Parameters<a class="anchor" aria-label="anchor" href="#parameters-1"></a>
+<h3 class="unnumbered" id="parameters-1">Parameters<a class="anchor" aria-label="anchor" href="#parameters-1"></a>
 </h3>
 <ul>
 <li><p><code>N</code> Number of individuals</p></li>
@@ -289,7 +289,7 @@
 </ul>
 </div>
 <div class="section level3">
-<h3 id="output-1">Output<a class="anchor" aria-label="anchor" href="#output-1"></a>
+<h3 class="unnumbered" id="output-1">Output<a class="anchor" aria-label="anchor" href="#output-1"></a>
 </h3>
 <p>The output is a <code>data.frame</code> consisting of the columns:</p>
 <ul>
@@ -313,7 +313,7 @@
 <p>For each individual there are as many lines as it experiences events, plus one line if being censored. The data format corresponds to the counting process format.</p>
 </div>
 <div class="section level3">
-<h3 id="example-1">Example<a class="anchor" aria-label="anchor" href="#example-1"></a>
+<h3 class="unnumbered" id="example-1">Example<a class="anchor" aria-label="anchor" href="#example-1"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/federicomarini/simrec" class="external-link">simrec</a></span><span class="op">)</span></span>
@@ -389,37 +389,37 @@
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html" class="external-link">datatable</a></span><span class="op">(</span><span class="va">simdata1</span><span class="op">)</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html" class="external-link">datatable</a></span><span class="op">(</span><span class="va">simdata2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    id x.V1       x.V2        zr        zc     start      stop status        fu</span></span>
-<span><span class="co">## 1   1    0 -0.4221862 0.9203546 0.9593511 0.0000000 0.4249174      2 0.4249174</span></span>
-<span><span class="co">## 6   2    1  1.7415838 0.3471924 0.5892304 0.0000000 0.2724148      2 0.2724148</span></span>
-<span><span class="co">## 10  3    0  0.6825700 0.9296601 0.9641888 0.0000000 0.0378596      0 0.0378596</span></span>
-<span><span class="co">## 12  4    1 -0.6392569 0.4001394 0.6325658 0.0000000 0.5007967      0 0.5007967</span></span>
-<span><span class="co">## 14  5    1  1.0657801 0.4151399 0.6443135 0.0000000 0.4715304      1 0.9917348</span></span>
-<span><span class="co">## 15  5    1  1.0657801 0.4151399 0.6443135 0.5537221 0.6870980      1 0.9917348</span></span>
-<span><span class="co">## 16  5    1  1.0657801 0.4151399 0.6443135 0.6870980 0.9917348      2 0.9917348</span></span>
-<span><span class="co">## 18  6    0  0.7629432 0.6842741 0.8272086 0.0000000 0.4232906      1 1.4729544</span></span>
-<span><span class="co">## 19  6    0  0.7629432 0.6842741 0.8272086 0.5054824 0.7617305      1 1.4729544</span></span>
-<span><span class="co">## 20  6    0  0.7629432 0.6842741 0.8272086 0.8439223 1.4014426      1 1.4729544</span></span>
-<span><span class="co">##    id x.V1       x.V2        zr        zc     start      stop status        fu</span></span>
-<span><span class="co">## 1   1    0 -1.1584721 1.1142318 0.4361507 0.0000000 0.9254609      2 0.9254609</span></span>
-<span><span class="co">## 6   2    1  1.1419509 1.2616995 0.5109417 0.0000000 0.7350757      1 1.1422773</span></span>
-<span><span class="co">## 7   2    1  1.1419509 1.2616995 0.5109417 0.8172675 0.9966876      1 1.1422773</span></span>
-<span><span class="co">## 8   2    1  1.1419509 1.2616995 0.5109417 0.9966876 1.1422773      0 1.1422773</span></span>
-<span><span class="co">## 9   3    1 -0.2191115 0.4380877 0.4512660 0.0000000 0.7989570      1 1.8828181</span></span>
-<span><span class="co">## 10  3    1 -0.2191115 0.4380877 0.4512660 0.8811487 1.2644053      1 1.8828181</span></span>
-<span><span class="co">## 11  3    1 -0.2191115 0.4380877 0.4512660 1.2644053 1.7928718      1 1.8828181</span></span>
-<span><span class="co">## 12  3    1 -0.2191115 0.4380877 0.4512660 1.7928718 1.8828181      2 1.8828181</span></span>
-<span><span class="co">## 13  4    1  1.5842411 0.3646322 1.6985725 0.0000000 0.7668078      2 0.7668078</span></span>
-<span><span class="co">## 17  5    1 -0.9735186 1.6243082 1.5376677 0.0000000 0.2763056      1 0.6404943</span></span></code></pre>
-<div id="htmlwidget-d81a0c9adcd75122af28" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d81a0c9adcd75122af28">{"x":{"filter":"none","vertical":false,"data":[["1","6","10","12","14","15","16","18","19","20","23","24","28","29","31","36"],[1,2,3,4,5,5,5,6,6,6,7,7,8,8,9,10],[0,1,0,1,1,1,1,0,0,0,1,1,1,1,1,1],[-0.42218615183691,1.74158378824825,0.682570007493236,-0.639256914548947,1.06578011259875,1.06578011259875,1.06578011259875,0.762943212330208,0.762943212330208,0.762943212330208,1.43625745832724,1.43625745832724,0.859114957462912,0.859114957462912,1.47494139405175,1.3607478484382],[0.92035455397343,0.347192409979932,0.929660070952409,0.400139437147763,0.415139883847357,0.415139883847357,0.415139883847357,0.684274093226288,0.684274093226288,0.684274093226288,0.786376290269238,0.786376290269238,0.270013958506887,0.270013958506887,0.185628582612186,0.497530150205916],[0.959351110893937,0.589230353919358,0.964188814990305,0.632565757172931,0.644313498110475,0.644313498110475,0.644313498110475,0.827208615299846,0.827208615299846,0.827208615299846,0.886778602735338,0.886778602735338,0.519628673676585,0.519628673676585,0.430846356155168,0.705358171573787],[0,0,0,0,0,0.553722134961979,0.687097962431523,0,0.505482392424749,0.843922291970346,0,0.54136000018831,0,0.656333052816857,0,0],[0.424917359892596,0.272414782164865,0.0378596032969654,0.500796666368842,0.471530354140061,0.687097962431523,0.99173483690978,0.423290611602831,0.761730511148428,1.40144263277631,0.54136000018831,0.637797586980783,0.57414127199494,1.46940680562294,0.316929870558074,0.30300117577847],[2,2,0,0,1,1,2,1,1,1,1,2,1,2,2,2],[0.424917359892596,0.272414782164865,0.0378596032969654,0.500796666368842,0.99173483690978,0.99173483690978,0.99173483690978,1.47295435484882,1.47295435484882,1.47295435484882,0.637797586980783,0.637797586980783,1.46940680562294,1.46940680562294,0.316929870558074,0.30300117577847]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>zr<\/th>\n      <th>zc<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-c42e21618ea1a7e4e6c8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c42e21618ea1a7e4e6c8">{"x":{"filter":"none","vertical":false,"data":[["1","6","7","8","9","10","11","12","13","17","18","24","25","36","37","44","45","46","47","48","49","53","57"],[1,2,2,2,3,3,3,3,4,5,5,6,6,7,7,8,8,8,8,8,8,9,10],[0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,0,0],[-1.15847206526243,1.14195088050175,1.14195088050175,1.14195088050175,-0.219111509388342,-0.219111509388342,-0.219111509388342,-0.219111509388342,1.58424106603624,-0.973518611798011,-0.973518611798011,0.155491616591171,0.155491616591171,1.21410829325855,1.21410829325855,1.72837114708075,1.72837114708075,1.72837114708075,1.72837114708075,1.72837114708075,1.72837114708075,0.665862081545381,1.67831950671871],[1.11423183445154,1.26169954905671,1.26169954905671,1.26169954905671,0.43808765718524,0.43808765718524,0.43808765718524,0.43808765718524,0.364632235382541,1.62430819906805,1.62430819906805,2.97859353930179,2.97859353930179,1.42662302685072,1.42662302685072,1.50890354054117,1.50890354054117,1.50890354054117,1.50890354054117,1.50890354054117,1.50890354054117,1.02030263453824,0.843869016386285],[0.436150715021146,0.5109416744117,0.5109416744117,0.5109416744117,0.451265983794161,0.451265983794161,0.451265983794161,0.451265983794161,1.69857246731528,1.53766770224531,1.53766770224531,0.998079927366309,0.998079927366309,0.345660642697039,0.345660642697039,0.552635941545545,0.552635941545545,0.552635941545545,0.552635941545545,0.552635941545545,0.552635941545545,0.653027423276609,2.06717544142926],[0,0,0.817267486442817,0.996687574545628,0,0.881148732572538,1.26440527770983,1.79287183143934,0,0,0.358497394926042,0,0.526475157175335,0,0.598653754423214,0,0.234657562701505,0.280491317043871,0.509059218686755,0.804879760232158,0.855017972187355,0,0],[0.925460916024793,0.7350757056209,0.996687574545628,1.14227733621374,0.79895695175062,1.26440527770983,1.79287183143934,1.88281807556928,0.766807806419893,0.276305614104124,0.64049427189897,0.444283376353417,0.915443442586892,0.516461973601296,0.776380173295496,0.152465781879588,0.280491317043871,0.426867437864837,0.72268797941024,0.855017972187355,1.05241935620391,0.928926051837624,0.274241346973253],[2,1,1,0,1,1,1,2,2,1,2,1,2,1,2,1,1,1,1,1,2,2,2],[0.925460916024793,1.14227733621374,1.14227733621374,1.14227733621374,1.88281807556928,1.88281807556928,1.88281807556928,1.88281807556928,0.766807806419893,0.64049427189897,0.64049427189897,0.915443442586892,0.915443442586892,0.776380173295496,0.776380173295496,1.05241935620391,1.05241935620391,1.05241935620391,1.05241935620391,1.05241935620391,1.05241935620391,0.928926051837624,0.274241346973253]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>zr<\/th>\n      <th>zc<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<span><span class="co">## 1   1    0 -1.7438815 1.4708967 1.2128053 0.0000000 0.8125093      2 0.8125093</span></span>
+<span><span class="co">## 6   2    0  2.2529472 0.6601332 0.8124858 0.0000000 0.3352947      2 0.3352947</span></span>
+<span><span class="co">## 11  3    0 -0.4286249 1.1410835 1.0682151 0.0000000 0.4404584      1 1.9922474</span></span>
+<span><span class="co">## 12  3    0 -0.4286249 1.1410835 1.0682151 0.4404584 1.0473745      1 1.9922474</span></span>
+<span><span class="co">## 13  3    0 -0.4286249 1.1410835 1.0682151 1.1295663 1.7796097      1 1.9922474</span></span>
+<span><span class="co">## 14  3    0 -0.4286249 1.1410835 1.0682151 1.8618015 1.9272875      1 1.9922474</span></span>
+<span><span class="co">## 16  4    0 -0.0556372 0.6168485 0.7853970 0.0000000 0.4538589      2 0.4538589</span></span>
+<span><span class="co">## 19  5    0 -2.0626043 0.8196217 0.9053296 0.0000000 0.1852155      1 0.2487465</span></span>
+<span><span class="co">## 20  5    0 -2.0626043 0.8196217 0.9053296 0.1852155 0.2487465      2 0.2487465</span></span>
+<span><span class="co">## 23  6    1  0.2268166 2.7856073 1.6690139 0.0000000 0.4709160      1 0.5779067</span></span>
+<span><span class="co">##    id x.V1       x.V2        zr        zc     start       stop status         fu</span></span>
+<span><span class="co">## 1   1    1 -0.7034571 0.7338608 1.2978801 0.0000000 0.07311717      0 0.07311717</span></span>
+<span><span class="co">## 3   2    1  1.0127021 0.9397690 1.3855561 0.0000000 0.63831549      2 0.63831549</span></span>
+<span><span class="co">## 10  3    0  1.6480893 0.8031450 1.4731196 0.0000000 0.78571545      2 0.78571545</span></span>
+<span><span class="co">## 15  4    1  0.3249503 0.5017022 1.1515112 0.0000000 0.55091826      2 0.55091826</span></span>
+<span><span class="co">## 20  5    0  0.4940347 0.9333100 0.9630355 0.0000000 0.85061448      2 0.85061448</span></span>
+<span><span class="co">## 24  6    1  0.2957423 0.5434088 1.0426409 0.0000000 0.43845169      2 0.43845169</span></span>
+<span><span class="co">## 30  7    0 -1.8135419 1.7433354 0.9809150 0.0000000 0.41500656      1 0.58557979</span></span>
+<span><span class="co">## 31  7    0 -1.8135419 1.7433354 0.9809150 0.4971983 0.58557979      2 0.58557979</span></span>
+<span><span class="co">## 35  8    0 -1.2178480 0.5063919 0.6007062 0.0000000 0.62986993      1 1.21294879</span></span>
+<span><span class="co">## 36  8    0 -1.2178480 0.5063919 0.6007062 0.7120617 1.21294879      2 1.21294879</span></span></code></pre>
+<div id="htmlwidget-5e9f038168b3fed39d16" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5e9f038168b3fed39d16">{"x":{"filter":"none","vertical":false,"data":[["1","6","11","12","13","14","16","19","20","23","24","32","34","36","40","41"],[1,2,3,3,3,3,4,5,5,6,6,7,8,9,10,10],[0,0,0,0,0,0,0,0,0,1,1,1,1,0,1,1],[-1.74388149555094,2.25294716063007,-0.428624866060179,-0.428624866060179,-0.428624866060179,-0.428624866060179,-0.0556371951361931,-2.06260427016405,-2.06260427016405,0.226816592419482,0.226816592419482,-1.08519173058021,-1.23560609029565,0.384298268633321,0.0506165480949766,0.0506165480949766],[1.47089666409606,0.660133248211014,1.14108351251941,1.14108351251941,1.14108351251941,1.14108351251941,0.6168484721239,0.819621746000289,0.819621746000289,2.78560734504992,2.78560734504992,1.07692059003544,0.913202407134802,0.437339422362757,2.50461900161989,2.50461900161989],[1.21280528696739,0.812485844929629,1.06821510592175,1.06821510592175,1.06821510592175,1.06821510592175,0.785397015606693,0.90532963389049,0.90532963389049,1.66901388401952,1.66901388401952,1.0377478451124,0.955616244700142,0.661316431341878,1.58259881259272,1.58259881259272],[0,0,0,0.440458413550655,1.1295663056125,1.86180149331226,0,0,0.18521547434973,0,0.470915994914351,0,0,0,0,0.320611685680893],[0.812509276155035,0.335294681179836,0.440458413550655,1.04737452479058,1.77960971249034,1.92728745558344,0.453858889450223,0.18521547434973,0.248746514758855,0.470915994914351,0.577906700627143,0.143517184536904,0.356119666074973,0.484660211159111,0.320611685680893,0.375130241840579],[2,2,1,1,1,1,2,1,2,1,2,0,2,2,1,2],[0.812509276155035,0.335294681179836,1.99224737661057,1.99224737661057,1.99224737661057,1.99224737661057,0.453858889450223,0.248746514758855,0.248746514758855,0.577906700627143,0.577906700627143,0.143517184536904,0.356119666074973,0.484660211159111,0.375130241840579,0.375130241840579]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>zr<\/th>\n      <th>zc<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-32d06455e4e7874f5241" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-32d06455e4e7874f5241">{"x":{"filter":"none","vertical":false,"data":[["1","3","10","15","20","24","30","31","35","36","37","38","39","43"],[1,2,3,4,5,6,7,7,8,8,9,9,9,10],[1,1,0,1,0,1,0,0,0,0,1,1,1,0],[-0.703457142141542,1.01270214612003,1.64808929610473,0.324950273894927,0.494034675634593,0.295742288350925,-1.81354191243498,-1.81354191243498,-1.21784800042475,-1.21784800042475,0.79916818604214,0.79916818604214,0.79916818604214,0.24029521435899],[0.733860838177726,0.93976903079187,0.803144970351839,0.501702203165848,0.933309956040409,0.543408839949875,1.74333537784792,1.74333537784792,0.506391896204977,0.506391896204977,1.32276824820292,1.32276824820292,1.32276824820292,0.441850236972005],[1.29788009748634,1.38555608802358,1.47311959098187,1.15151120317103,0.963035506466965,1.04264091522239,0.980915037896656,0.980915037896656,0.600706208778209,0.600706208778209,1.73877451826981,1.73877451826981,1.73877451826981,0.839458817631069],[0,0,0,0,0,0,0,0.497198342096232,0,0.712061711670434,0,0.715692822158457,0.738111858520039,0],[0.0731171742081642,0.638315486623965,0.785715452361803,0.550918259114215,0.850614484875129,0.438451693554631,0.415006561274315,0.585579791729969,0.629869930848517,1.21294879214731,0.715692822158457,0.738111858520039,0.992116812497606,0.210198576562107],[0,2,2,2,2,2,1,2,1,2,1,1,2,0],[0.0731171742081642,0.638315486623965,0.785715452361803,0.550918259114215,0.850614484875129,0.438451693554631,0.585579791729969,0.585579791729969,1.21294879214731,1.21294879214731,0.992116812497606,0.992116812497606,0.992116812497606,0.210198576562107]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>zr<\/th>\n      <th>zc<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="section level2">
 <h2 id="the-simrecint-function">The <code>simrecint</code> function<a class="anchor" aria-label="anchor" href="#the-simrecint-function"></a>
 </h2>
 <div class="section level3">
-<h3 id="description-2">Description<a class="anchor" aria-label="anchor" href="#description-2"></a>
+<h3 class="unnumbered" id="description-2">Description<a class="anchor" aria-label="anchor" href="#description-2"></a>
 </h3>
 <p>With this function previously simulated data (for example simulated by the use of <code>simrec</code> or <code>simreccomp</code>) can be cut to an interim data set. The simulated data must be in patient time (i.e. time since the patient entered the study, for an example see below), and must be in the counting process format. Furthermore, the dataset must have the variables <code>id</code>, <code>start</code>,<code>stop</code>, and <code>status</code>, like data simulated by the use of <code>simrec</code> or <code>simreccomp</code>. Then for every individual additionally a recruitment time is generated in study time (i.e. time since start of the study, for an example see below), which is uniformly distributed on <span class="math inline">\([0, t_R]\)</span>. The timing of the interim analysis <span class="math inline">\(t_I\)</span> is set in study time and data are being cut to all data, that are available at the interim analysis. If you only wish to simulate a recruitment time, <span class="math inline">\(t_I\)</span> can be set to <span class="math inline">\(t_R + fu.max\)</span> or something else beyond the end of the study.</p>
 <p>Simulated data in patient time:</p>
@@ -430,7 +430,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/simrecint.html">simrecint</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">N</span>, <span class="va">tR</span>, <span class="va">tI</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="parameters-2">Parameters<a class="anchor" aria-label="anchor" href="#parameters-2"></a>
+<h3 class="unnumbered" id="parameters-2">Parameters<a class="anchor" aria-label="anchor" href="#parameters-2"></a>
 </h3>
 <ul>
 <li>
@@ -444,7 +444,7 @@
 </ul>
 </div>
 <div class="section level3">
-<h3 id="output-2">Output<a class="anchor" aria-label="anchor" href="#output-2"></a>
+<h3 class="unnumbered" id="output-2">Output<a class="anchor" aria-label="anchor" href="#output-2"></a>
 </h3>
 <p>The output is a <code>data.frame</code> consisting of the columns, that were put into, and additionally the following columns:</p>
 <ul>
@@ -458,7 +458,7 @@
 <p>Individuals that are not already recruited at the interim analysis are left out here.</p>
 </div>
 <div class="section level3">
-<h3 id="example-2">Example<a class="anchor" aria-label="anchor" href="#example-2"></a>
+<h3 class="unnumbered" id="example-2">Example<a class="anchor" aria-label="anchor" href="#example-2"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Example - see example for simrec</span></span>
@@ -484,25 +484,33 @@
 <span><span class="va">simdataint</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simrecint.html">simrecint</a></span><span class="op">(</span><span class="va">simdata</span>, N <span class="op">=</span> <span class="va">N</span>, tR <span class="op">=</span> <span class="fl">2</span>, tI <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">simdataint</span><span class="op">)</span>  <span class="co"># only run for small N!</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html" class="external-link">datatable</a></span><span class="op">(</span><span class="va">simdataint</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##    id x.V1       x.V2         z start      stop status fu   rectime interimtime</span></span>
-<span><span class="co">## 1   1    0 -1.8473409 0.8192185     0 0.3530237      0  2 0.6469763           1</span></span>
-<span><span class="co">## 5   2    1  1.2320324 0.3740122     0 0.7835959      0  2 0.2164041           1</span></span>
-<span><span class="co">## 7   3    1 -0.3400125 0.4479879     0 0.4106880      0  2 0.5893120           1</span></span>
-<span><span class="co">## 21  7    0  1.1407250 1.4582186     0 0.1881704      0  2 0.8118296           1</span></span>
-<span><span class="co">##    stop_study</span></span>
-<span><span class="co">## 1    1.295617</span></span>
-<span><span class="co">## 5    1.489562</span></span>
-<span><span class="co">## 7    2.211549</span></span>
-<span><span class="co">## 21   1.209666</span></span></code></pre>
-<div id="htmlwidget-53b7f94caee90bef0c52" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-53b7f94caee90bef0c52">{"x":{"filter":"none","vertical":false,"data":[["1","5","7","21"],[1,2,3,7],[0,1,1,0],[-1.84734086649583,1.23203237282736,-0.340012491277312,1.14072503414714],[0.819218465370445,0.374012215501924,0.447987934322342,1.45821861597413],[0,0,0,0],[0.353023688308895,0.783595925662667,0.410687990486622,0.188170372974128],[0,0,0,0],[2,2,2,2],[0.646976311691105,0.216404074337333,0.589312009513378,0.811829627025872],[1,1,1,1],[1.29561736341823,1.48956189276171,2.21154899269678,1.20966555119979]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>z<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n      <th>rectime<\/th>\n      <th>interimtime<\/th>\n      <th>stop_study<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre><code><span><span class="co">##    id x.V1       x.V2         z     start      stop status        fu    rectime</span></span>
+<span><span class="co">## 1   1    1 -0.4888733 0.5099498 0.0000000 0.8363184      0 2.0000000 0.16368157</span></span>
+<span><span class="co">## 8   2    0 -1.4924345 0.7671820 0.0000000 0.5664134      0 0.5664134 0.20669659</span></span>
+<span><span class="co">## 22  5    0 -1.0145990 1.2758262 0.0000000 0.6456423      1 2.0000000 0.06454678</span></span>
+<span><span class="co">## 23  5    0 -1.0145990 1.2758262 0.6456423 0.6471562      1 2.0000000 0.06454678</span></span>
+<span><span class="co">## 24  5    0 -1.0145990 1.2758262 0.6471562 0.9354532      0 2.0000000 0.06454678</span></span>
+<span><span class="co">## 30  6    1 -0.3581568 1.0889779 0.0000000 0.8866823      0 1.7316260 0.11331771</span></span>
+<span><span class="co">## 39  8    1 -0.5724298 0.4311998 0.0000000 0.7908973      0 2.0000000 0.20910270</span></span>
+<span><span class="co">## 43  9    1  0.2072639 0.4365186 0.0000000 0.1698930      0 2.0000000 0.83010704</span></span>
+<span><span class="co">##    interimtime stop_study</span></span>
+<span><span class="co">## 1            1  1.0434292</span></span>
+<span><span class="co">## 8            1  0.7731100</span></span>
+<span><span class="co">## 22           1  0.7101891</span></span>
+<span><span class="co">## 23           1  0.7117029</span></span>
+<span><span class="co">## 24           1  1.1227576</span></span>
+<span><span class="co">## 30           1  1.1167750</span></span>
+<span><span class="co">## 39           1  1.8034953</span></span>
+<span><span class="co">## 43           1  1.7303836</span></span></code></pre>
+<div id="htmlwidget-0240f78290bbb94e4d50" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0240f78290bbb94e4d50">{"x":{"filter":"none","vertical":false,"data":[["1","8","22","23","24","30","39","43"],[1,2,5,5,5,6,8,9],[1,0,0,0,0,1,1,1],[-0.488873252824871,-1.49243445410877,-1.01459896233922,-1.01459896233922,-1.01459896233922,-0.358156767566199,-0.572429776725274,0.207263862194523],[0.509949781028714,0.767182000076757,1.27582619453362,1.27582619453362,1.27582619453362,1.0889779071086,0.431199799078371,0.436518565635296],[0,0,0,0.645642299147059,0.647156161325838,0,0,0],[0.836318434681743,0.566413396503776,0.645642299147059,0.647156161325838,0.935453221667558,0.886682289652526,0.790897303726524,0.169892960228026],[0,0,1,1,0,0,0,0],[2,0.566413396503776,2,2,2,1.73162604821846,2,2],[0.163681565318257,0.20669658575207,0.064546778332442,0.064546778332442,0.064546778332442,0.113317710347474,0.209102696273476,0.830107039771974],[1,1,1,1,1,1,1,1],[1.04342917708318,0.773109982255846,0.710189077479501,0.71170293965828,1.12275756066563,1.11677500689717,1.80349528362041,1.73038356360569]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>x.V1<\/th>\n      <th>x.V2<\/th>\n      <th>z<\/th>\n      <th>start<\/th>\n      <th>stop<\/th>\n      <th>status<\/th>\n      <th>fu<\/th>\n      <th>rectime<\/th>\n      <th>interimtime<\/th>\n      <th>stop_study<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="section level2">
 <h2 id="plotting-the-data">Plotting the Data<a class="anchor" aria-label="anchor" href="#plotting-the-data"></a>
 </h2>
 <div class="section level3">
-<h3 id="description-3">Description<a class="anchor" aria-label="anchor" href="#description-3"></a>
+<h3 class="unnumbered" id="description-3">Description<a class="anchor" aria-label="anchor" href="#description-3"></a>
 </h3>
 <p>The functions <code>simrecPlot</code> and <code>simreccompPlot</code> allow plotting of recurrent event data, possibly with a competing event.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -510,7 +518,7 @@
 <span><span class="fu"><a href="../reference/simreccompPlot.html">simreccompPlot</a></span><span class="op">(</span><span class="va">simdata</span>, id <span class="op">=</span> <span class="st">"id"</span>, start <span class="op">=</span> <span class="st">"start"</span>, stop <span class="op">=</span> <span class="st">"stop"</span>, status <span class="op">=</span> <span class="st">"status"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="parameters-3">Parameters<a class="anchor" aria-label="anchor" href="#parameters-3"></a>
+<h3 class="unnumbered" id="parameters-3">Parameters<a class="anchor" aria-label="anchor" href="#parameters-3"></a>
 </h3>
 <ul>
 <li>
@@ -542,12 +550,12 @@
 </ul>
 </div>
 <div class="section level3">
-<h3 id="output-3">Output<a class="anchor" aria-label="anchor" href="#output-3"></a>
+<h3 class="unnumbered" id="output-3">Output<a class="anchor" aria-label="anchor" href="#output-3"></a>
 </h3>
 <p>The output is a plot of the data with a bullet (<span class="math inline">\(\bullet\)</span>) indicating a recurrent event, a circle (<span class="math inline">\(\circ\)</span>) indicating censoring and <span class="math inline">\(\times\)</span> indicating the competing event.</p>
 </div>
 <div class="section level3">
-<h3 id="example-3">Example<a class="anchor" aria-label="anchor" href="#example-3"></a>
+<h3 class="unnumbered" id="example-3">Example<a class="anchor" aria-label="anchor" href="#example-3"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/simrecPlot.html">simrecPlot</a></span><span class="op">(</span><span class="va">simdata</span><span class="op">)</span></span></code></pre></div>
@@ -558,17 +566,17 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references">
-<div id="ref-Andersen1982">
-<p>Andersen, P. K., and R. D. Gill. 1982. “Cox’s Regression Model for Counting Processes: A Large Sample Study.” <em>Ann. Statist.</em> 10 (4): 1100–1120. <a href="https://doi.org/10.1214/aos/1176345976" class="external-link">https://doi.org/10.1214/aos/1176345976</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Andersen1982" class="csl-entry">
+Andersen, P. K., and R. D. Gill. 1982. <span>“Cox’s Regression Model for Counting Processes: A Large Sample Study.”</span> <em>Ann. Statist.</em> 10 (4): 1100–1120. <a href="https://doi.org/10.1214/aos/1176345976" class="external-link">https://doi.org/10.1214/aos/1176345976</a>.
 </div>
-<div id="ref-Bender2005">
-<p>Bender, Ralf, Thomas Augustin, and Maria Blettner. 2005. “Generating Survival Times to Simulate Cox Proportional Hazards Models.” <em>Statistics in Medicine</em> 24 (11): 1713–23. <a href="https://doi.org/10.1002/sim.2059" class="external-link">https://doi.org/10.1002/sim.2059</a>.</p>
+<div id="ref-Bender2005" class="csl-entry">
+Bender, Ralf, Thomas Augustin, and Maria Blettner. 2005. <span>“Generating Survival Times to Simulate Cox Proportional Hazards Models.”</span> <em>Statistics in Medicine</em> 24 (11): 1713–23. <a href="https://doi.org/10.1002/sim.2059" class="external-link">https://doi.org/10.1002/sim.2059</a>.
 </div>
-<div id="ref-Jahn-Eimermacher2015">
-<p>Jahn-Eimermacher, Antje, Katharina Ingel, Ann-Kathrin Ozga, Stella Preussler, and Harald Binder. 2015. “Simulating Recurrent Event Data with Hazard Functions Defined on a Total Time Scale.” <em>BMC Medical Research Methodology</em> 15 (1): 16. <a href="https://doi.org/10.1186/s12874-015-0005-2" class="external-link">https://doi.org/10.1186/s12874-015-0005-2</a>.</p>
+<div id="ref-Jahn-Eimermacher2015" class="csl-entry">
+Jahn-Eimermacher, Antje, Katharina Ingel, Ann-Kathrin Ozga, Stella Preussler, and Harald Binder. 2015. <span>“Simulating Recurrent Event Data with Hazard Functions Defined on a Total Time Scale.”</span> <em>BMC Medical Research Methodology</em> 15 (1): 16. <a href="https://doi.org/10.1186/s12874-015-0005-2" class="external-link">https://doi.org/10.1186/s12874-015-0005-2</a>.
 </div>
 </div>
 </div>
