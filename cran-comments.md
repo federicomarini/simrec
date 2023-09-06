@@ -1,24 +1,11 @@
 ## Resubmission
 
-This is a resubmission. In this version I have:
+This is a resubmission. In this version (1.0.1) I have:
 
-* Changed http --> https, adding the trailing slashes; the links are now directing to the 
-correct location of the content
-* Added a reference to the method in the Description: field, using the <doi:...> format 
-* Shortened the title
-* Removed commented code from the examples
-* Handled gently the setting of global graphical parameters in the functions
-
-## Test environments
-
-* local R installation, R 4.0.3
-* Mac OS 10.15.7 (on GitHub Actions), R 4.0.3
-* ubuntu 18.04.5 (on GitHub Actions), R 4.0.3
-* Windows Server 2019 10.0.17763 (on GitHub Actions), R 4.0.3
-* win-builder (devel)
+* Edited the approach to document the package man page within roxygen
+* Added a Session info section in the vignette
+* Fortified the code to avoid the usage of the "T" variable name
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
+0 errors | 0 warnings | 0 note
