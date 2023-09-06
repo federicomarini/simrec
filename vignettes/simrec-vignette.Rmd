@@ -497,6 +497,11 @@ simrecPlot(simdata)
 simreccompPlot(simdata1)
 ```
 
+# Session Info {.unnumbered}
+
+```{r sessioninfo}
+sessionInfo()
+```
 
 # References {-}
 
