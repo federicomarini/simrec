@@ -388,7 +388,7 @@ simreccomp <- function(N,
     }
   }
 
-  T <- matrix(t, N, 1)
+  Tmat <- matrix(t, N, 1)
   dirty <- rep(TRUE, N)
   T1 <- NULL
 
@@ -421,7 +421,7 @@ simreccomp <- function(N,
     T1 <- cbind(T1, ifelse(dirty, t1, NA))
     dirty <- ifelse(dirty, (t(t) < fu) & (t(t1) < fu), dirty)
     if (!any(dirty)) break
-    T <- cbind(T, ifelse(dirty, t, NA))
+    Tmat <- cbind(Tmat, ifelse(dirty, t, NA))
   }
 
   # comp. events simulation ***********************************************************
@@ -488,8 +488,8 @@ simreccomp <- function(N,
   tab.start.t <- start.t[!is.na(start.t)]
 
   # stop times
-  stop.t <- cbind(T, NA)
-  d <- apply(!is.na(T), 1, sum) # number of events per individual
+  stop.t <- cbind(Tmat, NA)
+  d <- apply(!is.na(Tmat), 1, sum) # number of events per individual
   f <- d + 1
   for (i in 1:N) {
     stop.t[i, f[i]] <- fu[i]
