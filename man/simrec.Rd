@@ -2,8 +2,8 @@
 % Please edit documentation in R/simrec-pkg.R, R/simrec.R
 \docType{package}
 \name{simrec}
-\alias{simrec}
 \alias{simrec-package}
+\alias{simrec}
 \title{simrec}
 \usage{
 simrec(
