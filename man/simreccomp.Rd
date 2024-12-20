@@ -33,21 +33,21 @@ simreccomp(
 
 \item{fu.max}{Maximum length of follow-up. Individuals length of follow-up is
 generated from a uniform distribution on
-\code{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common
+\verb{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common
 follow-up.}
 
 \item{cens.prob}{Gives the probability of being censored due to loss to follow-up before
 \code{fu.max}. For a random set of individuals defined by a B(N,\code{cens.prob})-distribution,
 the time to censoring is generated from a uniform
-distribution on \code{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring
+distribution on \verb{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring
 due to loss to follow-up.}
 
 \item{dist.x}{Distribution of the covariate(s) \eqn{X}. If there is more than one covariate,
 \code{dist.x} must be a vector of distributions with one entry for each covariate. Possible
 values are \code{"binomial"} and \code{"normal"}, default is \code{dist.x="binomial"}.}
 
-\item{par.x}{Parameters of the covariate distribution(s). For \code{"binomial", par.x} is
-the probability for \eqn{x=1}. For \code{"normal"}, \code{par.x=c(}\eqn{\mu, \sigma}\code{)}
+\item{par.x}{Parameters of the covariate distribution(s). For \verb{"binomial", par.x} is
+the probability for \eqn{x=1}. For \code{"normal"}, \verb{par.x=c(}\eqn{\mu, \sigma}\verb{)}
 where \eqn{\mu} is the mean and \eqn{\sigma} is the standard deviation of a normal distribution.
 If one of the covariates is defined to be normally distributed, \code{par.x} must be a list,
 e.g. \code{ dist.x <- c("binomial", "normal")} and \code{par.x  <- list(0.5, c(1,2))}.
@@ -93,22 +93,22 @@ Possible values are \code{"weibull"} or
 \item{par.rec}{Parameters for the distribution of the recurrent event data.
 If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
 where \eqn{\lambda>0} is the scale and \eqn{\nu>0} is the shape parameter. Then
-\code{par.rec=c(}\eqn{\lambda, \nu}\code{)}. A special case
+\verb{par.rec=c(}\eqn{\lambda, \nu}\verb{)}. A special case
 of this is the exponential distribution for \eqn{\nu=1}.
 If \code{dist.rec="gompertz"}, the hazard function is \deqn{\lambda_0(t)=\lambda*exp(\alpha t),}
 where \eqn{\lambda>0} is the scale and \eqn{\alpha\in(-\infty,+\infty)} is the shape parameter.
-Then \code{par.rec=c(}\eqn{\lambda, \alpha}\code{)}.
+Then \verb{par.rec=c(}\eqn{\lambda, \alpha}\verb{)}.
 If \code{dist.rec="lognormal"}, the hazard function is
 \deqn{\lambda_0(t)=[(1/(\sigma t))*\phi((ln(t)-\mu)/\sigma)]/[\Phi((-ln(t)-\mu)/\sigma)],}
 where \eqn{\phi} is the probability density function and \eqn{\Phi} is the cumulative
 distribution function of the standard normal distribution, \eqn{\mu\in(-\infty,+\infty)} is a
-location parameter and \eqn{\sigma>0} is a shape parameter. Then \code{par.rec=c(}\eqn{\mu,\sigma}\code{)}.
+location parameter and \eqn{\sigma>0} is a shape parameter. Then \verb{par.rec=c(}\eqn{\mu,\sigma}\verb{)}.
 Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
 specify the usual lognormal model (with covariates specified as effects on the parameters of the
 lognormal distribution resulting in non-proportional hazards), but only defines the baseline
 hazard and incorporates covariate effects using the proportional hazard assumption.
 If \code{dist.rec="step"} the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
-Then \code{par.rec=c(}\eqn{a,b,t_1}\code{)}.}
+Then \verb{par.rec=c(}\eqn{a,b,t_1}\verb{)}.}
 
 \item{dist.comp}{Form of the baseline hazard function for the competing event.
 Possible values are \code{"weibull"} or
@@ -128,17 +128,17 @@ events until end of follow-up.}
 \value{
 The output is a data.frame consisting of the columns:
 \item{id}{An integer number for identification of each individual}
-\item{x}{or \code{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the
+\item{x}{or \verb{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the
 randomly generated value of the covariate(s) \eqn{X} for each individual.}
 \item{zr}{Contains the randomly generated value of the frailty variable \eqn{Z_r} for each individual.}
 \item{zc}{Contains the randomly generated value of the frailty variable \eqn{Z_c} for each individual.}
-\item{start}{The start of interval \code{[start, stop]}, when the individual
+\item{start}{The start of interval \verb{[start, stop]}, when the individual
 starts to be at risk for a next event.}
-\item{stop}{The time of an event or censoring, i.e. the end of interval \code{[start, stop]}.}
+\item{stop}{The time of an event or censoring, i.e. the end of interval \verb{[start, stop]}.}
 \item{status}{An indicator of whether an event occured at time \code{stop} (\code{status=1}),
 the individual is censored at time \code{stop} (\code{status=0}) or the competing event occured at time
 \code{stop} (\code{status=2}).}
-\item{fu}{Length of follow-up period \code{[0,fu]} for each individual.}
+\item{fu}{Length of follow-up period \verb{[0,fu]} for each individual.}
 For each individual there are as many lines as it experiences events,
 plus one line if being censored.
 The data format corresponds to the counting process format.

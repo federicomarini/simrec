@@ -29,21 +29,21 @@ simrec(
 
 \item{fu.max}{Maximum length of follow-up. Individuals length of follow-up is
 generated from a uniform distribution on
- \code{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common
- follow-up.}
+\verb{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common
+follow-up.}
 
 \item{cens.prob}{Gives the probability of being censored due to loss to follow-up before
 \code{fu.max}. For a random set of individuals defined by a B(N,\code{cens.prob})-distribution,
 the time to censoring is generated from a uniform
-distribution on \code{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring
+distribution on \verb{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring
 due to loss to follow-up.}
 
 \item{dist.x}{Distribution of the covariate(s) \eqn{X}. If there is more than one covariate,
 \code{dist.x} must be a vector of distributions with one entry for each covariate. Possible
 values are \code{"binomial"} and \code{"normal"}, default is \code{dist.x="binomial"}.}
 
-\item{par.x}{Parameters of the covariate distribution(s). For \code{"binomial", par.x} is
-the probability for \eqn{x=1}. For \code{"normal"}, \code{par.x=c(}\eqn{\mu, \sigma}\code{)}
+\item{par.x}{Parameters of the covariate distribution(s). For \verb{"binomial", par.x} is
+the probability for \eqn{x=1}. For \code{"normal"}, \verb{par.x=c(}\eqn{\mu, \sigma}\verb{)}
 where \eqn{\mu} is the mean and \eqn{\sigma} is the standard deviation of a normal distribution.
 If one of the covariates is defined to be normally distributed, \code{par.x} must be a list,
 e.g. \code{ dist.x <- c("binomial", "normal")} and \code{par.x  <- list(0.5, c(1,2))}.
@@ -56,8 +56,8 @@ covariate, \code{beta.x} must be a vector of coefficients with one entry for eac
 
 \item{dist.z}{Distribution of the frailty variable \eqn{Z} with \eqn{E(Z)=1} and
 \eqn{Var(Z)=\theta}. Possible values are \code{"gamma"} for a Gamma distributed frailty
- and \code{"lognormal"} for a lognormal distributed frailty.
- Default is \code{dist.z="gamma"}.}
+and \code{"lognormal"} for a lognormal distributed frailty.
+Default is \code{dist.z="gamma"}.}
 
 \item{par.z}{Parameter \eqn{\theta} for the frailty distribution: this parameter gives
 the variance of the frailty variable \eqn{Z}.
@@ -69,22 +69,22 @@ Default is \code{par.z=0}, which causes \eqn{Z=1}, i.e. no frailty effect.}
 \item{par.rec}{Parameters for the distribution of the event data.
 If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
 where \eqn{\lambda>0} is the scale and \eqn{\nu>0} is the shape parameter. Then
-\code{par.rec=c(}\eqn{\lambda, \nu}\code{)}. A special case
+\verb{par.rec=c(}\eqn{\lambda, \nu}\verb{)}. A special case
 of this is the exponential distribution for \eqn{\nu=1}.\\
 If \code{dist.rec="gompertz"}, the hazard function is \deqn{\lambda_0(t)=\lambda*exp(\alpha t),}
 where \eqn{\lambda>0} is the scale and \eqn{\alpha\in(-\infty,+\infty)} is the shape parameter.
-Then \code{par.rec=c(}\eqn{\lambda, \alpha}\code{)}.\\
+Then \verb{par.rec=c(}\eqn{\lambda, \alpha}\verb{)}.\\
 If \code{dist.rec="lognormal"}, the hazard function is
 \deqn{\lambda_0(t)=[(1/(\sigma t))*\phi((ln(t)-\mu)/\sigma)]/[\Phi((-ln(t)-\mu)/\sigma)],}
 where \eqn{\phi} is the probability density function and \eqn{\Phi} is the cumulative
 distribution function of the standard normal distribution, \eqn{\mu\in(-\infty,+\infty)} is a
-location parameter and \eqn{\sigma>0} is a shape parameter. Then \code{par.rec=c(}\eqn{\mu,\sigma}\code{)}.
+location parameter and \eqn{\sigma>0} is a shape parameter. Then \verb{par.rec=c(}\eqn{\mu,\sigma}\verb{)}.
 Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
 specify the usual lognormal model (with covariates specified as effects on the parameters of the
 lognormal distribution resulting in non-proportional hazards), but only defines the baseline
 hazard and incorporates covariate effects using the proportional hazard assumption.\\
 If \code{dist.rec="step"} the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
-Then \code{par.rec=c(}\eqn{a,b,t_1}\code{)}.}
+Then \verb{par.rec=c(}\eqn{a,b,t_1}\verb{)}.}
 
 \item{pfree}{Probability that after experiencing an event the individual is not at risk
 for experiencing further events for a length of \code{dfree} time units.
@@ -96,27 +96,27 @@ events until end of follow-up.}
 }
 \value{
 The output is a data.frame consisting of the columns:
-   \item{id}{An integer number for identification of each individual}
-   \item{x}{or \code{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the
-      randomly generated value of the covariate(s) \eqn{X} for each individual.}
-   \item{z}{Contains the randomly generated value of the frailty variable \eqn{Z} for each individual.}
-   \item{start}{The start of interval \code{[start, stop]}, when the individual
-      starts to be at risk for a next event.}
-   \item{stop}{The time of an event or censoring, i.e. the end of interval
-   \code{[start, stop]}.}
-   \item{status}{An indicator of whether an event occured at time \code{stop} (\code{status=1})
-       or the individual is censored at time \code{stop} (\code{status=0}).}
-   \item{fu}{Length of follow-up period \code{[0,fu]} for each individual.}
-   For each individual there are as many lines as it experiences events,
-   plus one line if being censored.
-   The data format corresponds to the counting process format.
+\item{id}{An integer number for identification of each individual}
+\item{x}{or \verb{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the
+randomly generated value of the covariate(s) \eqn{X} for each individual.}
+\item{z}{Contains the randomly generated value of the frailty variable \eqn{Z} for each individual.}
+\item{start}{The start of interval \verb{[start, stop]}, when the individual
+starts to be at risk for a next event.}
+\item{stop}{The time of an event or censoring, i.e. the end of interval
+\verb{[start, stop]}.}
+\item{status}{An indicator of whether an event occured at time \code{stop} (\code{status=1})
+or the individual is censored at time \code{stop} (\code{status=0}).}
+\item{fu}{Length of follow-up period \verb{[0,fu]} for each individual.}
+For each individual there are as many lines as it experiences events,
+plus one line if being censored.
+The data format corresponds to the counting process format.
 }
 \description{
 Simulation of recurrent event data for non-constant baseline hazard
 (total-time model)
 
 This function allows simulation of recurrent event data following the multiplicative
-intensity model described in Andersen and Gill [1] with the baseline hazard being a
+intensity model described in Andersen and Gill (ref1) with the baseline hazard being a
 function of the total/calendar time. To induce between-subject-heterogeneity a random
 effect covariate (frailty term) can be incorporated. Data for individual \eqn{i} are generated
 according to the intensity process \deqn{Y_i(t) * \lambda_0(t)* Z_i *exp(\beta^t X_i),}
@@ -134,7 +134,7 @@ in the total time model with risk-free intervalls and possibly a competing
 event. The simrec package enables to cut the data to an interim data set,
 and provides functionality to plot.
 
-Data are simulated by extending the methods proposed by Bender et al [2]
+Data are simulated by extending the methods proposed by Bender et al (ref2)
 to the multiplicative intensity model.
 }
 \examples{
@@ -185,11 +185,11 @@ simdata <- simrec(
 \references{
 \enumerate{
 \item Andersen P, Gill R (1982): Cox's regression model for counting processes:
-   a large sample study. The Annals of Statistics 10:1100-1120
+a large sample study. The Annals of Statistics 10:1100-1120
 \item Bender R, Augustin T, Blettner M (2005): Generating survival times to simulate Cox
-  proportional hazards models. Statistics in Medicine 24:1713-1723
+proportional hazards models. Statistics in Medicine 24:1713-1723
 \item Jahn-Eimermacher A, Ingel K, Ozga AK, Preussler S, Binder H (2015): Simulating recurrent event data
-  with hazard functions defined on a total time scale. BMC Medical Research Methodology 15:16
+with hazard functions defined on a total time scale. BMC Medical Research Methodology 15:16
 }
 }
 \seealso{
@@ -210,3 +210,4 @@ Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher.
 Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI),
 University Medical Center of the Johannes Gutenberg-University Mainz, Germany
 }
+\keyword{internal}

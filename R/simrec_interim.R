@@ -1,25 +1,25 @@
 #' simrecint
 #'
-#' With this function previously simulated data (for example simulated by the use of \code{simrec} or \code{simreccomp})
+#' With this function previously simulated data (for example simulated by the use of `simrec` or `simreccomp`)
 #' can be cut to an interim data set.
 #' The simulated data must be in patient time (i.e. time since the patient entered the study),
-#' and must be in the counting process format. Furthermore the dataset must have the variables \code{id}, \code{start}, \code{stop} and \code{status},
-#' like data simulated by the use of \code{simrec} or \code{simreccomp}.
+#' and must be in the counting process format. Furthermore the dataset must have the variables `id`, `start`, `stop` and `status`,
+#' like data simulated by the use of `simrec` or `simreccomp`.
 #' Then for every individual additionally a recruitment time is generated in study time (i.e. time since start of the study),
-#' which is uniformly distributed on \code{[0, tR]}.
-#' The timing of the interim analysis \code{tI} is set in study time and
+#' which is uniformly distributed on `[0, tR]`.
+#' The timing of the interim analysis `tI` is set in study time and
 #' data are being cut to all data, that are available at the interim analysis.
 #' For further explanations on study time and patient time see the vignette.
-#' If you only wish to simulate a recruitment time, \code{tI} can be set to \code{tR + fu.max} or something bigger.
+#' If you only wish to simulate a recruitment time, `tI` can be set to `tR + fu.max` or something bigger.
 #'
 #' @param data  Previously generated data (in patient time), that shall be cut to interim data
-#' @param N     Number of individuals, for which \code{data} was generated
+#' @param N     Number of individuals, for which `data` was generated
 #' @param tR    Length of the recruitment period (in study time)
 #' @param tI    Timing of the interim analysis (in study time)
 #'
 #' @return The output is a data.frame consisting of the columns, that were put into, and additionally the following columns:
 #'    \item{rectime}{The recruitment time for each individual (in study time).}
-#'    \item{interimtime}{The time of the interim analysis \code{tI} (in study time).}
+#'    \item{interimtime}{The time of the interim analysis `tI` (in study time).}
 #'    \item{stop_study}{The stopping time for each event in study time.}
 #'  Individuals that are not already recruited at the interim analysis are left out here.
 #' @author Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher.

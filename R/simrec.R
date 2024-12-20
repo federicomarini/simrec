@@ -1,7 +1,7 @@
 #' simrec
 #'
 #' This function allows simulation of recurrent event data following the multiplicative
-#' intensity model described in Andersen and Gill [1] with the baseline hazard being a
+#' intensity model described in Andersen and Gill (ref1) with the baseline hazard being a
 #' function of the total/calendar time. To induce between-subject-heterogeneity a random
 #' effect covariate (frailty term) can be incorporated. Data for individual \eqn{i} are generated
 #' according to the intensity process \deqn{Y_i(t) * \lambda_0(t)* Z_i *exp(\beta^t X_i),}
@@ -17,77 +17,77 @@
 #' @param fu.min     Minimum length of follow-up.
 #' @param fu.max     Maximum length of follow-up. Individuals length of follow-up is
 #'  generated from a uniform distribution on
-#'   \code{[fu.min, fu.max]}. If \code{fu.min=fu.max}, then all individuals have a common
+#'   `[fu.min, fu.max]`. If `fu.min=fu.max`, then all individuals have a common
 #'   follow-up.
 #' @param cens.prob  Gives the probability of being censored due to loss to follow-up before
-#'   \code{fu.max}. For a random set of individuals defined by a B(N,\code{cens.prob})-distribution,
+#'   `fu.max`. For a random set of individuals defined by a B(N,`cens.prob`)-distribution,
 #'   the time to censoring is generated from a uniform
-#'   distribution on \code{[0, fu.max]}. Default is \code{cens.prob=0}, i.e. no censoring
+#'   distribution on `[0, fu.max]`. Default is `cens.prob=0`, i.e. no censoring
 #'   due to loss to follow-up.
 #' @param dist.x     Distribution of the covariate(s) \eqn{X}. If there is more than one covariate,
-#'   \code{dist.x} must be a vector of distributions with one entry for each covariate. Possible
-#'   values are \code{"binomial"} and \code{"normal"}, default is \code{dist.x="binomial"}.
-#' @param par.x      Parameters of the covariate distribution(s). For \code{"binomial", par.x} is
-#'   the probability for \eqn{x=1}. For \code{"normal"}, \code{par.x=c(}\eqn{\mu, \sigma}\code{)}
+#'   `dist.x` must be a vector of distributions with one entry for each covariate. Possible
+#'   values are `"binomial"` and `"normal"`, default is `dist.x="binomial"`.
+#' @param par.x      Parameters of the covariate distribution(s). For `"binomial", par.x` is
+#'   the probability for \eqn{x=1}. For `"normal"`, `par.x=c(`\eqn{\mu, \sigma}`)`
 #'   where \eqn{\mu} is the mean and \eqn{\sigma} is the standard deviation of a normal distribution.
-#'   If one of the covariates is defined to be normally distributed, \code{par.x} must be a list,
-#'   e.g. \code{ dist.x <- c("binomial", "normal")} and \code{par.x  <- list(0.5, c(1,2))}.
-#'   Default is \code{par.x=0}, i.e. \eqn{x=0} for all individuals.
+#'   If one of the covariates is defined to be normally distributed, `par.x` must be a list,
+#'   e.g. ` dist.x <- c("binomial", "normal")` and `par.x  <- list(0.5, c(1,2))`.
+#'   Default is `par.x=0`, i.e. \eqn{x=0} for all individuals.
 #' @param beta.x  Regression coefficient(s) for the covariate(s) \eqn{x}. If there is more than one
-#'   covariate, \code{beta.x} must be a vector of coefficients with one entry for each covariate.
-#'   \code{simrec} generates as many covariates as there are entries in \code{beta.x}. Default is
-#'   \code{beta.x=0}, corresponding to no effect of the covariate \eqn{x}.
+#'   covariate, `beta.x` must be a vector of coefficients with one entry for each covariate.
+#'   `simrec` generates as many covariates as there are entries in `beta.x`. Default is
+#'   `beta.x=0`, corresponding to no effect of the covariate \eqn{x}.
 #' @param dist.z     Distribution of the frailty variable \eqn{Z} with \eqn{E(Z)=1} and
-#'   \eqn{Var(Z)=\theta}. Possible values are \code{"gamma"} for a Gamma distributed frailty
-#'    and \code{"lognormal"} for a lognormal distributed frailty.
-#'    Default is \code{dist.z="gamma"}.
+#'   \eqn{Var(Z)=\theta}. Possible values are `"gamma"` for a Gamma distributed frailty
+#'    and `"lognormal"` for a lognormal distributed frailty.
+#'    Default is `dist.z="gamma"`.
 #' @param par.z      Parameter \eqn{\theta} for the frailty distribution: this parameter gives
 #'   the variance of the frailty variable \eqn{Z}.
-#'   Default is \code{par.z=0}, which causes \eqn{Z=1}, i.e. no frailty effect.
-#' @param dist.rec   Form of the baseline hazard function. Possible values are \code{"weibull"} or
-#'   \code{"gompertz"} or \code{"lognormal"} or \code{"step"}.
+#'   Default is `par.z=0`, which causes \eqn{Z=1}, i.e. no frailty effect.
+#' @param dist.rec   Form of the baseline hazard function. Possible values are `"weibull"` or
+#'   `"gompertz"` or `"lognormal"` or `"step"`.
 #' @param par.rec  Parameters for the distribution of the event data.
-#'   If \code{dist.rec="weibull"} the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
+#'   If `dist.rec="weibull"` the  hazard function is \deqn{\lambda_0(t)=\lambda*\nu* t^{\nu - 1},}
 #'   where \eqn{\lambda>0} is the scale and \eqn{\nu>0} is the shape parameter. Then
-#'   \code{par.rec=c(}\eqn{\lambda, \nu}\code{)}. A special case
+#'   `par.rec=c(`\eqn{\lambda, \nu}`)`. A special case
 #'   of this is the exponential distribution for \eqn{\nu=1}.\\
-#'   If \code{dist.rec="gompertz"}, the hazard function is \deqn{\lambda_0(t)=\lambda*exp(\alpha t),}
+#'   If `dist.rec="gompertz"`, the hazard function is \deqn{\lambda_0(t)=\lambda*exp(\alpha t),}
 #'   where \eqn{\lambda>0} is the scale and \eqn{\alpha\in(-\infty,+\infty)} is the shape parameter.
-#'   Then \code{par.rec=c(}\eqn{\lambda, \alpha}\code{)}.\\
-#'   If \code{dist.rec="lognormal"}, the hazard function is
+#'   Then `par.rec=c(`\eqn{\lambda, \alpha}`)`.\\
+#'   If `dist.rec="lognormal"`, the hazard function is
 #'   \deqn{\lambda_0(t)=[(1/(\sigma t))*\phi((ln(t)-\mu)/\sigma)]/[\Phi((-ln(t)-\mu)/\sigma)],}
 #'   where \eqn{\phi} is the probability density function and \eqn{\Phi} is the cumulative
 #'   distribution function of the standard normal distribution, \eqn{\mu\in(-\infty,+\infty)} is a
-#'   location parameter and \eqn{\sigma>0} is a shape parameter. Then \code{par.rec=c(}\eqn{\mu,\sigma}\code{)}.
-#'   Please note, that specifying \code{dist.rec="lognormal"} together with some covariates does not
+#'   location parameter and \eqn{\sigma>0} is a shape parameter. Then `par.rec=c(`\eqn{\mu,\sigma}`)`.
+#'   Please note, that specifying `dist.rec="lognormal"` together with some covariates does not
 #'   specify the usual lognormal model (with covariates specified as effects on the parameters of the
 #'   lognormal distribution resulting in non-proportional hazards), but only defines the baseline
 #'   hazard and incorporates covariate effects using the proportional hazard assumption.\\
-#'   If \code{dist.rec="step"} the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
-#'   Then \code{par.rec=c(}\eqn{a,b,t_1}\code{)}.
+#'   If `dist.rec="step"` the hazard function is \deqn{\lambda_0(t)=a, t<=t_1, and \lambda_0(t)=b, t>t_1}.
+#'   Then `par.rec=c(`\eqn{a,b,t_1}`)`.
 #' @param pfree Probability that after experiencing an event the individual is not at risk
-#'   for experiencing further events for a length of \code{dfree} time units.
-#'   Default is \code{pfree=0}.
-#' @param dfree Length of the risk-free interval. Must be in the same time unit as \code{fu.max}.
-#'  Default is \code{dfree=0}, i.e. the individual is continously at risk for experiencing
+#'   for experiencing further events for a length of `dfree` time units.
+#'   Default is `pfree=0`.
+#' @param dfree Length of the risk-free interval. Must be in the same time unit as `fu.max`.
+#'  Default is `dfree=0`, i.e. the individual is continously at risk for experiencing
 #'  events until end of follow-up.
 #' @return The output is a data.frame consisting of the columns:
 #'    \item{id}{An integer number for identification of each individual}
-#'    \item{x}{or \code{x.V1, x.V2, ...} - depending on the covariate matrix. Contains the
+#'    \item{x}{or `x.V1, x.V2, ...` - depending on the covariate matrix. Contains the
 #'       randomly generated value of the covariate(s) \eqn{X} for each individual.}
 #'    \item{z}{Contains the randomly generated value of the frailty variable \eqn{Z} for each individual.}
-#'    \item{start}{The start of interval \code{[start, stop]}, when the individual
+#'    \item{start}{The start of interval `[start, stop]`, when the individual
 #'       starts to be at risk for a next event.}
 #'    \item{stop}{The time of an event or censoring, i.e. the end of interval
-#'    \code{[start, stop]}.}
-#'    \item{status}{An indicator of whether an event occured at time \code{stop} (\code{status=1})
-#'        or the individual is censored at time \code{stop} (\code{status=0}).}
-#'    \item{fu}{Length of follow-up period \code{[0,fu]} for each individual.}
+#'    `[start, stop]`.}
+#'    \item{status}{An indicator of whether an event occured at time `stop` (`status=1`)
+#'        or the individual is censored at time `stop` (`status=0`).}
+#'    \item{fu}{Length of follow-up period `[0,fu]` for each individual.}
 #'    For each individual there are as many lines as it experiences events,
 #'    plus one line if being censored.
 #'    The data format corresponds to the counting process format.
 #' @details
-#' Data are simulated by extending the methods proposed by Bender et al [2]
+#' Data are simulated by extending the methods proposed by Bender et al (ref2)
 #' to the multiplicative intensity model.
 #' @references
 #' \enumerate{

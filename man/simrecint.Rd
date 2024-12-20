@@ -17,10 +17,10 @@ simrecint(data, N, tR, tI)
 }
 \value{
 The output is a data.frame consisting of the columns, that were put into, and additionally the following columns:
-   \item{rectime}{The recruitment time for each individual (in study time).}
-   \item{interimtime}{The time of the interim analysis \code{tI} (in study time).}
-   \item{stop_study}{The stopping time for each event in study time.}
- Individuals that are not already recruited at the interim analysis are left out here.
+\item{rectime}{The recruitment time for each individual (in study time).}
+\item{interimtime}{The time of the interim analysis \code{tI} (in study time).}
+\item{stop_study}{The stopping time for each event in study time.}
+Individuals that are not already recruited at the interim analysis are left out here.
 }
 \description{
 With this function previously simulated data (for example simulated by the use of \code{simrec} or \code{simreccomp})
@@ -29,7 +29,7 @@ The simulated data must be in patient time (i.e. time since the patient entered 
 and must be in the counting process format. Furthermore the dataset must have the variables \code{id}, \code{start}, \code{stop} and \code{status},
 like data simulated by the use of \code{simrec} or \code{simreccomp}.
 Then for every individual additionally a recruitment time is generated in study time (i.e. time since start of the study),
-which is uniformly distributed on \code{[0, tR]}.
+which is uniformly distributed on \verb{[0, tR]}.
 The timing of the interim analysis \code{tI} is set in study time and
 data are being cut to all data, that are available at the interim analysis.
 For further explanations on study time and patient time see the vignette.

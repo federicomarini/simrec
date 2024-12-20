@@ -16,6 +16,6 @@
 #'
 #' Maintainer: Antje Jahn-Eimermacher \email{jahna@uni-mainz.de}
 #'
-#' @docType package
+#' @keywords internal
 #' @name simrec
 "_PACKAGE"

@@ -4,13 +4,13 @@
 #'
 #' @param data       A data set of recurrent event data to be plotted.
 #'                      The input-data must include columns corresponding to:
-#'                      \code{id} (patient-ID), \code{start} (= beginning of an interval where the patient is at risk for an event),
-#'                      \code{stop} (= end of the interval due to an event or censoring),
-#'                      \code{status} (= an indicator of the patient status at \code{stop} with = 0 censoring, 1 = event)
-#' @param id            the name of the \code{id} column, default is \code{"id"}
-#' @param start         the name of the \code{start} column, default is \code{"start"}
-#' @param stop          the name of the \code{stop} column, default is \code{"stop"}
-#' @param status        the name of the \code{status} column, default is \code{"status"}
+#'                      `id` (patient-ID), `start` (= beginning of an interval where the patient is at risk for an event),
+#'                      `stop` (= end of the interval due to an event or censoring),
+#'                      `status` (= an indicator of the patient status at `stop` with = 0 censoring, 1 = event)
+#' @param id            the name of the `id` column, default is `"id"`
+#' @param start         the name of the `start` column, default is `"start"`
+#' @param stop          the name of the `stop` column, default is `"stop"`
+#' @param status        the name of the `status` column, default is `"status"`
 #'
 #' @return The output  is a plot of the data with a bullet indicating a recurrent event and a circle indicating censoring.
 #' @author Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher.
@@ -20,7 +20,7 @@
 #' @export
 #' @examples
 #' ### Example:
-#' ### First simulate a sample of 10 individuals (for more details see the help of \code{simrec})
+#' ### First simulate a sample of 10 individuals (for more details see the help of `simrec`)
 #' N <- 10
 #' dist.x <- c("binomial", "normal")
 #' par.x <- list(0.5, c(0, 1))
@@ -106,13 +106,13 @@ simrecPlot <- function(data,
 #'
 #' @param data          A data set of recurrent event data to be plotted.
 #'                      The input-data must include columns corresponding to:
-#'                      \code{id} (patient-ID), \code{start} (= beginning of an interval where the patient is at risk for an event),
-#'                      \code{stop} (= end of the interval due to an event or censoring),
-#'                      \code{status} (= an indicator of the patient status at \code{stop} with = 0 censoring, 1 = event, 2 = competing event)
-#' @param id            the name of the \code{id} column, default is \code{"id"}
-#' @param start         the name of the \code{start} column, default is \code{"start"}
-#' @param stop          the name of the \code{stop} column, default is \code{"stop"}
-#' @param status        the name of the \code{status} column, default is \code{"status"}
+#'                      `id` (patient-ID), `start` (= beginning of an interval where the patient is at risk for an event),
+#'                      `stop` (= end of the interval due to an event or censoring),
+#'                      `status` (= an indicator of the patient status at `stop` with = 0 censoring, 1 = event, 2 = competing event)
+#' @param id            the name of the `id` column, default is `"id"`
+#' @param start         the name of the `start` column, default is `"start"`
+#' @param stop          the name of the `stop` column, default is `"stop"`
+#' @param status        the name of the `status` column, default is `"status"`
 #'
 #' @return The output  is a plot of the data with a bullet indicating a recurrent event, an x indicating the competing event and a circle indicating censoring.
 #' @author Katharina Ingel, Stella Preussler, Antje Jahn-Eimermacher.
@@ -122,7 +122,7 @@ simrecPlot <- function(data,
 #' @export
 #' @examples
 #' ### Example:
-#' ### First simulate a sample of 10 individuals (for more details see the help of \code{simreccomp})
+#' ### First simulate a sample of 10 individuals (for more details see the help of `simreccomp`)
 #' N <- 10
 #' dist.x <- c("binomial", "normal")
 #' par.x <- list(0.5, c(0, 1))

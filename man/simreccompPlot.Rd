@@ -35,7 +35,7 @@ This function allows plotting of recurrent event data with a competing event.
 }
 \examples{
 ### Example:
-### First simulate a sample of 10 individuals (for more details see the help of \code{simreccomp})
+### First simulate a sample of 10 individuals (for more details see the help of `simreccomp`)
 N <- 10
 dist.x <- c("binomial", "normal")
 par.x <- list(0.5, c(0, 1))
